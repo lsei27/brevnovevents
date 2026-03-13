@@ -37,6 +37,19 @@ body {
   top: 0;
 }
 
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-brand-red);
+  outline-offset: 2px;
+}
+
+/* Ensure minimum tap target size on mobile */
+@media (pointer: coarse) {
+  button, a, input, select, textarea {
+    min-height: 48px;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
