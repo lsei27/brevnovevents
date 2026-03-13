@@ -80,10 +80,10 @@ export function PriceList() {
         </p>
         <div className="mt-10 text-center">
           <Button
-            href="/downloads/technicky-rider-brevnovsky-klaster.pdf"
+            href="/downloads/cenik-brevnovsky-klaster.pdf"
             variant="secondary"
           >
-            Stáhnout technický rider
+            Stáhnout ceník
           </Button>
         </div>
       </div>
