@@ -7,6 +7,7 @@ import { SocialProof } from "@/components/sections/SocialProof";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { WeddingGateway } from "@/components/sections/WeddingGateway";
 import { Location } from "@/components/sections/Location";
+import { Contact } from "@/components/sections/Contact";
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
       <HowItWorks />
       <WeddingGateway />
       <Location />
+      <Contact />
     </>
   );
 }
