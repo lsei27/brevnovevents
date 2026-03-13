@@ -19,6 +19,11 @@ export async function submitInquiry(
     }
   });
 
+  // Honeypot check — before validation so bots get silent success
+  if (raw.website && raw.website.length > 0) {
+    return { success: true, message: "ok" };
+  }
+
   // Validate
   const result = inquirySchema.safeParse(raw);
   if (!result.success) {
@@ -29,12 +34,6 @@ export async function submitInquiry(
   }
 
   const data = result.data;
-
-  // Honeypot check
-  if (data.website && data.website.length > 0) {
-    // Bot detected — silently succeed
-    return { success: true, message: "ok" };
-  }
 
   // Send based on EMAIL_MODE
   const emailMode = process.env.EMAIL_MODE ?? "webhook";
@@ -91,7 +90,7 @@ async function sendDirect(data: InquiryFormData): Promise<void> {
   }
 
   // Notification email to team
-  await fetch("https://api.resend.com/emails", {
+  const notifResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -105,8 +104,12 @@ async function sendDirect(data: InquiryFormData): Promise<void> {
     }),
   });
 
+  if (!notifResponse.ok) {
+    throw new Error(`Resend notification email returned ${notifResponse.status}`);
+  }
+
   // Confirmation email to submitter
-  await fetch("https://api.resend.com/emails", {
+  const confirmResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -119,6 +122,10 @@ async function sendDirect(data: InquiryFormData): Promise<void> {
       text: `Dobrý den ${data.name},\n\nděkujeme za Vaši poptávku. Ozveme se do 1 pracovního dne s předběžnou nabídkou.\n\nPro urgentní požadavky volejte +420 602 346 729.\n\nS pozdravem,\nTým IN CATERING\nbrevnov@incatering.cz`,
     }),
   });
+
+  if (!confirmResponse.ok) {
+    throw new Error(`Resend confirmation email returned ${confirmResponse.status}`);
+  }
 }
 
 function formatEmailText(data: InquiryFormData): string {

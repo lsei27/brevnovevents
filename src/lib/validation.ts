@@ -12,7 +12,7 @@ export const inquirySchema = z.object({
   isAgency: z.string().optional(),
   description: z.string().optional(),
   source: z.string().optional(),
-  website: z.string().max(0).optional(), // honeypot — must be empty
+  website: z.string().optional(), // honeypot — checked in server action
 });
 
 export type InquiryFormData = z.infer<typeof inquirySchema>;
