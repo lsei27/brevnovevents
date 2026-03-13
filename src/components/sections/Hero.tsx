@@ -13,18 +13,15 @@ export function Hero() {
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-brand-black/30" />
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
+        <div className="ml-auto max-w-2xl text-right">
           <h1 className="text-4xl font-black leading-tight md:text-6xl">
-            Břevnovský klášter – eventový prostor pro 20 až 1&nbsp;100 hostů v&nbsp;Praze
+            Uspořádejte váš event v&nbsp;barokním klenotu Prahy
           </h1>
           <p className="mt-6 text-lg font-medium leading-relaxed text-white md:text-xl">
-            Historické prostory pro komorní meetingy, konference, gala večery i velké firemní akce. Od salonku pro 20 lidí po kongres pro 800&nbsp;– s&nbsp;cateringem od IN&nbsp;CATERING a parkováním zdarma.
+            Prostory pro 20 až 1&nbsp;100 hostů. Catering, technika i parkování – vše pod jednou střechou.
           </p>
-          <p className="mt-4 text-base font-medium leading-relaxed text-white/80">
-            Kde jinde v Praze uspořádáte kongres pro 800 lidí v barokních sálech z&nbsp;10.&nbsp;století – nebo komorní workshop pro 20 v&nbsp;salonku s&nbsp;freskami? 60 parkovacích míst zdarma, 15&nbsp;minut od letiště. Jeden tým pro prostor i catering. Od briefu po debrief.
-          </p>
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-end gap-4 sm:flex-row sm:justify-end">
             <Button href="#kontakt" variant="primary">
               Domluvit prohlídku
             </Button>

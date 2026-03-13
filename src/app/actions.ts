@@ -13,10 +13,7 @@ export async function submitInquiry(
   _prevState: ActionResult,
   formData: FormData
 ): Promise<ActionResult> {
-  console.log("submitInquiry called, formData type:", typeof formData, "is FormData:", formData instanceof FormData);
-
   if (!formData || !(formData instanceof FormData)) {
-    console.error("formData is not a FormData instance:", formData);
     return {
       success: false,
       message: "Formulář nebyl správně odeslán. Zkuste to znovu.",
@@ -47,7 +44,7 @@ export async function submitInquiry(
   const data = result.data;
 
   // Send based on EMAIL_MODE
-  const emailMode = process.env.EMAIL_MODE ?? "webhook";
+  const emailMode = (process.env.EMAIL_MODE ?? "webhook").trim();
 
   try {
     if (emailMode === "webhook") {
@@ -72,13 +69,10 @@ export async function submitInquiry(
 }
 
 async function sendWebhook(data: InquiryFormData): Promise<void> {
-  const webhookUrl = process.env.WEBHOOK_URL;
+  const webhookUrl = process.env.WEBHOOK_URL?.trim();
   if (!webhookUrl) {
-    console.error("WEBHOOK_URL is not configured. EMAIL_MODE:", process.env.EMAIL_MODE);
     throw new Error("WEBHOOK_URL is not configured");
   }
-
-  console.log("Sending webhook to:", webhookUrl);
 
   const response = await fetch(webhookUrl, {
     method: "POST",
@@ -90,10 +84,8 @@ async function sendWebhook(data: InquiryFormData): Promise<void> {
     }),
   });
 
-  const responseText = await response.text();
-  console.log("Webhook response:", response.status, responseText);
-
   if (!response.ok) {
+    const responseText = await response.text();
     throw new Error(`Webhook returned ${response.status}: ${responseText}`);
   }
 }
@@ -170,10 +162,7 @@ export async function submitWeddingInquiry(
   _prevState: ActionResult,
   formData: FormData
 ): Promise<ActionResult> {
-  console.log("submitWeddingInquiry called, formData type:", typeof formData, "is FormData:", formData instanceof FormData);
-
   if (!formData || !(formData instanceof FormData)) {
-    console.error("formData is not a FormData instance:", formData);
     return {
       success: false,
       message: "Formulář nebyl správně odeslán. Zkuste to znovu.",
@@ -208,7 +197,7 @@ export async function submitWeddingInquiry(
   const data = result.data;
 
   // Send based on EMAIL_MODE
-  const emailMode = process.env.EMAIL_MODE ?? "webhook";
+  const emailMode = (process.env.EMAIL_MODE ?? "webhook").trim();
 
   try {
     if (emailMode === "webhook") {
@@ -233,13 +222,10 @@ export async function submitWeddingInquiry(
 }
 
 async function sendWeddingWebhook(data: WeddingFormData): Promise<void> {
-  const webhookUrl = process.env.WEBHOOK_URL;
+  const webhookUrl = process.env.WEBHOOK_URL?.trim();
   if (!webhookUrl) {
-    console.error("WEBHOOK_URL is not configured. EMAIL_MODE:", process.env.EMAIL_MODE);
     throw new Error("WEBHOOK_URL is not configured");
   }
-
-  console.log("Sending wedding webhook to:", webhookUrl);
 
   const response = await fetch(webhookUrl, {
     method: "POST",
@@ -251,10 +237,8 @@ async function sendWeddingWebhook(data: WeddingFormData): Promise<void> {
     }),
   });
 
-  const responseText = await response.text();
-  console.log("Wedding webhook response:", response.status, responseText);
-
   if (!response.ok) {
+    const responseText = await response.text();
     throw new Error(`Webhook returned ${response.status}: ${responseText}`);
   }
 }

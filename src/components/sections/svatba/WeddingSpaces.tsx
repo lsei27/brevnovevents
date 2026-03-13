@@ -29,7 +29,7 @@ const spaces = [
 
 export function WeddingSpaces() {
   return (
-    <section className="bg-brand-black py-20 md:py-32">
+    <section className="bg-brand-black pt-10 pb-20 md:pt-16 md:pb-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           Svatební prostory – od obřadu po poslední tanec pod jednou střechou

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 
 export function Contact() {
@@ -13,7 +14,7 @@ export function Contact() {
         </p>
 
         <div className="mt-16 grid gap-12 md:grid-cols-2">
-          {/* Contact info */}
+          {/* Contact info + image */}
           <div>
             <h3 className="text-xl font-bold">Kontakt</h3>
             <div className="mt-6 space-y-4 text-brand-white/70">
@@ -45,6 +46,15 @@ export function Contact() {
                 </span>
                 www.brevnovevents.cz
               </p>
+            </div>
+            <div className="mt-8 overflow-hidden rounded-2xl">
+              <Image
+                src="/images/reference/terezian-vecere-marie-terezie.webp"
+                alt="Slavnostní večeře v Tereziánském sále Břevnovského kláštera"
+                width={600}
+                height={400}
+                className="aspect-[3/2] w-full object-cover"
+              />
             </div>
           </div>
 
