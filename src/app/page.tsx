@@ -6,6 +6,7 @@ import { PricingAnchors } from "@/components/sections/PricingAnchors";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { WeddingGateway } from "@/components/sections/WeddingGateway";
+import { Location } from "@/components/sections/Location";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <SocialProof />
       <HowItWorks />
       <WeddingGateway />
+      <Location />
     </>
   );
 }
