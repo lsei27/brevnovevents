@@ -12,7 +12,7 @@ import { SmallerEvents } from "@/components/sections/firemni/SmallerEvents";
 import { PriceList } from "@/components/sections/firemni/PriceList";
 import { Upsell } from "@/components/sections/firemni/Upsell";
 import { ProcessExpanded } from "@/components/sections/firemni/ProcessExpanded";
-import { CaseStudy } from "@/components/sections/firemni/CaseStudy";
+import { SocialProof } from "@/components/sections/SocialProof";
 import { AgencyProgram } from "@/components/sections/firemni/AgencyProgram";
 import { FAQFiremni } from "@/components/sections/firemni/FAQFiremni";
 import { Location } from "@/components/sections/Location";
@@ -53,7 +53,7 @@ export default function FiremniEventyPage() {
       <PriceList />
       <Upsell />
       <ProcessExpanded />
-      <CaseStudy />
+      <SocialProof />
       <AgencyProgram />
       <FAQFiremni />
       <Location />
