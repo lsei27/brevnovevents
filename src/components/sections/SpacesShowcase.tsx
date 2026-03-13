@@ -75,7 +75,7 @@ export function SpacesShowcase() {
             Všechny prostory
           </Button>
           <Button
-            href="/downloads/technicky-rider-brevnovsky-klaster.pdf"
+            href="/downloads/cenik-brevnovsky-klaster.pdf"
             variant="secondary"
           >
             Technický rider
