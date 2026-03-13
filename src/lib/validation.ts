@@ -7,7 +7,7 @@ export const inquirySchema = z.object({
   eventType: z.string().min(1, "Toto pole je povinné."),
   guestCount: z.string().min(1, "Toto pole je povinné."),
   preferredDate: z.string().min(1, "Toto pole je povinné."),
-  phone: z.string().optional(),
+  phone: z.string().min(1, "Toto pole je povinné."),
   catering: z.string().optional(),
   isAgency: z.string().optional(),
   description: z.string().optional(),

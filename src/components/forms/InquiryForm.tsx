@@ -80,6 +80,13 @@ export function InquiryForm() {
         required
         errors={state.errors?.email}
       />
+      <FormField
+        label="Telefon"
+        name="phone"
+        type="tel"
+        required
+        errors={state.errors?.phone}
+      />
       <SelectField
         label="Typ akce"
         name="eventType"
@@ -114,11 +121,6 @@ export function InquiryForm() {
           Další informace (nepovinné)
         </summary>
         <div className="mt-4 space-y-5">
-          <FormField
-            label="Telefon"
-            name="phone"
-            type="tel"
-          />
           <RadioGroup
             label="Potřebujete catering?"
             name="catering"
