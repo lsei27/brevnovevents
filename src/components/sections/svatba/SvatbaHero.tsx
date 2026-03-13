@@ -5,8 +5,8 @@ export function SvatbaHero() {
   return (
     <section className="relative flex min-h-screen items-end pb-20 md:items-center md:pb-0">
       <Image
-        src="/images/svatby/bk-svatba-zahrady.webp"
-        alt="Svatba v Břevnovském klášteře – svatební obřad v klášterní zahradě"
+        src="/images/svatby/bk-vojteska.webp"
+        alt="Svatba v Břevnovském klášteře – Vojtěška a klášterní zahrada"
         fill
         priority
         className="object-cover"

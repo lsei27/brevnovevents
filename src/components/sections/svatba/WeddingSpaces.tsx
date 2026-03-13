@@ -4,8 +4,8 @@ const spaces = [
   {
     title: "Venkovní obřad v klášterní zahradě",
     text: "Prostor Vojtěška a klášterní zahrada s rybníky – místo pro civilní svatební obřady. Nádvoří pojme až 300 hostů pro welcome drink a cocktail reception.",
-    image: "/images/svatby/bk-vojteska.webp",
-    alt: "Vojtěška – klášterní zahrada pro svatební obřad",
+    image: "/images/svatby/bk-svatba-zahrady.webp",
+    alt: "Klášterní zahrady – venkovní svatební obřad",
   },
   {
     title: "Slavnostní hostina v Tereziánském sále",
