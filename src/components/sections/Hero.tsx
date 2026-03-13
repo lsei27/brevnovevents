@@ -28,7 +28,7 @@ export function Hero() {
             <Button href="#kontakt" variant="primary">
               Domluvit prohlídku
             </Button>
-            <Button href="/downloads/cenik-brevnovsky-klaster.pdf" variant="secondary">
+            <Button href="/downloads/technicky-rider-brevnovsky-klaster.pdf" variant="secondary">
               Technický rider
             </Button>
           </div>
