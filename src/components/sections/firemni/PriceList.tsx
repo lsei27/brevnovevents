@@ -30,13 +30,17 @@ function PriceTable({ title, rows }: { title: string; rows: PriceRow[] }) {
     <div>
       <h3 className="mb-4 text-lg font-bold md:text-xl">{title}</h3>
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm">
+        <table className="w-full table-fixed text-left text-sm">
+          <colgroup>
+            <col className="w-[60%]" />
+            <col className="w-[40%]" />
+          </colgroup>
           <thead className="border-b border-brand-gray-dark/40 text-brand-white/60">
             <tr>
               <th className="px-3 py-3 font-semibold">
                 {title === "Nádvoří a doplňkové služby" ? "Služba" : "Prostor"}
               </th>
-              <th className="px-3 py-3 font-semibold">Cena</th>
+              <th className="px-3 py-3 text-right font-semibold">Cena</th>
             </tr>
           </thead>
           <tbody>
@@ -46,7 +50,7 @@ function PriceTable({ title, rows }: { title: string; rows: PriceRow[] }) {
                 className="border-b border-brand-gray-dark/10"
               >
                 <td className="px-3 py-3 font-medium">{row.item}</td>
-                <td className="px-3 py-3">{row.price}</td>
+                <td className="whitespace-nowrap px-3 py-3 text-right">{row.price}</td>
               </tr>
             ))}
           </tbody>

@@ -4,20 +4,20 @@ const cards = [
   {
     title: "Klášterní pivovar",
     text: "Exkurze do klášterního pivovaru s degustací. Funguje jako teambuilding nebo doplněk networkingového programu. Hosté ocení příběh – Břevnovský pivovar vaří pivo od 13. století.",
-    image: "/images/prostory/brevnovsky-klaster-exterier.webp",
-    alt: "Exteriér Břevnovského kláštera s klášterním pivovarem",
+    image: "/images/prostory/pivovar-brevnov.webp",
+    alt: "Klášterní pivovar Břevnovského kláštera – měděné varny",
   },
   {
     title: "Historická krypta",
     text: "Komorní prostor pod klášterem pro netradiční úvod programu nebo exkluzivní setkání. Autentická atmosféra, kterou žádný moderní prostor nenapodobí.",
-    image: "/images/prostory/salonek-prizemi.webp",
-    alt: "Salonek v přízemí Břevnovského kláštera",
+    image: "/images/prostory/krypta-bk.webp",
+    alt: "Historická krypta pod Břevnovským klášterem",
   },
   {
     title: "Stůl Marie Terezie",
     text: "Slavnostní večeře Marie Terezia a Josefa II. v Tereziánském sále. Vraťte se do roku 1774 prostřednictvím inscenace večeře, která se v tomto místě skutečně odehrála. Skvělá atmosféra s výkladem profesionálního průvodce.",
-    image: "/images/prostory/tereziansky-sal-konference.webp",
-    alt: "Tereziánský sál připravený na slavnostní večeři",
+    image: "/images/prostory/terezian-vecere-marie-terezie.webp",
+    alt: "Slavnostní večeře Marie Terezie v Tereziánském sále",
   },
 ];
 

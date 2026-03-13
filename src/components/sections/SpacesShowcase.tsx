@@ -43,7 +43,7 @@ const spaces = [
       "Historický areál s unikátní atmosférou pro příjezd hostů.",
   },
   {
-    image: "/images/prostory/sala-terrena-raut.webp",
+    image: "/images/prostory/benediktinska-vinarna.webp",
     alt: "Benediktinská vinárna – komorní prostor pro afterparty a degustace",
     title: "Benediktinská vinárna",
     capacity: "40 osob",

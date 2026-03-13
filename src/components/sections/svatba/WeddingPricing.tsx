@@ -29,14 +29,15 @@ export function WeddingPricing() {
         </h3>
 
         <div className="mt-6 overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full table-fixed text-left text-sm">
+            <colgroup>
+              <col className="w-[60%]" />
+              <col className="w-[40%]" />
+            </colgroup>
             <thead className="border-b border-brand-gray-dark/40 text-brand-white/60">
               <tr>
-                {headers.map((h) => (
-                  <th key={h} className="px-3 py-3 font-semibold">
-                    {h}
-                  </th>
-                ))}
+                <th className="px-3 py-3 font-semibold">Prostor</th>
+                <th className="px-3 py-3 text-right font-semibold">Cena</th>
               </tr>
             </thead>
             <tbody>
@@ -46,7 +47,7 @@ export function WeddingPricing() {
                   className="border-b border-brand-gray-dark/10"
                 >
                   <td className="px-3 py-3 font-medium">{row.room}</td>
-                  <td className="px-3 py-3">{row.price}</td>
+                  <td className="whitespace-nowrap px-3 py-3 text-right">{row.price}</td>
                 </tr>
               ))}
             </tbody>

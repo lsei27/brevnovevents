@@ -34,6 +34,14 @@ const spaces = [
       "Zlatý, Modrý, Pompejský, Brandlův – workshopy, board meetingy, breakout sessions.",
   },
   {
+    image: "/images/prostory/benediktinska-vinarna.webp",
+    alt: "Benediktinská vinárna – komorní prostor pro afterparty a degustace",
+    title: "Benediktinská vinárna",
+    capacity: "80 osob",
+    description:
+      "Komorní prostor pro afterparty, degustace a neformální setkání v autentickém klášterním prostředí.",
+  },
+  {
     image: "/images/prostory/brevnovsky-klaster-exterier.webp",
     alt: "Břevnovský klášter – pohled na exteriér historického areálu",
     title: "Exteriér",

@@ -64,11 +64,10 @@ export function SmallerEvents() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-brand-gray-dark/40 text-brand-white/60">
               <tr>
-                {headers.map((h) => (
-                  <th key={h} className="px-3 py-3 font-semibold">
-                    {h}
-                  </th>
-                ))}
+                <th className="px-3 py-3 font-semibold">Prostor</th>
+                <th className="px-3 py-3 font-semibold">Kapacita</th>
+                <th className="px-3 py-3 font-semibold">Hodí se pro</th>
+                <th className="whitespace-nowrap px-3 py-3 text-right font-semibold">Orientační cena</th>
               </tr>
             </thead>
             <tbody>
@@ -77,10 +76,10 @@ export function SmallerEvents() {
                   key={v.space}
                   className="border-b border-brand-gray-dark/10"
                 >
-                  <td className="px-3 py-3 font-medium">{v.space}</td>
-                  <td className="px-3 py-3">{v.capacity}</td>
+                  <td className="whitespace-nowrap px-3 py-3 font-medium">{v.space}</td>
+                  <td className="whitespace-nowrap px-3 py-3">{v.capacity}</td>
                   <td className="px-3 py-3">{v.suitableFor}</td>
-                  <td className="px-3 py-3">{v.price}</td>
+                  <td className="whitespace-nowrap px-3 py-3 text-right">{v.price}</td>
                 </tr>
               ))}
             </tbody>
