@@ -52,8 +52,8 @@ const packages: PackageCard[] = [
     price: "265 000",
     price200: "440 000",
     cta: "Nezávazná nabídka",
-    image: "/images/prostory/tereziansky-sal-gala.webp",
-    alt: "Tereziánský sál připravený na gala večeři",
+    image: "/images/prostory/gala-bk.webp",
+    alt: "Gala večeře v Břevnovském klášteře",
   },
   {
     name: "Firemní večírek · 1. patro",
@@ -163,7 +163,7 @@ export function Packages() {
                         : "border-brand-gray-dark/20 bg-brand-black"
                     }`}
                   >
-                    <div className="overflow-hidden">
+                    <div className="relative overflow-hidden">
                       <Image
                         src={pkg.image}
                         alt={pkg.alt}
@@ -171,13 +171,13 @@ export function Packages() {
                         height={250}
                         className="h-48 w-full object-cover"
                       />
-                    </div>
-                    <div className="flex flex-1 flex-col p-8">
                       {pkg.featured && (
-                        <span className="mb-4 inline-block self-start rounded-full bg-brand-red px-4 py-1 text-xs font-bold uppercase tracking-wide">
+                        <span className="absolute right-3 top-3 rounded-full bg-brand-red px-4 py-1.5 text-xs font-bold uppercase tracking-wide shadow-lg">
                           Nejoblíbenější
                         </span>
                       )}
+                    </div>
+                    <div className="flex flex-1 flex-col p-8">
                       <h3 className="text-2xl font-bold">{pkg.name}</h3>
                       <p className="mt-1 text-sm text-brand-white/60">
                         {pkg.persons}
