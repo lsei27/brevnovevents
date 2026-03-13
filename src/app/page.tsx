@@ -5,6 +5,7 @@ import { VideoTour } from "@/components/sections/VideoTour";
 import { PricingAnchors } from "@/components/sections/PricingAnchors";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { HowItWorks } from "@/components/sections/HowItWorks";
+import { WeddingGateway } from "@/components/sections/WeddingGateway";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       <PricingAnchors />
       <SocialProof />
       <HowItWorks />
+      <WeddingGateway />
     </>
   );
 }
