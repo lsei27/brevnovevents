@@ -16,12 +16,12 @@ interface Package {
 
 const packages: Package[] = [
   // Reprezentační prostory – 1. patro
-  { name: "Konference", venue: "Reprezentační prostory · 1. patro", persons: "100 osob", includes: "Sál, AV technika, 2× coffee break + oběd", price: "210 000", price200: "310 000", featured: false },
-  { name: "Gala večeře", venue: "Reprezentační prostory · 1. patro", persons: "100 osob", includes: "Sál + salonky, welcome drink, 3chodové menu, nápoje", price: "265 000", price200: "440 000", featured: true },
-  { name: "Večerní event", venue: "Reprezentační prostory · 1. patro", persons: "100 osob", includes: "Sál, welcome drink, bufetová večeře, nápoje", price: "235 000", price200: "380 000", featured: false },
+  { name: "Konference · 1. patro", venue: "Reprezentační prostory", persons: "100 osob", includes: "Sál, AV technika, 2× coffee break + oběd", price: "210 000", price200: "310 000", featured: false },
+  { name: "Gala večeře · 1. patro", venue: "Reprezentační prostory", persons: "100 osob", includes: "Sál + salonky, welcome drink, 3chodové menu, nápoje", price: "265 000", price200: "440 000", featured: true },
+  { name: "Firemní večírek · 1. patro", venue: "Reprezentační prostory", persons: "100 osob", includes: "Sál, welcome drink, bufetová večeře, nápoje", price: "235 000", price200: "380 000", featured: false },
   // Klášterní prostory – přízemí
-  { name: "Konference", venue: "Klášterní prostory · přízemí", persons: "100 osob", includes: "Sala Terrena + salonky, AV technika, 2× coffee break + oběd", price: "175 000", price200: "275 000", featured: false },
-  { name: "Večerní event", venue: "Klášterní prostory · přízemí", persons: "100 osob", includes: "Sala Terrena, welcome drink, bufetová večeře, nápoje", price: "200 000", price200: "345 000", featured: false },
+  { name: "Konference · přízemí", venue: "Klášterní prostory", persons: "100 osob", includes: "Sala Terrena + salonky, AV technika, 2× coffee break + oběd", price: "175 000", price200: "275 000", featured: false },
+  { name: "Firemní večírek · přízemí", venue: "Klášterní prostory", persons: "100 osob", includes: "Sala Terrena, welcome drink, bufetová večeře, nápoje", price: "200 000", price200: "345 000", featured: false },
 ];
 
 export function PricingAnchors() {
@@ -60,13 +60,13 @@ export function PricingAnchors() {
           Orientační ceny. Každou akci kalkulujeme individuálně.
         </p>
 
-        <div className="relative mt-16">
+        <div className="mt-16">
           <div ref={emblaRef} className="overflow-hidden">
-            <div className="flex gap-6">
-              {packages.map((pkg, index) => (
+            <div className="-ml-6 flex">
+              {packages.map((pkg) => (
                 <div
                   key={`${pkg.venue}-${pkg.name}`}
-                  className="min-w-0 flex-[0_0_85%] sm:flex-[0_0_48%] lg:flex-[0_0_33.333%]"
+                  className="min-w-0 flex-[0_0_85%] pl-6 sm:flex-[0_0_48%] lg:flex-[0_0_33.333%]"
                 >
                   <div
                     className={`flex h-full flex-col rounded-2xl border p-8 ${
@@ -80,10 +80,7 @@ export function PricingAnchors() {
                         Nejoblíbenější
                       </span>
                     )}
-                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-red">
-                      {pkg.venue}
-                    </p>
-                    <h3 className="mt-2 text-2xl font-bold">{pkg.name}</h3>
+                    <h3 className="text-2xl font-bold">{pkg.name}</h3>
                     <p className="mt-2 text-sm text-brand-white/60">
                       {pkg.persons}
                     </p>
@@ -91,7 +88,10 @@ export function PricingAnchors() {
                       {pkg.includes}
                     </p>
                     <div className="mt-auto pt-8">
-                      <p className="text-sm text-brand-white/60">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-brand-red">
+                        {pkg.venue}
+                      </p>
+                      <p className="mt-2 text-sm text-brand-white/60">
                         od (100 osob)
                       </p>
                       <p className="text-3xl font-black text-brand-white">
@@ -114,48 +114,51 @@ export function PricingAnchors() {
             </div>
           </div>
 
-          {/* Arrows */}
-          <button
-            type="button"
-            onClick={scrollPrev}
-            aria-label="Předchozí"
-            className="absolute left-2 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40 md:block"
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={scrollNext}
-            aria-label="Další"
-            className="absolute right-2 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40 md:block"
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Dots */}
-        <div className="mt-6 flex justify-center gap-2">
-          {packages.map((pkg, index) => (
+          {/* Arrows – below carousel */}
+          <div className="mt-6 flex items-center justify-center gap-4">
             <button
-              key={`dot-${pkg.venue}-${pkg.name}`}
               type="button"
-              onClick={() => emblaApi?.scrollTo(index)}
-              aria-label={`Přejít na balíček ${index + 1}`}
-              className="group flex items-center justify-center p-2"
+              onClick={scrollPrev}
+              aria-label="Předchozí"
+              className="rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40"
             >
-              <span
-                className={`h-2.5 w-2.5 rounded-full transition-colors ${
-                  index === selectedIndex
-                    ? "bg-brand-white"
-                    : "bg-brand-white/30 group-hover:bg-brand-white/50"
-                }`}
-              />
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
-          ))}
+
+            {/* Dots */}
+            <div className="flex gap-2">
+              {packages.map((pkg, index) => (
+                <button
+                  key={`dot-${pkg.venue}-${pkg.name}`}
+                  type="button"
+                  onClick={() => emblaApi?.scrollTo(index)}
+                  aria-label={`Přejít na balíček ${index + 1}`}
+                  className="group flex items-center justify-center p-2"
+                >
+                  <span
+                    className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                      index === selectedIndex
+                        ? "bg-brand-white"
+                        : "bg-brand-white/30 group-hover:bg-brand-white/50"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={scrollNext}
+              aria-label="Další"
+              className="rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <p className="mt-8 text-center text-sm text-brand-white/40">

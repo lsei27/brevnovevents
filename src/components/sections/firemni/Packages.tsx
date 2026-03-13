@@ -21,8 +21,8 @@ interface PackageCard {
 const packages: PackageCard[] = [
   // ── Reprezentační prostory – 1. patro ──
   {
-    name: "Konference",
-    venue: "Reprezentační prostory · 1. patro",
+    name: "Konference · 1. patro",
+    venue: "Reprezentační prostory",
     persons: "100–200 osob",
     featured: false,
     includes: [
@@ -38,8 +38,8 @@ const packages: PackageCard[] = [
     alt: "Tereziánský sál v konferenčním uspořádání",
   },
   {
-    name: "Gala večeře",
-    venue: "Reprezentační prostory · 1. patro",
+    name: "Gala večeře · 1. patro",
+    venue: "Reprezentační prostory",
     persons: "100–200 osob",
     featured: true,
     includes: [
@@ -52,12 +52,12 @@ const packages: PackageCard[] = [
     price: "265 000",
     price200: "440 000",
     cta: "Nezávazná nabídka",
-    image: "/images/prostory/sala-terrena-raut.webp",
-    alt: "Sala Terrena připravená na gala večer s rautem",
+    image: "/images/prostory/tereziansky-sal-gala.webp",
+    alt: "Tereziánský sál připravený na gala večeři",
   },
   {
-    name: "Večerní firemní event",
-    venue: "Reprezentační prostory · 1. patro",
+    name: "Firemní večírek · 1. patro",
+    venue: "Reprezentační prostory",
     persons: "100–200 osob",
     featured: false,
     includes: [
@@ -71,12 +71,12 @@ const packages: PackageCard[] = [
     price200: "380 000",
     cta: "Nezávazná nabídka",
     image: "/images/prostory/brevnovsky-klaster-pohled-shora.webp",
-    alt: "Břevnovský klášter z výšky – celý areál pro večerní firemní akce",
+    alt: "Břevnovský klášter z výšky – celý areál pro firemní večírek",
   },
   // ── Klášterní prostory – přízemí ──
   {
-    name: "Konference",
-    venue: "Klášterní prostory · přízemí",
+    name: "Konference · přízemí",
+    venue: "Klášterní prostory",
     persons: "100–200 osob",
     featured: false,
     includes: [
@@ -92,8 +92,8 @@ const packages: PackageCard[] = [
     alt: "Sala Terrena – konferenční uspořádání v klášterních prostorách",
   },
   {
-    name: "Večerní firemní event",
-    venue: "Klášterní prostory · přízemí",
+    name: "Firemní večírek · přízemí",
+    venue: "Klášterní prostory",
     persons: "100–200 osob",
     featured: false,
     includes: [
@@ -107,7 +107,7 @@ const packages: PackageCard[] = [
     price200: "345 000",
     cta: "Nezávazná nabídka",
     image: "/images/prostory/salonek-prizemi.webp",
-    alt: "Klášterní prostory v přízemí – večerní firemní event",
+    alt: "Klášterní prostory v přízemí – firemní večírek",
   },
 ];
 
@@ -148,13 +148,13 @@ export function Packages() {
           individuálně dle vašich potřeb.
         </p>
 
-        <div className="relative mt-16">
+        <div className="mt-16">
           <div ref={emblaRef} className="overflow-hidden">
-            <div className="flex gap-6">
+            <div className="-ml-6 flex">
               {packages.map((pkg) => (
                 <div
                   key={`${pkg.venue}-${pkg.name}`}
-                  className="min-w-0 flex-[0_0_85%] sm:flex-[0_0_48%] lg:flex-[0_0_33.333%]"
+                  className="min-w-0 flex-[0_0_85%] pl-6 sm:flex-[0_0_48%] lg:flex-[0_0_33.333%]"
                 >
                   <div
                     className={`flex h-full flex-col overflow-hidden rounded-2xl border ${
@@ -178,10 +178,7 @@ export function Packages() {
                           Nejoblíbenější
                         </span>
                       )}
-                      <p className="text-xs font-semibold uppercase tracking-wider text-brand-red">
-                        {pkg.venue}
-                      </p>
-                      <h3 className="mt-2 text-2xl font-bold">{pkg.name}</h3>
+                      <h3 className="text-2xl font-bold">{pkg.name}</h3>
                       <p className="mt-1 text-sm text-brand-white/60">
                         {pkg.persons}
                       </p>
@@ -196,7 +193,10 @@ export function Packages() {
                         ))}
                       </ul>
                       <div className="mt-8">
-                        <p className="text-sm text-brand-white/60">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-brand-red">
+                          {pkg.venue}
+                        </p>
+                        <p className="mt-2 text-sm text-brand-white/60">
                           od (100 osob)
                         </p>
                         <p className="text-3xl font-black">
@@ -221,48 +221,50 @@ export function Packages() {
             </div>
           </div>
 
-          {/* Arrows */}
-          <button
-            type="button"
-            onClick={scrollPrev}
-            aria-label="Předchozí balíček"
-            className="absolute left-2 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40 md:block"
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={scrollNext}
-            aria-label="Další balíček"
-            className="absolute right-2 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40 md:block"
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Dots */}
-        <div className="mt-6 flex justify-center gap-2">
-          {packages.map((pkg, index) => (
+          {/* Arrows + Dots – below carousel */}
+          <div className="mt-6 flex items-center justify-center gap-4">
             <button
-              key={`dot-${pkg.venue}-${pkg.name}`}
               type="button"
-              onClick={() => emblaApi?.scrollTo(index)}
-              aria-label={`Balíček ${index + 1}`}
-              className="group flex items-center justify-center p-2"
+              onClick={scrollPrev}
+              aria-label="Předchozí balíček"
+              className="rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40"
             >
-              <span
-                className={`h-2.5 w-2.5 rounded-full transition-colors ${
-                  index === selectedIndex
-                    ? "bg-brand-white"
-                    : "bg-brand-white/30 group-hover:bg-brand-white/50"
-                }`}
-              />
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
-          ))}
+
+            <div className="flex gap-2">
+              {packages.map((pkg, index) => (
+                <button
+                  key={`dot-${pkg.venue}-${pkg.name}`}
+                  type="button"
+                  onClick={() => emblaApi?.scrollTo(index)}
+                  aria-label={`Balíček ${index + 1}`}
+                  className="group flex items-center justify-center p-2"
+                >
+                  <span
+                    className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                      index === selectedIndex
+                        ? "bg-brand-white"
+                        : "bg-brand-white/30 group-hover:bg-brand-white/50"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={scrollNext}
+              aria-label="Další balíček"
+              className="rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <p className="mx-auto mt-12 max-w-3xl text-center text-sm text-brand-white/50">
