@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/Button";
+
 interface PriceRow {
   item: string;
   price: string;
@@ -76,6 +78,14 @@ export function PriceList() {
           Ceny jsou bez DPH. Catering se kalkuluje individuálně dle rozsahu
           akce.
         </p>
+        <div className="mt-10 text-center">
+          <Button
+            href="/downloads/technicky-rider-brevnovsky-klaster.pdf"
+            variant="secondary"
+          >
+            Stáhnout technický rider
+          </Button>
+        </div>
       </div>
     </section>
   );

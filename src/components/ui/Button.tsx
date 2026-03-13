@@ -16,7 +16,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-brand-red text-white hover:bg-brand-red-hover focus-visible:ring-brand-red",
   secondary:
-    "bg-transparent text-brand-white border border-brand-white hover:bg-brand-white hover:text-brand-black focus-visible:ring-brand-white",
+    "bg-brand-white text-brand-black border border-brand-white hover:bg-transparent hover:text-brand-white focus-visible:ring-brand-white",
   pink:
     "bg-brand-pink text-brand-black hover:opacity-90 focus-visible:ring-brand-pink",
 };
