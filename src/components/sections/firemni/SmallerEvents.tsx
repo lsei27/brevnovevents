@@ -46,7 +46,7 @@ const venues: SmallVenue[] = [
   },
 ];
 
-const headers = ["Prostor", "Kapacita", "Hodí se pro", "Orientační cena"];
+const headers = ["Prostor", "Kapacita", "Hodí se pro", "Cena"];
 
 export function SmallerEvents() {
   return (
@@ -61,13 +61,13 @@ export function SmallerEvents() {
           konferenci nebo komorní večeři.
         </p>
         <div className="mt-16 overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-xs md:text-sm">
             <thead className="border-b border-brand-gray-dark/40 text-brand-white/60">
               <tr>
-                <th className="px-3 py-3 font-semibold">Prostor</th>
-                <th className="px-3 py-3 font-semibold">Kapacita</th>
-                <th className="px-3 py-3 font-semibold">Hodí se pro</th>
-                <th className="whitespace-nowrap px-3 py-3 text-right font-semibold">Orientační cena</th>
+                <th className="px-1 py-2 md:px-3 md:py-3 font-semibold">Prostor</th>
+                <th className="px-1 py-2 md:px-3 md:py-3 font-semibold">Kapacita</th>
+                <th className="px-1 py-2 md:px-3 md:py-3 font-semibold">Hodí se pro</th>
+                <th className="px-1 py-2 md:px-3 md:py-3 text-right font-semibold">Cena</th>
               </tr>
             </thead>
             <tbody>
@@ -76,10 +76,10 @@ export function SmallerEvents() {
                   key={v.space}
                   className="border-b border-brand-gray-dark/10"
                 >
-                  <td className="whitespace-nowrap px-3 py-3 font-medium">{v.space}</td>
-                  <td className="whitespace-nowrap px-3 py-3">{v.capacity}</td>
-                  <td className="px-3 py-3">{v.suitableFor}</td>
-                  <td className="whitespace-nowrap px-3 py-3 text-right">{v.price}</td>
+                  <td className="px-1 py-2 md:px-3 md:py-3 font-medium">{v.space}</td>
+                  <td className="px-1 py-2 md:px-3 md:py-3">{v.capacity}</td>
+                  <td className="px-1 py-2 md:px-3 md:py-3 leading-tight opacity-90">{v.suitableFor}</td>
+                  <td className="px-1 py-2 md:px-3 md:py-3 text-right leading-tight">{v.price}</td>
                 </tr>
               ))}
             </tbody>

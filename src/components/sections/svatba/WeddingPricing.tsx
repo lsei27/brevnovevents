@@ -29,15 +29,15 @@ export function WeddingPricing() {
         </h3>
 
         <div className="mt-6 overflow-x-auto">
-          <table className="w-full table-fixed text-left text-sm">
+          <table className="w-full table-fixed text-left text-xs md:text-sm">
             <colgroup>
-              <col className="w-[60%]" />
-              <col className="w-[40%]" />
+              <col className="w-[50%] md:w-[60%]" />
+              <col className="w-[50%] md:w-[40%]" />
             </colgroup>
             <thead className="border-b border-brand-gray-dark/40 text-brand-white/60">
               <tr>
-                <th className="px-3 py-3 font-semibold">Prostor</th>
-                <th className="px-3 py-3 text-right font-semibold">Cena</th>
+                <th className="px-2 py-2 md:px-3 md:py-3 font-semibold">Prostor</th>
+                <th className="px-2 py-2 md:px-3 md:py-3 text-right font-semibold">Cena</th>
               </tr>
             </thead>
             <tbody>
@@ -46,8 +46,8 @@ export function WeddingPricing() {
                   key={row.room}
                   className="border-b border-brand-gray-dark/10"
                 >
-                  <td className="px-3 py-3 font-medium">{row.room}</td>
-                  <td className="whitespace-nowrap px-3 py-3 text-right">{row.price}</td>
+                  <td className="px-2 py-2 md:px-3 md:py-3 font-medium">{row.room}</td>
+                  <td className="px-2 py-2 md:px-3 md:py-3 text-right">{row.price}</td>
                 </tr>
               ))}
             </tbody>

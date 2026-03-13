@@ -34,11 +34,11 @@ function CapacityTable({ title, rows, note }: { title: string; rows: RoomRow[]; 
     <div>
       <h3 className="mb-6 text-xl font-bold md:text-2xl">{title}</h3>
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm">
+        <table className="w-full text-left text-[10px] sm:text-xs md:text-sm">
           <thead className="border-b border-brand-gray-dark/40 text-brand-white/60">
             <tr>
               {headers.map((h) => (
-                <th key={h} className="px-3 py-3 font-semibold">
+                <th key={h} className="px-1 py-2 sm:px-2 md:px-3 md:py-3 font-semibold leading-tight">
                   {h}
                 </th>
               ))}
@@ -47,13 +47,13 @@ function CapacityTable({ title, rows, note }: { title: string; rows: RoomRow[]; 
           <tbody>
             {rows.map((row) => (
               <tr key={row.room} className="border-b border-brand-gray-dark/10">
-                <td className="px-3 py-3 font-medium">{row.room}</td>
-                <td className="px-3 py-3">{row.reception}</td>
-                <td className="px-3 py-3">{row.theatre}</td>
-                <td className="px-3 py-3">{row.school}</td>
-                <td className="px-3 py-3">{row.banquet}</td>
-                <td className="px-3 py-3">{row.dimensions}</td>
-                <td className="px-3 py-3">{row.area}</td>
+                <td className="px-1 py-2 sm:px-2 md:px-3 md:py-3 font-medium leading-tight">{row.room}</td>
+                <td className="px-1 py-2 sm:px-2 md:px-3 md:py-3">{row.reception}</td>
+                <td className="px-1 py-2 sm:px-2 md:px-3 md:py-3">{row.theatre}</td>
+                <td className="px-1 py-2 sm:px-2 md:px-3 md:py-3">{row.school}</td>
+                <td className="px-1 py-2 sm:px-2 md:px-3 md:py-3">{row.banquet}</td>
+                <td className="px-1 py-2 sm:px-2 md:px-3 md:py-3">{row.dimensions}</td>
+                <td className="px-1 py-2 sm:px-2 md:px-3 md:py-3">{row.area}</td>
               </tr>
             ))}
           </tbody>
