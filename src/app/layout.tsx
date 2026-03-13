@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 const satoshi = localFont({
@@ -43,7 +45,9 @@ export default function RootLayout({
         <a href="#hlavni-obsah" className="skip-link">
           Prejit na obsah
         </a>
-        {children}
+        <Header />
+        <main id="hlavni-obsah">{children}</main>
+        <Footer />
       </body>
     </html>
   );
