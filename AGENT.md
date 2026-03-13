@@ -56,13 +56,21 @@ Proměnné prostředí zahrnují:
   - Firemní eventy / Obecný web: Akcentní barva je červená (`bg-brand-red`).
   - Svatby: Akcentní barva je růžová / Rose Gold (`bg-brand-pink`). Tlačítka dostávají variantu `variant="pink"`.
 - **Typografie:** Font je pravděpodobně `Geist` optimalizovaný Next.js (popsáno v README) a případně `Satoshi` navěšený na CSS proměnnou `--font-sans`.
-- **Odezvy:** Interaktivní věci (`Hover` state, navigace, formuláře) používají nativní Tailwind transition třídy (např. transparentnost hlavičky je při scrollování řešena hookem `isScrolled` v `Header.tsx`).
-- **Responzivita:** Layout je postaven *Mobile-First*. Tabulky (např. Ceníky, Kapacity) jsou optimalizovány přes CSS třídy a nesmí na mobilu tvořit horizontální posuvník (`overflow-x-scroll`). Písmo je úměrně zmenšené a tabulky upraveny (`whitespace-nowrap` byl záměrně odstraňen).
-- **Provedení sliderů:** Pagination u karuselů se vykresluje jako tečky (`rounded-full`), obalené v klikacím kontejneru se stylizací proti vizuální deformaci pod vlivem minimálních dotykových výšek (min-height přes media pointer: coarse pravidlo).
+- **Odezvy:** Interaktivní věci (`Hover` state, navigace, formuláře) používají nativní Tailwind transition třídy. Transparentnost hlavičky po načtení je nyní 90 % (`bg-brand-black/10` v `Header.tsx`), při scrollování se ztmaví na 95 %.
+- **Responzivita:** Layout je postaven *Mobile-First*. Tabulky (např. Ceníky, Kapacity) jsou optimalizovány a nesmí na mobilu tvořit horizontální posuvník (`overflow-x-scroll`). Písmo je zmenšené (`text-[10px]` až `text-xs`) a zrušeno tvrdé nerozlamování textu (`whitespace-nowrap`).
+- **Slidery a Reference:** Sdílená komponenta `SocialProof.tsx` je používána globálně pro případové studie (homepage, firemní eventy), nenahrazovat ji izolovanými komponentami (jako byla dřívější smazaná `CaseStudy`). Pagination se vykresluje jako CSS tečky (`rounded-full`), obalené ve span s klikacím kontejnerem proti vizuální deformaci pod vlivem responzivního `min-height`.
 
 ## 5. Pravidla pro další vývoj
 1. **Nenarušit existující Server Actions architekturu:** Nepřidávat API routy tam, kde postačí Server Akce.
 2. **Kódový styl TypeScript a Tailwind:** Používat striktní typování propů. Pro Tailwind nevyužívat komplexní `@apply`, snažit se zachovat utility třídy přímo v JSX as long as possible.
 3. **Validovat všechny inputy:** Při úpravě formulářů VŽDY měnit i Zod schema (`validation.ts` a typy dat).
-4. **Zarovnání a přístupnost:** Kontrolovat kontrast v dark módu, dodržovat `text-left` pro lepší čitelnost odstavců (viz minulé refaktoringy Hero sekcí).
-5. **SEO Context:** S každou novou stránkou upravit `sitemap.ts` (`src/app/sitemap.ts`) a implementovat správné strukturované `Schema.org` definice (viz `src/lib/schema.ts`). Mnoho stávající dokumentace a FAQ se do stránky propisuje jako JSON-LD.
+4. **Zarovnání a přístupnost:** Kontrolovat kontrast v dark módu, dodržovat `text-left` pro lepší čitelnost odstavců a CTA tlačítek v Hero sekcích.
+5. **SEO Context:** S každou novou stránkou upravit `sitemap.ts` a implementovat správné strukturované `Schema.org` definice (viz `src/lib/schema.ts`). Mnoho stávající dokumentace a FAQ se do stránky propisuje jako JSON-LD.
+
+## 6. Historie klíčových nedávných změn (Březen 2026)
+- **UI a Čitelnost:** Oprava zarovnání textů doleva (namísto doprava) na všech Hero sekcích (svatby, firemní, hp).
+- **Hlavička:** Zvýšení průhlednosti hlavičky při načtení na 90 % (`bg-brand-black/10`).
+- **Hero Image:** Výměna obrázku na homepage na pohled shora na areál.
+- **Formuláře B2B:** `phone` byl přesunut na přední pozici ihned pod email a nastaven jako povinný (`required`) field včetně validace (`valdiation.ts`).
+- **Responzivita:** Fixnut horizontální přesah všech datových tabulek ceníku a kapacit pro mobilní zařízení zrušením `whitespace-nowrap` a drobným posunem paddingů a grid velikostí.
+- **Sdílení sekcí:** Na stránku /firemni-eventy nasazena globální Embla carousel komponenta SocialProof (obsahující referenci na obří akce i lokální meetupy) namísto statického duplikátu jediné akce.
