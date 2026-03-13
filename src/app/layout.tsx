@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import {
+  getEventVenueSchema,
+  getLocalBusinessSchema,
+  getVideoObjectSchema,
+  getBreadcrumbSchema,
+} from "@/lib/schema";
 import "./globals.css";
 
 const satoshi = localFont({
@@ -39,12 +45,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const schemas = [
+    getEventVenueSchema(),
+    getLocalBusinessSchema(),
+    getVideoObjectSchema(),
+    getBreadcrumbSchema(),
+  ];
+
   return (
     <html lang="cs" className={satoshi.variable}>
       <body className="font-sans antialiased">
         <a href="#hlavni-obsah" className="skip-link">
           Prejit na obsah
         </a>
+        {schemas.map((schema, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            suppressHydrationWarning
+          >
+            {JSON.stringify(schema)}
+          </script>
+        ))}
         <Header />
         <main id="hlavni-obsah">{children}</main>
         <Footer />
