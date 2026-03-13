@@ -5,8 +5,8 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen items-end pb-20 md:items-center md:pb-0">
       <Image
-        src="/images/hero/tereziansky-sal-strom-inc.webp"
-        alt="Břevnovský klášter – Tereziánský sál připravený na konferenci pro 180 osob"
+        src="/images/hero/BK_pohled_shora.webp"
+        alt="Břevnovský klášter z výšky"
         fill
         priority
         className="object-cover"
