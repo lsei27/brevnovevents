@@ -166,8 +166,12 @@ export function SocialProof() {
               type="button"
               onClick={() => emblaApi?.scrollTo(index)}
               aria-label={`Reference ${index + 1}`}
-              className={`h-2 w-2 rounded-full transition-colors ${index === selectedIndex ? "bg-brand-white" : "bg-brand-white/30"}`}
-            />
+              className="group flex items-center justify-center p-2"
+            >
+              <span
+                className={`h-2.5 w-2.5 rounded-full transition-colors ${index === selectedIndex ? "bg-brand-white" : "bg-brand-white/30 group-hover:bg-brand-white/50"}`}
+              />
+            </button>
           ))}
         </div>
       </div>
