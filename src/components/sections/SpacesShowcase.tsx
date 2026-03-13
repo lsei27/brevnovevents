@@ -43,6 +43,14 @@ const spaces = [
       "Historický areál s unikátní atmosférou pro příjezd hostů.",
   },
   {
+    image: "/images/prostory/sala-terrena-raut.webp",
+    alt: "Benediktinská vinárna — komorní prostor pro afterparty a degustace",
+    title: "Benediktinská vinárna",
+    capacity: "40 osob",
+    description:
+      "Komorní prostor pro afterparty, degustace a neformální setkání v autentickém klášterním prostředí.",
+  },
+  {
     image: "/images/prostory/brevnovsky-klaster-pohled-shora.webp",
     alt: "Břevnovský klášter — letecký pohled na celý areál",
     title: "Areál z výšky",
