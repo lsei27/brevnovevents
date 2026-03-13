@@ -1,23 +1,28 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
 interface PackageCard {
   name: string;
+  venue: string;
   persons: string;
   featured: boolean;
   includes: string[];
   price: string;
   price200: string;
-  breakdown: string;
   cta: string;
-  reference?: string;
   image: string;
   alt: string;
 }
 
 const packages: PackageCard[] = [
+  // ── Reprezentační prostory – 1. patro ──
   {
     name: "Konference",
+    venue: "Reprezentační prostory · 1. patro",
     persons: "100–200 osob",
     featured: false,
     includes: [
@@ -28,13 +33,13 @@ const packages: PackageCard[] = [
     ],
     price: "210 000",
     price200: "310 000",
-    breakdown: "Pronájem 65 tis. + catering 990 Kč/os + AV 25 tis. + personál 20 tis.",
     cta: "Nezávazná nabídka",
     image: "/images/prostory/tereziansky-sal-konference.webp",
     alt: "Tereziánský sál v konferenčním uspořádání",
   },
   {
     name: "Gala večeře",
+    venue: "Reprezentační prostory · 1. patro",
     persons: "100–200 osob",
     featured: true,
     includes: [
@@ -46,13 +51,13 @@ const packages: PackageCard[] = [
     ],
     price: "265 000",
     price200: "440 000",
-    breakdown: "Pronájem 65 tis. + welcome 260 Kč/os + menu 1 090 Kč/os + nápoje 430 Kč/os + personál 20 tis.",
     cta: "Nezávazná nabídka",
     image: "/images/prostory/sala-terrena-raut.webp",
     alt: "Sala Terrena připravená na gala večer s rautem",
   },
   {
     name: "Večerní firemní event",
+    venue: "Reprezentační prostory · 1. patro",
     persons: "100–200 osob",
     featured: false,
     includes: [
@@ -64,14 +69,74 @@ const packages: PackageCard[] = [
     ],
     price: "235 000",
     price200: "380 000",
-    breakdown: "Pronájem 65 tis. + welcome 260 Kč/os + bufet 790 Kč/os + nápoje 430 Kč/os + personál 20 tis.",
     cta: "Nezávazná nabídka",
     image: "/images/prostory/brevnovsky-klaster-pohled-shora.webp",
     alt: "Břevnovský klášter z výšky – celý areál pro večerní firemní akce",
   },
+  // ── Klášterní prostory – přízemí ──
+  {
+    name: "Konference",
+    venue: "Klášterní prostory · přízemí",
+    persons: "100–200 osob",
+    featured: false,
+    includes: [
+      "Sala Terrena + přilehlé salonky – celodenní pronájem (od 30 000 Kč)",
+      "Základní AV technika: projektor, ozvučení, mikrofony (od 25 000 Kč)",
+      "Catering: 2× coffee break + oběd + nápoje (od 990 Kč/os)",
+      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
+    ],
+    price: "175 000",
+    price200: "275 000",
+    cta: "Nezávazná nabídka",
+    image: "/images/prostory/sala-terrena-raut.webp",
+    alt: "Sala Terrena – konferenční uspořádání v klášterních prostorách",
+  },
+  {
+    name: "Večerní firemní event",
+    venue: "Klášterní prostory · přízemí",
+    persons: "100–200 osob",
+    featured: false,
+    includes: [
+      "Sala Terrena + přilehlé prostory (od 30 000 Kč)",
+      "Welcome drink + studené kanapky (od 260 Kč/os)",
+      "Bufetová večeře (od 790 Kč/os)",
+      "Nápojový balíček s pivem a vínem (od 430 Kč/os)",
+      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
+    ],
+    price: "200 000",
+    price200: "345 000",
+    cta: "Nezávazná nabídka",
+    image: "/images/prostory/salonek-prizemi.webp",
+    alt: "Klášterní prostory v přízemí – večerní firemní event",
+  },
 ];
 
 export function Packages() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+  });
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
   return (
     <section className="bg-brand-black-alt py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -82,62 +147,124 @@ export function Packages() {
           Balíčky slouží jako cenová orientace. Každou akci kalkulujeme
           individuálně dle vašich potřeb.
         </p>
-        <div className="mt-16 grid gap-8 md:grid-cols-3 md:items-start">
-          {packages.map((pkg) => (
-            <div
-              key={pkg.name}
-              className={`flex flex-col overflow-hidden rounded-2xl border ${
-                pkg.featured
-                  ? "scale-[1.02] border-brand-red bg-brand-black md:scale-105"
-                  : "border-brand-gray-dark/20 bg-brand-black"
-              }`}
-            >
-              <div className="overflow-hidden">
-                <Image
-                  src={pkg.image}
-                  alt={pkg.alt}
-                  width={400}
-                  height={250}
-                  className="h-48 w-full object-cover"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-8">
-                {pkg.featured && (
-                  <span className="mb-4 inline-block self-start rounded-full bg-brand-red px-4 py-1 text-xs font-bold uppercase tracking-wide">
-                    Nejoblíbenější
-                  </span>
-                )}
-                <h3 className="text-2xl font-bold">{pkg.name}</h3>
-                <p className="mt-1 text-sm text-brand-white/60">
-                  {pkg.persons}
-                </p>
-                <ul className="mt-6 flex-1 space-y-2">
-                  {pkg.includes.map((item) => (
-                    <li
-                      key={item}
-                      className="text-sm leading-relaxed text-brand-white/70"
-                    >
-                      &bull; {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  <p className="text-sm text-brand-white/60">od (100 osob)</p>
-                  <p className="text-3xl font-black">{pkg.price} Kč</p>
-                  <p className="mt-2 text-sm text-brand-white/50">200 osob od {pkg.price200} Kč</p>
-                </div>
-                <div className="mt-6">
-                  <Button
-                    href="#kontakt"
-                    variant={pkg.featured ? "primary" : "secondary"}
+
+        <div className="relative mt-16">
+          <div ref={emblaRef} className="overflow-hidden">
+            <div className="flex gap-6">
+              {packages.map((pkg) => (
+                <div
+                  key={`${pkg.venue}-${pkg.name}`}
+                  className="min-w-0 flex-[0_0_85%] sm:flex-[0_0_48%] lg:flex-[0_0_33.333%]"
+                >
+                  <div
+                    className={`flex h-full flex-col overflow-hidden rounded-2xl border ${
+                      pkg.featured
+                        ? "border-brand-red bg-brand-black"
+                        : "border-brand-gray-dark/20 bg-brand-black"
+                    }`}
                   >
-                    {pkg.cta}
-                  </Button>
+                    <div className="overflow-hidden">
+                      <Image
+                        src={pkg.image}
+                        alt={pkg.alt}
+                        width={400}
+                        height={250}
+                        className="h-48 w-full object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col p-8">
+                      {pkg.featured && (
+                        <span className="mb-4 inline-block self-start rounded-full bg-brand-red px-4 py-1 text-xs font-bold uppercase tracking-wide">
+                          Nejoblíbenější
+                        </span>
+                      )}
+                      <p className="text-xs font-semibold uppercase tracking-wider text-brand-red">
+                        {pkg.venue}
+                      </p>
+                      <h3 className="mt-2 text-2xl font-bold">{pkg.name}</h3>
+                      <p className="mt-1 text-sm text-brand-white/60">
+                        {pkg.persons}
+                      </p>
+                      <ul className="mt-6 flex-1 space-y-2">
+                        {pkg.includes.map((item) => (
+                          <li
+                            key={item}
+                            className="text-sm leading-relaxed text-brand-white/70"
+                          >
+                            &bull; {item}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-8">
+                        <p className="text-sm text-brand-white/60">
+                          od (100 osob)
+                        </p>
+                        <p className="text-3xl font-black">
+                          {pkg.price} Kč
+                        </p>
+                        <p className="mt-2 text-sm text-brand-white/50">
+                          200 osob od {pkg.price200} Kč
+                        </p>
+                      </div>
+                      <div className="mt-6">
+                        <Button
+                          href="#kontakt"
+                          variant={pkg.featured ? "primary" : "secondary"}
+                        >
+                          {pkg.cta}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
+          </div>
+
+          {/* Arrows */}
+          <button
+            type="button"
+            onClick={scrollPrev}
+            aria-label="Předchozí balíček"
+            className="absolute left-2 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40 md:block"
+          >
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={scrollNext}
+            aria-label="Další balíček"
+            className="absolute right-2 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40 md:block"
+          >
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Dots */}
+        <div className="mt-6 flex justify-center gap-2">
+          {packages.map((pkg, index) => (
+            <button
+              key={`dot-${pkg.venue}-${pkg.name}`}
+              type="button"
+              onClick={() => emblaApi?.scrollTo(index)}
+              aria-label={`Balíček ${index + 1}`}
+              className="group flex items-center justify-center p-2"
+            >
+              <span
+                className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                  index === selectedIndex
+                    ? "bg-brand-white"
+                    : "bg-brand-white/30 group-hover:bg-brand-white/50"
+                }`}
+              />
+            </button>
           ))}
         </div>
+
         <p className="mx-auto mt-12 max-w-3xl text-center text-sm text-brand-white/50">
           Ceny jsou orientační, bez DPH. Finální kalkulace závisí na rozsahu
           akce, termínu a požadavcích na techniku a catering. Nabídku na míru
