@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
 interface PackageCard {
@@ -8,6 +9,8 @@ interface PackageCard {
   price: string;
   cta: string;
   reference?: string;
+  image: string;
+  alt: string;
 }
 
 const packages: PackageCard[] = [
@@ -23,6 +26,8 @@ const packages: PackageCard[] = [
     ],
     price: "180 000",
     cta: "Nezávazná nabídka",
+    image: "/images/prostory/tereziansky-sal-konference.webp",
+    alt: "Tereziánský sál v konferenčním uspořádání",
   },
   {
     name: "Gala večer",
@@ -36,6 +41,8 @@ const packages: PackageCard[] = [
     ],
     price: "350 000",
     cta: "Nezávazná nabídka",
+    image: "/images/prostory/sala-terrena-raut.webp",
+    alt: "Sala Terrena připravená na gala večer s rautem",
   },
   {
     name: "Kongres",
@@ -50,6 +57,8 @@ const packages: PackageCard[] = [
     price: "600 000",
     cta: "Nezávazná nabídka",
     reference: "Reference: Speedchain International 2024 – 800 účastníků",
+    image: "/images/prostory/brevnovsky-klaster-pohled-shora.webp",
+    alt: "Břevnovský klášter z výšky – celý areál pro kongresové akce",
   },
 ];
 
@@ -68,45 +77,58 @@ export function Packages() {
           {packages.map((pkg) => (
             <div
               key={pkg.name}
-              className={`flex flex-col rounded-2xl border p-8 ${
+              className={`flex flex-col overflow-hidden rounded-2xl border ${
                 pkg.featured
                   ? "scale-[1.02] border-brand-red bg-brand-black md:scale-105"
                   : "border-brand-gray-dark/20 bg-brand-black"
               }`}
             >
-              {pkg.featured && (
-                <span className="mb-4 inline-block self-start rounded-full bg-brand-red px-4 py-1 text-xs font-bold uppercase tracking-wide">
-                  Nejoblíbenější
-                </span>
-              )}
-              <h3 className="text-2xl font-bold">{pkg.name}</h3>
-              <p className="mt-1 text-sm text-brand-white/60">{pkg.persons}</p>
-              <ul className="mt-6 flex-1 space-y-2">
-                {pkg.includes.map((item) => (
-                  <li
-                    key={item}
-                    className="text-sm leading-relaxed text-brand-white/70"
-                  >
-                    &bull; {item}
-                  </li>
-                ))}
-              </ul>
-              {pkg.reference && (
-                <p className="mt-4 text-xs italic text-brand-white/50">
-                  {pkg.reference}
-                </p>
-              )}
-              <div className="mt-8">
-                <p className="text-sm text-brand-white/60">od</p>
-                <p className="text-3xl font-black">{pkg.price} Kč</p>
+              <div className="overflow-hidden">
+                <Image
+                  src={pkg.image}
+                  alt={pkg.alt}
+                  width={400}
+                  height={250}
+                  className="h-48 w-full object-cover"
+                />
               </div>
-              <div className="mt-6">
-                <Button
-                  href="#kontakt"
-                  variant={pkg.featured ? "primary" : "secondary"}
-                >
-                  {pkg.cta}
-                </Button>
+              <div className="flex flex-1 flex-col p-8">
+                {pkg.featured && (
+                  <span className="mb-4 inline-block self-start rounded-full bg-brand-red px-4 py-1 text-xs font-bold uppercase tracking-wide">
+                    Nejoblíbenější
+                  </span>
+                )}
+                <h3 className="text-2xl font-bold">{pkg.name}</h3>
+                <p className="mt-1 text-sm text-brand-white/60">
+                  {pkg.persons}
+                </p>
+                <ul className="mt-6 flex-1 space-y-2">
+                  {pkg.includes.map((item) => (
+                    <li
+                      key={item}
+                      className="text-sm leading-relaxed text-brand-white/70"
+                    >
+                      &bull; {item}
+                    </li>
+                  ))}
+                </ul>
+                {pkg.reference && (
+                  <p className="mt-4 text-xs italic text-brand-white/50">
+                    {pkg.reference}
+                  </p>
+                )}
+                <div className="mt-8">
+                  <p className="text-sm text-brand-white/60">od</p>
+                  <p className="text-3xl font-black">{pkg.price} Kč</p>
+                </div>
+                <div className="mt-6">
+                  <Button
+                    href="#kontakt"
+                    variant={pkg.featured ? "primary" : "secondary"}
+                  >
+                    {pkg.cta}
+                  </Button>
+                </div>
               </div>
             </div>
           ))}

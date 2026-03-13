@@ -3,13 +3,14 @@ import { Button } from "@/components/ui/Button";
 
 export function FiremniHero() {
   return (
-    <section className="relative flex min-h-[60vh] items-end pb-20 md:pb-32">
+    <section className="relative flex min-h-screen items-end pb-20 md:items-center md:pb-0">
       <Image
-        src="/images/hero/homepage-hero.webp"
+        src="/images/hero/tereziansky-sal-strom-inc.webp"
         alt="Firemní event v Tereziánském sále Břevnovského kláštera"
         fill
         priority
         className="object-cover"
+        sizes="100vw"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-brand-black/30" />
       <div className="relative mx-auto max-w-7xl px-6">

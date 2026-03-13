@@ -1,15 +1,23 @@
+import Image from "next/image";
+
 const cards = [
   {
     title: "Klášterní pivovar",
     text: "Exkurze do klášterního pivovaru s degustací. Funguje jako teambuilding nebo doplněk networkingového programu. Hosté ocení příběh – Břevnovský pivovar vaří pivo od 13. století.",
+    image: "/images/prostory/brevnovsky-klaster-exterier.webp",
+    alt: "Exteriér Břevnovského kláštera s klášterním pivovarem",
   },
   {
     title: "Historická krypta",
     text: "Komorní prostor pod klášterem pro netradiční úvod programu nebo exkluzivní setkání. Autentická atmosféra, kterou žádný moderní prostor nenapodobí.",
+    image: "/images/prostory/salonek-prizemi.webp",
+    alt: "Salonek v přízemí Břevnovského kláštera",
   },
   {
     title: "Stůl Marie Terezie",
     text: "Slavnostní večeře Marie Terezia a Josefa II. v Tereziánském sále. Vraťte se do roku 1774 prostřednictvím inscenace večeře, která se v tomto místě skutečně odehrála. Skvělá atmosféra s výkladem profesionálního průvodce.",
+    image: "/images/prostory/tereziansky-sal-konference.webp",
+    alt: "Tereziánský sál připravený na slavnostní večeři",
   },
 ];
 
@@ -25,12 +33,23 @@ export function Upsell() {
           {cards.map((card) => (
             <div
               key={card.title}
-              className="rounded-2xl border border-brand-gray-dark/20 bg-brand-black p-8"
+              className="overflow-hidden rounded-2xl border border-brand-gray-dark/20 bg-brand-black"
             >
-              <h3 className="text-xl font-bold">{card.title}</h3>
-              <p className="mt-4 leading-relaxed text-brand-white/70">
-                {card.text}
-              </p>
+              <div className="overflow-hidden">
+                <Image
+                  src={card.image}
+                  alt={card.alt}
+                  width={400}
+                  height={250}
+                  className="h-48 w-full object-cover"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-xl font-bold">{card.title}</h3>
+                <p className="mt-4 leading-relaxed text-brand-white/70">
+                  {card.text}
+                </p>
+              </div>
             </div>
           ))}
         </div>

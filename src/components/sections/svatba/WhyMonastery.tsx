@@ -21,6 +21,8 @@ const reasons = [
   },
 ];
 
+import Image from "next/image";
+
 export function WhyMonastery() {
   return (
     <section className="bg-brand-black-alt py-20 md:py-32">
@@ -28,6 +30,16 @@ export function WhyMonastery() {
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           Co odlišuje klášter od hotelových a zámeckých svateb
         </h2>
+
+        <div className="mt-12 overflow-hidden rounded-2xl">
+          <Image
+            src="/images/svatby/svatba-exterier.webp"
+            alt="Nádvoří Břevnovského kláštera – historický prostor pro svatební den"
+            width={1200}
+            height={500}
+            className="h-64 w-full object-cover md:h-80"
+          />
+        </div>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2">
           {reasons.map((reason, index) => (

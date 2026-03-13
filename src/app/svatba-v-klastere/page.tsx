@@ -4,6 +4,7 @@ import { SvatbaHero } from "@/components/sections/svatba/SvatbaHero";
 import { WeddingSpaces } from "@/components/sections/svatba/WeddingSpaces";
 import { WeddingCapacity } from "@/components/sections/svatba/WeddingCapacity";
 import { WeddingPricing } from "@/components/sections/svatba/WeddingPricing";
+import { WeddingGallery } from "@/components/sections/svatba/WeddingGallery";
 import { WhyMonastery } from "@/components/sections/svatba/WhyMonastery";
 import { WeddingProcess } from "@/components/sections/svatba/WeddingProcess";
 import { FAQSvatba } from "@/components/sections/svatba/FAQSvatba";
@@ -38,6 +39,7 @@ export default function SvatbaPage() {
       <WeddingSpaces />
       <WeddingCapacity />
       <WeddingPricing />
+      <WeddingGallery />
       <WhyMonastery />
       <WeddingProcess />
       <FAQSvatba />

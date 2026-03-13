@@ -1,19 +1,29 @@
+import Image from "next/image";
+
 const spaces = [
   {
     title: "Venkovní obřad v klášterní zahradě",
     text: "Prostor Vojtěška a klášterní zahrada s rybníky – místo pro civilní svatební obřady. Nádvoří pojme až 300 hostů pro welcome drink a cocktail reception.",
+    image: "/images/svatby/bk-vojteska.webp",
+    alt: "Vojtěška – klášterní zahrada pro svatební obřad",
   },
   {
     title: "Slavnostní hostina v Tereziánském sále",
     text: "Barokní sál s freskovou výzdobou a stropní výškou 7,3 m. Kapacita 120 osob pro banketní sezení. Prostor, kde se fotky dělají samy.",
+    image: "/images/svatby/bk-terezian-obrad.webp",
+    alt: "Tereziánský sál – barokní prostor pro svatební hostinu",
   },
   {
     title: "Komorní oslava v přízemí",
     text: "Sala Terrena (až 110 osob) s přímým vstupem do zahrady. Benediktinská vinárna (až 80 osob) pro komorní večerní oslavu nebo afterparty.",
+    image: "/images/svatby/bk-svatba-sala-terrena.webp",
+    alt: "Sala Terrena – prostor pro komorní svatební oslavu",
   },
   {
     title: "Salonky pro menší skupiny",
     text: "Zlatý salonek (40 osob) – příprava nevěsty, fotokoutek nebo VIP prostor. Modrý salonek (20 osob) – klidný kout pro nejbližší.",
+    image: "/images/svatby/bk-prizemi-svatba.webp",
+    alt: "Salonek pro přípravu nevěsty a komorní setkání",
   },
 ];
 
@@ -29,12 +39,21 @@ export function WeddingSpaces() {
           {spaces.map((space) => (
             <div
               key={space.title}
-              className="rounded-2xl border-l-4 border-brand-pink bg-brand-black-alt p-8"
+              className="overflow-hidden rounded-2xl border border-brand-gray-dark/20 bg-brand-black-alt"
             >
-              <h3 className="text-lg font-bold">{space.title}</h3>
-              <p className="mt-3 leading-relaxed text-brand-white/70">
-                {space.text}
-              </p>
+              <Image
+                src={space.image}
+                alt={space.alt}
+                width={600}
+                height={300}
+                className="h-48 w-full object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-bold">{space.title}</h3>
+                <p className="mt-2 leading-relaxed text-brand-white/70">
+                  {space.text}
+                </p>
+              </div>
             </div>
           ))}
         </div>
