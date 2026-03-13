@@ -64,8 +64,11 @@ export async function submitInquiry(
 async function sendWebhook(data: InquiryFormData): Promise<void> {
   const webhookUrl = process.env.WEBHOOK_URL;
   if (!webhookUrl) {
+    console.error("WEBHOOK_URL is not configured. EMAIL_MODE:", process.env.EMAIL_MODE);
     throw new Error("WEBHOOK_URL is not configured");
   }
+
+  console.log("Sending webhook to:", webhookUrl);
 
   const response = await fetch(webhookUrl, {
     method: "POST",
@@ -77,8 +80,11 @@ async function sendWebhook(data: InquiryFormData): Promise<void> {
     }),
   });
 
+  const responseText = await response.text();
+  console.log("Webhook response:", response.status, responseText);
+
   if (!response.ok) {
-    throw new Error(`Webhook returned ${response.status}`);
+    throw new Error(`Webhook returned ${response.status}: ${responseText}`);
   }
 }
 
@@ -209,8 +215,11 @@ export async function submitWeddingInquiry(
 async function sendWeddingWebhook(data: WeddingFormData): Promise<void> {
   const webhookUrl = process.env.WEBHOOK_URL;
   if (!webhookUrl) {
+    console.error("WEBHOOK_URL is not configured. EMAIL_MODE:", process.env.EMAIL_MODE);
     throw new Error("WEBHOOK_URL is not configured");
   }
+
+  console.log("Sending wedding webhook to:", webhookUrl);
 
   const response = await fetch(webhookUrl, {
     method: "POST",
@@ -222,8 +231,11 @@ async function sendWeddingWebhook(data: WeddingFormData): Promise<void> {
     }),
   });
 
+  const responseText = await response.text();
+  console.log("Wedding webhook response:", response.status, responseText);
+
   if (!response.ok) {
-    throw new Error(`Webhook returned ${response.status}`);
+    throw new Error(`Webhook returned ${response.status}: ${responseText}`);
   }
 }
 
