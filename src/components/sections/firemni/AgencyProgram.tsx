@@ -23,7 +23,7 @@ const benefits = [
 
 export function AgencyProgram() {
   return (
-    <section className="bg-brand-black py-20 md:py-32">
+    <section className="bg-brand-black pb-20 pt-8 md:pb-32 md:pt-12">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           Partnerský program pro event agentury
