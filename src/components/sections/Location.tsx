@@ -1,5 +1,5 @@
 const transportInfo = [
-  { label: "MHD", value: "Tramvaj č. 22, 25 — zastávka Břevnovský klášter" },
+  { label: "MHD", value: "Tramvaj č. 22, 25 – zastávka Břevnovský klášter" },
   { label: "Parkování", value: "60 míst zdarma v areálu" },
   { label: "Letiště", value: "15 min. autem" },
   { label: "Centrum", value: "20 min. tramvají" },
@@ -10,7 +10,7 @@ export function Location() {
     <section className="bg-brand-black-alt py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Kde nás najdete — Praha 6, Břevnov
+          Kde nás najdete – Praha 6, Břevnov
         </h2>
 
         <div className="mt-16 grid gap-12 md:grid-cols-2">
@@ -36,7 +36,7 @@ export function Location() {
               <p className="mt-2 text-brand-white/70">
                 Markétská 1/28
                 <br />
-                169 00 Praha 6 — Břevnov
+                169 00 Praha 6 – Břevnov
               </p>
             </address>
 

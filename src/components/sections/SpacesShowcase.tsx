@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 const spaces = [
   {
     image: "/images/prostory/tereziansky-sal-konference.webp",
-    alt: "Tereziánský sál — konferenční sál pro 180 osob v Břevnovském klášteře",
+    alt: "Tereziánský sál – konferenční sál pro 180 osob v Břevnovském klášteře",
     title: "Tereziánský sál",
     capacity: "180 osob divadlo / 100 banket",
     description:
@@ -12,7 +12,7 @@ const spaces = [
   },
   {
     image: "/images/prostory/sala-terrena-raut.webp",
-    alt: "Sala Terrena — eventový prostor pro rauty a prezentace, kapacita 110 osob",
+    alt: "Sala Terrena – eventový prostor pro rauty a prezentace, kapacita 110 osob",
     title: "Sala Terrena",
     capacity: "110 osob recepce / 70 banket",
     description:
@@ -20,7 +20,7 @@ const spaces = [
   },
   {
     image: "/images/prostory/nadvori-klaster.webp",
-    alt: "Nádvoří Břevnovského kláštera — venkovní prostor pro 300 hostů",
+    alt: "Nádvoří Břevnovského kláštera – venkovní prostor pro 300 hostů",
     title: "Nádvoří a zahrady",
     capacity: "300 osob",
     description:
@@ -28,15 +28,15 @@ const spaces = [
   },
   {
     image: "/images/prostory/salonek-prizemi.webp",
-    alt: "Salonek v přízemí Břevnovského kláštera — workshopy a meetingy pro 20–50 osob",
+    alt: "Salonek v přízemí Břevnovského kláštera – workshopy a meetingy pro 20–50 osob",
     title: "Salonky",
     capacity: "20–50 osob",
     description:
-      "Zlatý, Modrý, Pompejský, Brandlův — workshopy, board meetingy, breakout sessions.",
+      "Zlatý, Modrý, Pompejský, Brandlův – workshopy, board meetingy, breakout sessions.",
   },
   {
     image: "/images/prostory/brevnovsky-klaster-exterier.webp",
-    alt: "Břevnovský klášter — pohled na exteriér historického areálu",
+    alt: "Břevnovský klášter – pohled na exteriér historického areálu",
     title: "Exteriér",
     capacity: "",
     description:
@@ -44,7 +44,7 @@ const spaces = [
   },
   {
     image: "/images/prostory/sala-terrena-raut.webp",
-    alt: "Benediktinská vinárna — komorní prostor pro afterparty a degustace",
+    alt: "Benediktinská vinárna – komorní prostor pro afterparty a degustace",
     title: "Benediktinská vinárna",
     capacity: "40 osob",
     description:
@@ -52,7 +52,7 @@ const spaces = [
   },
   {
     image: "/images/prostory/brevnovsky-klaster-pohled-shora.webp",
-    alt: "Břevnovský klášter — letecký pohled na celý areál",
+    alt: "Břevnovský klášter – letecký pohled na celý areál",
     title: "Areál z výšky",
     capacity: "",
     description:
@@ -65,20 +65,20 @@ export function SpacesShowcase() {
     <section id="prostory" className="bg-brand-black-alt py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Prostory pro každý formát — od komorního meetingu po kongres
+          Prostory pro každý formát – od komorního meetingu po kongres
         </h2>
         <div className="mt-16">
           <ImageCarousel slides={spaces} />
         </div>
         <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Button href="#kontakt" variant="primary">
-            Zobrazit všechny prostory
+            Všechny prostory
           </Button>
           <Button
             href="/downloads/technicky-rider-brevnovsky-klaster.pdf"
             variant="secondary"
           >
-            Stáhnout technický rider
+            Technický rider
           </Button>
         </div>
       </div>

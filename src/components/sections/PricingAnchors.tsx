@@ -29,8 +29,8 @@ export function PricingAnchors() {
         </div>
         <p className="mt-8 text-center text-sm text-brand-white/40">Ceny bez DPH. Menší akce od 20 osob kalkulujeme individuálně.</p>
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Button href="#kontakt" variant="primary">Nezávazná nabídka na míru — odpovíme do 24 hodin</Button>
-          <Button href="#kontakt" variant="secondary">Zeptat se na kompletní ceník</Button>
+          <Button href="#kontakt" variant="primary">Nabídka na míru</Button>
+          <Button href="#kontakt" variant="secondary">Kompletní ceník</Button>
         </div>
       </div>
     </section>

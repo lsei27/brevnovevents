@@ -1,7 +1,7 @@
 const steps = [
   { number: "1", title: "Poptávka a prohlídka", text: "Odpovíme do 24 hodin. Provedeme vás klášterem a ukážeme, jak prostory fungují v praxi. Nezávazně." },
-  { number: "2", title: "Nabídka na míru", text: "Transparentní cenová nabídka — pronájem, catering, technika. Bez skrytých položek." },
-  { number: "3", title: "Plánování a produkce", text: "Doladíme harmonogram, dispozice, menu a techniku. Vy řešíte obsah programu — o zbytek se staráme my." },
+  { number: "2", title: "Nabídka na míru", text: "Transparentní cenová nabídka – pronájem, catering, technika. Bez skrytých položek." },
+  { number: "3", title: "Plánování a produkce", text: "Doladíme harmonogram, dispozice, menu a techniku. Vy řešíte obsah programu – o zbytek se staráme my." },
   { number: "4", title: "Den D", text: "Náš tým je na místě od přípravy po úklid." },
 ];
 

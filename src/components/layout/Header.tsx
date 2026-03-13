@@ -29,14 +29,24 @@ export function Header() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" aria-label="Domu">
+        <Link href="/" className="flex items-center gap-3" aria-label="Domů">
           <Image
             src="/images/bk-logo.svg"
-            alt="Břevnovský klášter — logo"
+            alt="Břevnovský klášter – logo"
             width={140}
             height={40}
             priority
           />
+          <span className="hidden text-xs text-white/50 lg:block">
+            provozuje
+            <Image
+              src="/images/in-catering-logo.svg"
+              alt="IN CATERING"
+              width={70}
+              height={20}
+              className="ml-1 inline-block align-middle"
+            />
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -45,7 +55,7 @@ export function Header() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-sm font-medium text-white transition-colors hover:text-white/80"
+                className="text-base font-bold text-white transition-colors hover:text-white/80"
               >
                 {link.label}
               </Link>
@@ -68,17 +78,17 @@ export function Header() {
           aria-expanded={isMobileOpen}
         >
           <span
-            className={`block h-0.5 w-6 bg-brand-white transition-transform ${
+            className={`block h-0.5 w-6 bg-white transition-transform ${
               isMobileOpen ? "translate-y-2 rotate-45" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-brand-white transition-opacity ${
+            className={`block h-0.5 w-6 bg-white transition-opacity ${
               isMobileOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-brand-white transition-transform ${
+            className={`block h-0.5 w-6 bg-white transition-transform ${
               isMobileOpen ? "-translate-y-2 -rotate-45" : ""
             }`}
           />
@@ -93,7 +103,7 @@ export function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="block text-lg text-brand-white"
+                  className="block text-lg font-bold text-white"
                   onClick={() => setIsMobileOpen(false)}
                 >
                   {link.label}

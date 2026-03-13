@@ -23,11 +23,11 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Břevnovský klášter — eventové prostory Praha | brevnovevents.cz",
+  title: "Břevnovský klášter – eventové prostory Praha | brevnovevents.cz",
   description:
     "Pronájem historických prostor pro firemní akce a svatby v Praze. Od komorního meetingu pro 20 osob po kongres pro 1 100 hostů. Parkování zdarma. Provozuje IN CATERING.",
   openGraph: {
-    title: "Břevnovský klášter — eventové prostory v Praze",
+    title: "Břevnovský klášter – eventové prostory v Praze",
     description:
       "Historické prostory pro 20–1 100 hostů. Konference, gala večery, firemní akce i svatby. Parkování zdarma, catering od IN CATERING.",
     url: "https://brevnovevents.cz",

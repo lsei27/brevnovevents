@@ -16,7 +16,7 @@ export function WeddingGateway() {
       {/* Background image */}
       <img
         src="/images/svatby/vojteska-klasterni-zahrada.webp"
-        alt="Svatba v Břevnovském klášteře — venkovní obřad v klášterní zahradě"
+        alt="Svatba v Břevnovském klášteře – venkovní obřad v klášterní zahradě"
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -31,7 +31,7 @@ export function WeddingGateway() {
           <p className="mt-4 leading-relaxed text-brand-white/80">
             Barokní sály, klášterní zahrady a catering na míru pro 30 až 200
             hostů. Obřad v zahradě, hostina v sále s freskami, afterparty ve
-            vinárně — vše v jednom areálu.
+            vinárně – vše v jednom areálu.
           </p>
 
           <ul className="mt-8 space-y-3">

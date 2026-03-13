@@ -17,7 +17,7 @@ export function Footer() {
           <div className="space-y-4">
             <Image
               src="/images/bk-logo.svg"
-              alt="Břevnovský klášter — logo"
+              alt="Břevnovský klášter – logo"
               width={160}
               height={45}
             />
@@ -25,7 +25,7 @@ export function Footer() {
               Provozuje
               <Image
                 src="/images/in-catering-logo.svg"
-                alt="IN CATERING — logo"
+                alt="IN CATERING – logo"
                 width={100}
                 height={28}
               />
@@ -54,7 +54,7 @@ export function Footer() {
             <h3 className="mb-4 font-bold text-brand-white">Kontakt</h3>
             <address className="space-y-2 text-sm not-italic text-white/70">
               <p>Markétská 1/28</p>
-              <p>169 00 Praha 6 — Břevnov</p>
+              <p>169 00 Praha 6 – Břevnov</p>
               <p>
                 <a
                   href="mailto:brevnov@incatering.cz"

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 const uspCards = [
   {
     title: "Kapacita bez kompromisů",
-    text: "Až 1 100 hostů — více než Lobkowiczký palác (350), Martinický palác (200) nebo klášter Minoritů (250). Od salonku pro 20 po celý areál.",
+    text: "Až 1 100 hostů – více než Lobkowiczký palác (350), Martinický palác (200) nebo klášter Minoritů (250). Od salonku pro 20 po celý areál.",
   },
   {
     title: "Vše pod jednou střechou",
@@ -35,7 +35,7 @@ export function USP() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <Button href="#prostory" variant="secondary">Zjistit více o prostorech</Button>
+          <Button href="#prostory" variant="secondary">Prohlédnout prostory</Button>
         </div>
       </div>
     </section>
