@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { WeddingForm } from "@/components/forms/WeddingForm";
 
 export function WeddingContact() {
@@ -45,6 +46,15 @@ export function WeddingContact() {
                 </span>
                 www.brevnovevents.cz
               </p>
+            </div>
+            <div className="mt-8 overflow-hidden rounded-2xl">
+              <Image
+                src="/images/svatby/bk-ts-2.webp"
+                alt="Svatba v Břevnovském klášteře – Tereziánský sál"
+                width={600}
+                height={400}
+                className="aspect-[3/2] w-full object-cover"
+              />
             </div>
           </div>
 
