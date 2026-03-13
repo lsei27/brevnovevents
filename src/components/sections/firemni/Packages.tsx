@@ -7,6 +7,8 @@ interface PackageCard {
   featured: boolean;
   includes: string[];
   price: string;
+  price200: string;
+  breakdown: string;
   cta: string;
   reference?: string;
   image: string;
@@ -19,46 +21,53 @@ const packages: PackageCard[] = [
     persons: "100–200 osob",
     featured: false,
     includes: [
-      "Tereziánský sál – celodenní pronájem (200 m², divadelní sezení až 180 osob)",
-      "Základní AV technika: projektor, ozvučení, mikrofony",
-      "Welcome drink na nádvoří nebo v Sala Terreně",
-      "Catering: 2× coffee break, rautový oběd",
+      "Tereziánský sál – celodenní pronájem (od 65 000 Kč)",
+      "Základní AV technika: projektor, ozvučení, mikrofony (od 25 000 Kč)",
+      "Catering: 2× coffee break + oběd + nápoje (od 990 Kč/os)",
+      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
     ],
-    price: "180 000",
+    price: "210 000",
+    price200: "310 000",
+    breakdown: "Pronájem 65 tis. + catering 990 Kč/os + AV 25 tis. + personál 20 tis.",
     cta: "Nezávazná nabídka",
     image: "/images/prostory/tereziansky-sal-konference.webp",
     alt: "Tereziánský sál v konferenčním uspořádání",
   },
   {
-    name: "Gala večer",
-    persons: "150–300 osob",
+    name: "Gala večeře",
+    persons: "100–200 osob",
     featured: true,
     includes: [
-      "Tereziánský sál + Opatská jídelna + přilehlé salonky",
-      "AV technika + scénické osvětlení",
-      "Welcome drink na nádvoří",
-      "Catering: slavnostní 4chodové menu",
+      "Tereziánský sál + přilehlé salonky (od 65 000 Kč)",
+      "Welcome drink + studené kanapky (od 260 Kč/os)",
+      "Servírované 3chodové menu (od 1 090 Kč/os)",
+      "Nápojový balíček s pivem a vínem (od 430 Kč/os)",
+      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
     ],
-    price: "350 000",
+    price: "265 000",
+    price200: "440 000",
+    breakdown: "Pronájem 65 tis. + welcome 260 Kč/os + menu 1 090 Kč/os + nápoje 430 Kč/os + personál 20 tis.",
     cta: "Nezávazná nabídka",
     image: "/images/prostory/sala-terrena-raut.webp",
     alt: "Sala Terrena připravená na gala večer s rautem",
   },
   {
-    name: "Kongres",
-    persons: "300–800 osob",
+    name: "Večerní firemní event",
+    persons: "100–200 osob",
     featured: false,
     includes: [
-      "Celé 1. patro + přízemí + nádvoří",
-      "Plná AV výbava (LED obrazovky, streaming, konferenční mikrofony)",
-      "Paralelní sekce + VIP lounge",
-      "Celodenní catering včetně slavnostní večeře",
+      "Tereziánský sál + přilehlé prostory (od 65 000 Kč)",
+      "Welcome drink + studené kanapky (od 260 Kč/os)",
+      "Bufetová večeře (od 790 Kč/os)",
+      "Nápojový balíček s pivem a vínem (od 430 Kč/os)",
+      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
     ],
-    price: "600 000",
+    price: "235 000",
+    price200: "380 000",
+    breakdown: "Pronájem 65 tis. + welcome 260 Kč/os + bufet 790 Kč/os + nápoje 430 Kč/os + personál 20 tis.",
     cta: "Nezávazná nabídka",
-    reference: "Reference: Speedchain International 2024 – 800 účastníků",
     image: "/images/prostory/brevnovsky-klaster-pohled-shora.webp",
-    alt: "Břevnovský klášter z výšky – celý areál pro kongresové akce",
+    alt: "Břevnovský klášter z výšky – celý areál pro večerní firemní akce",
   },
 ];
 
@@ -112,14 +121,10 @@ export function Packages() {
                     </li>
                   ))}
                 </ul>
-                {pkg.reference && (
-                  <p className="mt-4 text-xs italic text-brand-white/50">
-                    {pkg.reference}
-                  </p>
-                )}
                 <div className="mt-8">
-                  <p className="text-sm text-brand-white/60">od</p>
+                  <p className="text-sm text-brand-white/60">od (100 osob)</p>
                   <p className="text-3xl font-black">{pkg.price} Kč</p>
+                  <p className="mt-2 text-sm text-brand-white/50">200 osob od {pkg.price200} Kč</p>
                 </div>
                 <div className="mt-6">
                   <Button

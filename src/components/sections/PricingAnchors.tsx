@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/Button";
 
 const packages = [
-  { name: "Konference", persons: "100–200 osob", includes: "Sál, AV technika, catering", price: "180 000", featured: false },
-  { name: "Gala večer", persons: "150–300 osob", includes: "Sály + salonky, osvětlení, 4chodové menu", price: "350 000", featured: true },
-  { name: "Kongres", persons: "300–800 osob", includes: "Celý areál, plná AV, celodenní catering", price: "600 000", featured: false },
+  { name: "Konference", persons: "100 osob", includes: "Sál, AV technika, 2× coffee break + oběd", price: "210 000", price200: "310 000", featured: false },
+  { name: "Gala večer", persons: "100 osob", includes: "Sál + salonky, welcome drink, 3chodové menu, nápoje", price: "265 000", price200: "440 000", featured: true },
+  { name: "Večerní event", persons: "100 osob", includes: "Sál, welcome drink, bufetová večeře, nápoje", price: "235 000", price200: "380 000", featured: false },
 ];
 
 export function PricingAnchors() {
@@ -20,8 +20,9 @@ export function PricingAnchors() {
               <p className="mt-2 text-sm text-brand-white/60">{pkg.persons}</p>
               <p className="mt-4 text-sm leading-relaxed text-brand-white/70">{pkg.includes}</p>
               <div className="mt-auto pt-8">
-                <p className="text-sm text-brand-white/60">od</p>
+                <p className="text-sm text-brand-white/60">od (100 osob)</p>
                 <p className="text-3xl font-black text-brand-white">{pkg.price}&nbsp;Kč</p>
+                <p className="mt-2 text-sm text-brand-white/50">200 osob od {pkg.price200}&nbsp;Kč</p>
               </div>
               <Button href="#kontakt" variant={pkg.featured ? "primary" : "secondary"} className="mt-6 w-full">Nezávazná nabídka</Button>
             </div>
