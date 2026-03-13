@@ -13,6 +13,16 @@ export async function submitInquiry(
   _prevState: ActionResult,
   formData: FormData
 ): Promise<ActionResult> {
+  console.log("submitInquiry called, formData type:", typeof formData, "is FormData:", formData instanceof FormData);
+
+  if (!formData || !(formData instanceof FormData)) {
+    console.error("formData is not a FormData instance:", formData);
+    return {
+      success: false,
+      message: "Formulář nebyl správně odeslán. Zkuste to znovu.",
+    };
+  }
+
   const raw: Record<string, string> = {};
   formData.forEach((value, key) => {
     if (typeof value === "string") {
@@ -160,6 +170,16 @@ export async function submitWeddingInquiry(
   _prevState: ActionResult,
   formData: FormData
 ): Promise<ActionResult> {
+  console.log("submitWeddingInquiry called, formData type:", typeof formData, "is FormData:", formData instanceof FormData);
+
+  if (!formData || !(formData instanceof FormData)) {
+    console.error("formData is not a FormData instance:", formData);
+    return {
+      success: false,
+      message: "Formulář nebyl správně odeslán. Zkuste to znovu.",
+    };
+  }
+
   const raw: Record<string, string> = {};
   formData.forEach((value, key) => {
     if (typeof value === "string" && key !== "celebrationType") {
