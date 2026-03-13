@@ -27,7 +27,7 @@ export function SocialProof() {
               ))}
             </div>
             <div className="mt-8">
-              <Button href="/reference/speedchain-2024" variant="secondary">Přečíst celou případovou studii</Button>
+              <Button href="#kontakt" variant="secondary">Chci podobnou akci</Button>
             </div>
           </div>
         </div>

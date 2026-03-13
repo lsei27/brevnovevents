@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const footerLinks = [
   { label: "Prostory", href: "#prostory" },
-  { label: "Firemni eventy", href: "#cenik" },
+  { label: "Firemní eventy", href: "#cenik" },
   { label: "Svatby", href: "#svatby" },
   { label: "Kontakt", href: "#kontakt" },
 ];
@@ -17,7 +17,7 @@ export function Footer() {
           <div className="space-y-4">
             <Image
               src="/images/bk-logo.svg"
-              alt="Brevnovsky klaster — logo"
+              alt="Břevnovský klášter — logo"
               width={160}
               height={45}
             />
@@ -33,7 +33,7 @@ export function Footer() {
           </div>
 
           {/* Navigation */}
-          <nav aria-label="Paticka">
+          <nav aria-label="Patička">
             <h3 className="mb-4 font-bold text-brand-white">Navigace</h3>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
@@ -53,8 +53,8 @@ export function Footer() {
           <div>
             <h3 className="mb-4 font-bold text-brand-white">Kontakt</h3>
             <address className="space-y-2 text-sm not-italic text-brand-gray-dark">
-              <p>Marketska 1/28</p>
-              <p>169 00 Praha 6 — Brevnov</p>
+              <p>Markétská 1/28</p>
+              <p>169 00 Praha 6 — Břevnov</p>
               <p>
                 <a
                   href="mailto:brevnov@incatering.cz"
@@ -92,10 +92,10 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 border-t border-brand-gray-dark/30 pt-8 text-center text-sm text-brand-gray-dark">
           <p>
-            &copy; 2026 IN CATERING s.r.o. Vsechna prava vyhrazena.
+            &copy; 2026 IN CATERING s.r.o. Všechna práva vyhrazena.
             {" · "}
             <a href="#" className="underline hover:text-brand-white">
-              Zasady ochrany osobnich udaju
+              Zásady ochrany osobních údajů
             </a>
           </p>
         </div>

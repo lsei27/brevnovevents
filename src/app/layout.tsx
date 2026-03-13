@@ -23,13 +23,13 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Brevnovsky klaster — eventove prostory Praha | brevnovevents.cz",
+  title: "Břevnovský klášter — eventové prostory Praha | brevnovevents.cz",
   description:
-    "Pronajem historickych prostor pro firemni akce a svatby v Praze. Od komorniho meetingu pro 20 osob po kongres pro 1 100 hostu. Parkovani zdarma. Provozuje IN CATERING.",
+    "Pronájem historických prostor pro firemní akce a svatby v Praze. Od komorního meetingu pro 20 osob po kongres pro 1 100 hostů. Parkování zdarma. Provozuje IN CATERING.",
   openGraph: {
-    title: "Brevnovsky klaster — eventove prostory v Praze",
+    title: "Břevnovský klášter — eventové prostory v Praze",
     description:
-      "Historicke prostory pro 20-1 100 hostu. Konference, gala vecery, firemni akce i svatby. Parkovani zdarma, catering od IN CATERING.",
+      "Historické prostory pro 20–1 100 hostů. Konference, gala večery, firemní akce i svatby. Parkování zdarma, catering od IN CATERING.",
     url: "https://brevnovevents.cz",
     siteName: "brevnovevents.cz",
     locale: "cs_CZ",
@@ -56,7 +56,7 @@ export default function RootLayout({
     <html lang="cs" className={satoshi.variable}>
       <body className="font-sans antialiased">
         <a href="#hlavni-obsah" className="skip-link">
-          Prejit na obsah
+          Přejít na obsah
         </a>
         {schemas.map((schema, i) => (
           <script

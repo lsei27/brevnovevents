@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 
 const navLinks = [
   { label: "Prostory", href: "#prostory" },
-  { label: "Firemni eventy", href: "#cenik" },
+  { label: "Firemní eventy", href: "#cenik" },
   { label: "Svatby", href: "#svatby" },
   { label: "Kontakt", href: "#kontakt" },
 ];
@@ -32,7 +32,7 @@ export function Header() {
         <Link href="/" aria-label="Domu">
           <Image
             src="/images/bk-logo.svg"
-            alt="Brevnovsky klaster — logo"
+            alt="Břevnovský klášter — logo"
             width={140}
             height={40}
             priority
@@ -55,7 +55,7 @@ export function Header() {
 
         <div className="hidden md:block">
           <Button href="#kontakt" variant="primary">
-            Domluvit prohlidku
+            Domluvit prohlídku
           </Button>
         </div>
 
@@ -64,7 +64,7 @@ export function Header() {
           type="button"
           className="flex flex-col gap-1.5 md:hidden"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          aria-label={isMobileOpen ? "Zavrit menu" : "Otevrit menu"}
+          aria-label={isMobileOpen ? "Zavřít menu" : "Otevřít menu"}
           aria-expanded={isMobileOpen}
         >
           <span
@@ -102,7 +102,7 @@ export function Header() {
             ))}
             <li>
               <Button href="#kontakt" variant="primary" className="w-full text-center">
-                Domluvit prohlidku
+                Domluvit prohlídku
               </Button>
             </li>
           </ul>
