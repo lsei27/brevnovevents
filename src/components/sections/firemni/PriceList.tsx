@@ -62,7 +62,7 @@ function PriceTable({ title, rows }: { title: string; rows: PriceRow[] }) {
 
 export function PriceList() {
   return (
-    <section className="bg-brand-black py-20 md:py-32">
+    <section id="cenik" className="bg-brand-black py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           Ceník pronájmu prostor Břevnovského kláštera

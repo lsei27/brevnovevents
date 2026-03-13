@@ -46,7 +46,7 @@ const spaces = [
     image: "/images/prostory/benediktinska-vinarna.webp",
     alt: "Benediktinská vinárna – komorní prostor pro afterparty a degustace",
     title: "Benediktinská vinárna",
-    capacity: "40 osob",
+    capacity: "80 osob",
     description:
       "Komorní prostor pro afterparty, degustace a neformální setkání v autentickém klášterním prostředí.",
   },
@@ -71,7 +71,7 @@ export function SpacesShowcase() {
           <ImageCarousel slides={spaces} />
         </div>
         <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Button href="#kontakt" variant="primary">
+          <Button href="/firemni-eventy" variant="primary">
             Všechny prostory
           </Button>
           <Button

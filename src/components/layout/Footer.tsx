@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const footerLinks = [
-  { label: "Prostory", href: "#prostory" },
-  { label: "Firemní eventy", href: "#cenik" },
-  { label: "Svatby", href: "#svatby" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Prostory", href: "/#prostory" },
+  { label: "Firemní eventy", href: "/firemni-eventy" },
+  { label: "Svatby", href: "/svatba-v-klastere" },
+  { label: "Kontakt", href: "/#kontakt" },
 ];
 
 export function Footer() {
@@ -23,12 +23,18 @@ export function Footer() {
             />
             <p className="flex items-center gap-2 text-sm text-white/70">
               Provozuje
-              <Image
-                src="/images/in-catering-logo.svg"
-                alt="IN CATERING – logo"
-                width={100}
-                height={28}
-              />
+              <a
+                href="https://incatering.cz"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/images/in-catering-logo.svg"
+                  alt="IN CATERING – logo"
+                  width={100}
+                  height={28}
+                />
+              </a>
             </p>
           </div>
 
@@ -100,9 +106,9 @@ export function Footer() {
           <p>
             &copy; 2026 IN CATERING s.r.o. Všechna práva vyhrazena.
             {" · "}
-            <a href="#" className="underline hover:text-white">
+            <Link href="/gdpr" className="underline hover:text-white">
               Zásady ochrany osobních údajů
-            </a>
+            </Link>
           </p>
         </div>
       </div>

@@ -54,7 +54,7 @@ export default function RootLayout({
 
   return (
     <html lang="cs" className={satoshi.variable}>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <a href="#hlavni-obsah" className="skip-link">
           Přejít na obsah
         </a>

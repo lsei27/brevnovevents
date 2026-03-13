@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "Je v Břevnovském klášteře parkování?",
     answer:
-      "Ano. 60 míst zdarma přímo v areálu kláštera. Pro větší akce zajistíme organizaci parkování a navigaci hostů.",
+      "Ano. 60 míst zdarma před areálem kláštera. Pro větší akce zajistíme organizaci parkování a navigaci hostů.",
   },
   {
     question: "Je prostor bezbariérový?",

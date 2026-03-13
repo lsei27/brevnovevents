@@ -1,6 +1,6 @@
 const transportInfo = [
   { label: "MHD", value: "Tramvaj č. 22, 25 – zastávka Břevnovský klášter" },
-  { label: "Parkování", value: "60 míst zdarma v areálu" },
+  { label: "Parkování", value: "60 míst zdarma před areálem" },
   { label: "Letiště", value: "15 min. autem" },
   { label: "Centrum", value: "20 min. tramvají" },
 ];
@@ -17,7 +17,7 @@ export function Location() {
           {/* Map */}
           <div className="overflow-hidden rounded-2xl">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.4!2d14.3667!3d50.0833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTDCsDA1JzAwLjAiTiAxNMKwMjInMDAuMCJF!5e0!3m2!1scs!2scz!4v1"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1106.9911271640362!2d14.356213153260008!3d50.08408041332804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b9570980d8ef9%3A0x7beb2aa78412e531!2zQsWZZXZub3Zza8O9IGtsw6HFoXRlciDigJMgU3Byw6F2YSBCxZlldm5vdnNrw6lobyBrbMOhxaF0ZXJhIHMuci5vLg!5e0!3m2!1scs!2scz!4v1773395285181!5m2!1scs!2scz"
               width="100%"
               height="400"
               style={{ border: 0 }}
