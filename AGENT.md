@@ -1,76 +1,97 @@
 # Břevnov Events – Agent Context & Architecture Guide
 
-Tento dokument slouží jako hlavní referenční příručka pro AI agenty a vývojáře pracující na projektu **Břevnovský klášter Events** (brevnovevents). Popisuje architekturu, technologie, adresářovou strukturu a klíčové procesy.
+Referenční příručka pro AI agenty a vývojáře pracující na projektu **Břevnovský klášter Events** (brevnovevents).
 
 ## 1. Technologický stack
-- **Framework:** Next.js 15 (App Router)
+- **Framework:** Next.js 16 (App Router)
 - **Knihovna:** React 19
 - **Stylování:** Tailwind CSS v4 (prostřednictvím PostCSS pluginů)
 - **Jazyk:** TypeScript (strict mode)
-- **Validace dat:** Zod (`zod`)
-- **Komponenty / UI:** Radix UI vzory (pokud jsou aplikovány), vlastní Tailwind shadery.
+- **Validace dat:** Zod v4
 - **Karusel/Slidery:** Embla Carousel (`embla-carousel-react`, `embla-carousel-autoplay`)
-- **Nasazení:** Vercel
+- **Nasazení:** Vercel (auto-deploy z `main` branch)
 
-## 2. Architektura a struktura projektu
-Projekt striktně následuje konvence Next.js App Routeru (`src/app`).
+## 2. Struktura projektu
 
 ```text
 src/
-├── app/                  # Next.js App Router
-│   ├── layout.tsx        # Hlavička, patička, globální metadata a fonty
-│   ├── page.tsx          # Homepage sestavená z bloků (sections)
-│   ├── actions.ts        # Server Actions (zpracování formulářů)
-│   ├── sitemap.ts        # Generování sitemapy
-│   ├── globals.css       # Globální CSS (Tailwind a CSS proměnné)
-│   ├── firemni-eventy/   # Podstránka Firemní eventy (bude/je implementována)
-│   └── svatba-v-klastere/# Podstránka Svatby (bude/je implementována)
-├── components/           # UI komponenty
-│   ├── forms/            # Klientské formuláře (InquiryForm.tsx, WeddingForm.tsx)
-│   ├── layout/           # Header.tsx, Footer.tsx
-│   ├── sections/         # Stavební bloky stránek (Hero, USP, Pricing, atd.)
-│   └── ui/               # Znovupoužitelné atomické komponenty (Button, ImageCarousel)
-├── lib/                  # Pomocné funkce a definice
-│   ├── schema.ts         # Generování Schema.org JSON-LD pro SEO
-│   └── validation.ts     # Zod schémata, options pro leaky formů, struktury dat
-public/                   # Statické soubory, obrázky, technické ridery (PDF)
+├── app/
+│   ├── layout.tsx           # Root layout – Satoshi font, Header, Footer, Schema.org JSON-LD
+│   ├── page.tsx             # Homepage (10 sekcí)
+│   ├── actions.ts           # Server Actions (InquiryForm + WeddingForm)
+│   ├── sitemap.ts           # Sitemap generátor
+│   ├── globals.css          # Tailwind + CSS proměnné
+│   ├── gdpr/page.tsx        # GDPR stránka
+│   ├── firemni-eventy/page.tsx   # B2B stránka (13 sekcí)
+│   └── svatba-v-klastere/page.tsx # Svatby (9 sekcí)
+├── components/
+│   ├── forms/               # InquiryForm.tsx (B2B), WeddingForm.tsx (svatby)
+│   ├── layout/              # Header.tsx, Footer.tsx
+│   ├── sections/            # Sdílené sekce (Hero, USP, SocialProof, Location, Contact, PricingAnchors, ...)
+│   │   ├── firemni/         # Sekce specifické pro /firemni-eventy
+│   │   └── svatba/          # Sekce specifické pro /svatba-v-klastere
+│   └── ui/                  # Button, ImageCarousel (s lightbox), YouTubeEmbed
+├── lib/
+│   ├── schema.ts            # Schema.org JSON-LD definice
+│   ├── validation.ts        # Zod schéma pro InquiryForm
+│   └── wedding-validation.ts # Zod schéma pro WeddingForm
+public/
+├── fonts/                   # Satoshi (Light, Regular, Bold, Black)
+├── images/
+│   ├── hero/                # Hero obrázky
+│   ├── prostory/            # Fotky prostor (sály, salonky, nádvoří, pivovar, krypta)
+│   ├── reference/           # Reference / case studies (Speedchain, Evropa 2)
+│   └── svatby/              # Svatební fotografie
+├── downloads/               # PDF ceník + technický rider
+└── robots.txt
 ```
 
-## 3. Klíčové procesy a data flow
+## 3. Klíčové procesy
 
-### 3.1. Zpracování formulářů (Server Actions)
-Odesílací formuláře napříč webem nevyužívají klasické API routy. Pracují pomocí **React Server Actions** definovaných ve `src/app/actions.ts`.
-- **Formuláře:** `InquiryForm` (B2B formulář), `WeddingForm` (Svatby). Formuláře drží interní state pomocí `useActionState`.
-- **Validace:** Provádí se server-side i client-side přes knihovnu **Zod**. Zod definice jsou ve `src/lib/validation.ts` a `src/lib/wedding-validation.ts`.
-- **Honeypot:** Většina formulářů obsahuje skryté (skryté atributem `sr-only`) pole `website`. Pokud je vyplněno, server skrytě předstírá úspěšné odeslání (ochrana proti hloupým botům).
+### 3.1. Formuláře (Server Actions)
+- Zpracování přes **React Server Actions** (`src/app/actions.ts`), ne API routy.
+- Dva formuláře: `InquiryForm` (B2B) a `WeddingForm` (svatby) s `useActionState`.
+- Server-side + client-side validace přes **Zod**.
+- **Honeypot:** Skryté pole `website` – pokud vyplněno, server předstírá úspěch.
 
 ### 3.2. E-maily a integrace
-Ze server-side akcí se e-maily nebo webhooky odesílají dle nastavení prostředí (`EMAIL_MODE`). Standardní implementace komunikuje s API Resend nebo napřímo pálí Webhooky například do n8n / Make.
-Proměnné prostředí zahrnují:
-- `RESEND_API_KEY` a `RESEND_FROM_EMAIL` (pro e-maily do cateringové agentury i confirmation maily klientům).
-- `WEBHOOK_URL` (pro odeslání dat do CRM).
+- `EMAIL_MODE=webhook` (výchozí) → POST na `WEBHOOK_URL` (n8n/Make)
+- `EMAIL_MODE=direct` → Resend API (`RESEND_API_KEY`, `RESEND_FROM_EMAIL`)
+- Notifikace na `brevnov@incatering.cz` + potvrzovací e-mail klientovi.
 
-## 4. UI / UX Specifika
-- **Design:** Tmavý ("dark") premium vzhled. Background většinou `#090909` (brand-black), doplňkové sekce v jemně světlejší černé (`brand-black-alt`).
-- **Barvy:** 
-  - Firemní eventy / Obecný web: Akcentní barva je červená (`bg-brand-red`).
-  - Svatby: Akcentní barva je růžová / Rose Gold (`bg-brand-pink`). Tlačítka dostávají variantu `variant="pink"`.
-- **Typografie:** Font je pravděpodobně `Geist` optimalizovaný Next.js (popsáno v README) a případně `Satoshi` navěšený na CSS proměnnou `--font-sans`.
-- **Odezvy:** Interaktivní věci (`Hover` state, navigace, formuláře) používají nativní Tailwind transition třídy. Transparentnost hlavičky po načtení je nyní 90 % (`bg-brand-black/10` v `Header.tsx`), při scrollování se ztmaví na 95 %.
-- **Responzivita:** Layout je postaven *Mobile-First*. Tabulky (např. Ceníky, Kapacity) jsou optimalizovány a nesmí na mobilu tvořit horizontální posuvník (`overflow-x-scroll`). Písmo je zmenšené (`text-[10px]` až `text-xs`) a zrušeno tvrdé nerozlamování textu (`whitespace-nowrap`).
-- **Slidery a Reference:** Sdílená komponenta `SocialProof.tsx` je používána globálně pro případové studie (homepage, firemní eventy), nenahrazovat ji izolovanými komponentami (jako byla dřívější smazaná `CaseStudy`). Pagination se vykresluje jako CSS tečky (`rounded-full`), obalené ve span s klikacím kontejnerem proti vizuální deformaci pod vlivem responzivního `min-height`.
+### 3.3. Cenové balíčky
+Ceny jsou kalkulované z PPTX nabídek (složka `Context_project/Nabídky_balíčky/`).
+Dvě kategorie prostor:
+- **Reprezentační prostory · 1. patro** – pronájem od 65 000 Kč (Tereziánský sál)
+- **Klášterní prostory · přízemí** – pronájem od 30 000 Kč (Sala Terrena)
+
+Balíčky zobrazené jako Embla carousel (5 karet):
+| Balíček | Reprez. (100 os.) | Reprez. (200 os.) | Klášt. (100 os.) | Klášt. (200 os.) |
+|---------|-------------------|-------------------|-------------------|-------------------|
+| Konference | 210 000 | 310 000 | 175 000 | 275 000 |
+| Gala večeře | 265 000 | 440 000 | – | – |
+| Firemní večírek | 235 000 | 380 000 | 200 000 | 345 000 |
+
+Doprovodné programy (Upsell sekce): Pivovar od 250 Kč/os, Krypta od 180 Kč/os, Stůl Marie Terezie od 110 000 Kč.
+
+## 4. UI / UX
+
+- **Design:** Tmavý premium vzhled. Background `#090909` (brand-black), alternativní sekce `brand-black-alt`.
+- **Barvy:** Firemní = červená (`brand-red`), Svatby = růžová (`brand-pink`, `variant="pink"`).
+- **Typografie:** Font Satoshi (`--font-satoshi`), Light/Regular/Bold/Black.
+- **Hlavička:** Průhledná při načtení (`bg-brand-black/10`), ztmavne při scrollování na 95 %.
+- **Responzivita:** Mobile-First. Tabulky bez horizontálního scrollu na mobilu.
+- **Carousel pattern:** Embla Carousel s loop, dots pagination a šipkami pod obsahem. Používáno pro: PricingAnchors, Packages, SocialProof, ImageCarousel (SpacesShowcase, SpacesGallery).
+- **ImageCarousel lightbox:** Klik na obrázek otevře fullscreen overlay s navigací (šipky, Escape, prev/next).
+- **Featured badge:** U karty "Nejoblíbenější" je badge jako overlay v pravém horním rohu obrázku (ne v body karty), aby nadpisy karet zůstaly zarovnané.
+- **Hero H1 copy:** Krátké, benefit-driven nadpisy zaměřené na zákazníka (ne popisné SEO texty). Font size `text-5xl` na desktopu.
 
 ## 5. Pravidla pro další vývoj
-1. **Nenarušit existující Server Actions architekturu:** Nepřidávat API routy tam, kde postačí Server Akce.
-2. **Kódový styl TypeScript a Tailwind:** Používat striktní typování propů. Pro Tailwind nevyužívat komplexní `@apply`, snažit se zachovat utility třídy přímo v JSX as long as possible.
-3. **Validovat všechny inputy:** Při úpravě formulářů VŽDY měnit i Zod schema (`validation.ts` a typy dat).
-4. **Zarovnání a přístupnost:** Kontrolovat kontrast v dark módu, dodržovat `text-left` pro lepší čitelnost odstavců a CTA tlačítek v Hero sekcích.
-5. **SEO Context:** S každou novou stránkou upravit `sitemap.ts` a implementovat správné strukturované `Schema.org` definice (viz `src/lib/schema.ts`). Mnoho stávající dokumentace a FAQ se do stránky propisuje jako JSON-LD.
 
-## 6. Historie klíčových nedávných změn (Březen 2026)
-- **UI a Čitelnost:** Oprava zarovnání textů doleva (namísto doprava) na všech Hero sekcích (svatby, firemní, hp).
-- **Hlavička:** Zvýšení průhlednosti hlavičky při načtení na 90 % (`bg-brand-black/10`).
-- **Hero Image:** Výměna obrázku na homepage na pohled shora na areál.
-- **Formuláře B2B:** `phone` byl přesunut na přední pozici ihned pod email a nastaven jako povinný (`required`) field včetně validace (`valdiation.ts`).
-- **Responzivita:** Fixnut horizontální přesah všech datových tabulek ceníku a kapacit pro mobilní zařízení zrušením `whitespace-nowrap` a drobným posunem paddingů a grid velikostí.
-- **Sdílení sekcí:** Na stránku /firemni-eventy nasazena globální Embla carousel komponenta SocialProof (obsahující referenci na obří akce i lokální meetupy) namísto statického duplikátu jediné akce.
+1. **Server Actions architektura:** Nepřidávat API routy tam, kde stačí Server Actions.
+2. **TypeScript + Tailwind:** Striktní typování propů. Utility třídy přímo v JSX, ne `@apply`.
+3. **Validace:** Při změně formulářů VŽDY aktualizovat Zod schéma (`validation.ts` / `wedding-validation.ts`).
+4. **SEO:** S každou novou stránkou upravit `sitemap.ts` a přidat Schema.org JSON-LD (`lib/schema.ts`).
+5. **Obrázky:** Formát WebP, ukládat do příslušné podsložky v `public/images/`. Nepoužívané obrázky mazat.
+6. **Carousel:** Pro seznamy 4+ položek používat Embla carousel se stávajícím patternem (šipky pod obsahem + dots).
+7. **Přístupnost:** Kontrolovat kontrast v dark módu, `text-left` pro odstavce, skip-link na `#hlavni-obsah`.
