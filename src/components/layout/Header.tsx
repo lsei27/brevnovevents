@@ -6,10 +6,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
 const navLinks = [
-  { label: "Prostory", href: "#prostory" },
-  { label: "Firemní eventy", href: "#cenik" },
-  { label: "Svatby", href: "#svatby" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Prostory", href: "/#prostory" },
+  { label: "Firemní eventy", href: "/firemni-eventy" },
+  { label: "Svatby", href: "/svatba-v-klastere" },
+  { label: "Kontakt", href: "/#kontakt" },
 ];
 
 export function Header() {

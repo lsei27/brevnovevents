@@ -1,0 +1,38 @@
+import Image from "next/image";
+import { Button } from "@/components/ui/Button";
+
+export function FiremniHero() {
+  return (
+    <section className="relative flex min-h-[60vh] items-end pb-20 md:pb-32">
+      <Image
+        src="/images/hero/homepage-hero.webp"
+        alt="Firemní event v Tereziánském sále Břevnovského kláštera"
+        fill
+        priority
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-brand-black/30" />
+      <div className="relative mx-auto max-w-7xl px-6">
+        <h1 className="max-w-3xl text-4xl font-black md:text-6xl">
+          Firemní eventy v Břevnovském klášteře – pronájem historických prostor
+          v Praze
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg font-medium text-white md:text-xl">
+          Konference, gala večery, product launche a firemní večírky pro 20 až
+          1 100 hostů. Barokní sály, nádvoří s kapacitou 300 osob a catering od
+          IN CATERING – vše pod jednou střechou.
+        </p>
+        <p className="mt-4 max-w-2xl font-medium text-white/80">
+          Od komorního workshopu v salonku s freskami po mezinárodní kongres pro
+          800 účastníků. Jeden tým pro prostor, catering i techniku. Parkování
+          pro 60 aut zdarma, 15 minut od letiště.
+        </p>
+        <div className="mt-8">
+          <Button href="#kontakt" variant="primary">
+            Domluvit prohlídku
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
