@@ -46,7 +46,7 @@ export function WeddingSpaces() {
                 alt={space.alt}
                 width={600}
                 height={300}
-                className="h-48 w-full object-cover"
+                className="h-96 w-full object-cover"
               />
               <div className="p-6">
                 <h3 className="text-xl font-bold">{space.title}</h3>

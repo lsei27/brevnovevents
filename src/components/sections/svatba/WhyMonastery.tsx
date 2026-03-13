@@ -37,7 +37,7 @@ export function WhyMonastery() {
             alt="Nádvoří Břevnovského kláštera – historický prostor pro svatební den"
             width={1200}
             height={500}
-            className="h-64 w-full object-cover md:h-80"
+            className="h-[28rem] w-full object-cover md:h-[32rem]"
           />
         </div>
 
