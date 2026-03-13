@@ -25,7 +25,7 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        isScrolled ? "bg-brand-black/95 backdrop-blur-md" : "bg-transparent"
+        isScrolled ? "bg-brand-black/95 backdrop-blur-md" : "bg-brand-black/50 backdrop-blur-sm"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -37,7 +37,7 @@ export function Header() {
             height={40}
             priority
           />
-          <span className="hidden text-xs text-white/50 lg:block">
+          <span className="hidden text-xs text-white lg:block">
             provozuje
             <Image
               src="/images/in-catering-logo.svg"
