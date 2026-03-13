@@ -4,18 +4,21 @@ const cards = [
   {
     title: "Klášterní pivovar",
     text: "Exkurze do klášterního pivovaru s degustací. Funguje jako teambuilding nebo doplněk networkingového programu. Hosté ocení příběh – Břevnovský pivovar vaří pivo od 13. století.",
+    price: "od 250 Kč/os",
     image: "/images/prostory/pivovar-brevnov.webp",
     alt: "Klášterní pivovar Břevnovského kláštera – měděné varny",
   },
   {
     title: "Historická krypta",
-    text: "Komorní prostor pod klášterem pro netradiční úvod programu nebo exkluzivní setkání. Autentická atmosféra, kterou žádný moderní prostor nenapodobí.",
+    text: "Komorní prostor pod klášterem pro netradiční úvod programu nebo exkluzivní setkání. Autentická atmosféra, kterou žádný moderní prostor nenapodobí. Součástí je prohlídka s výkladem.",
+    price: "od 180 Kč/os",
     image: "/images/prostory/krypta-bk.webp",
     alt: "Historická krypta pod Břevnovským klášterem",
   },
   {
     title: "Stůl Marie Terezie",
-    text: "Slavnostní večeře Marie Terezia a Josefa II. v Tereziánském sále. Vraťte se do roku 1774 prostřednictvím inscenace večeře, která se v tomto místě skutečně odehrála. Skvělá atmosféra s výkladem profesionálního průvodce.",
+    text: "Slavnostní večeře Marie Terezie a Josefa II. v Tereziánském sále. Vraťte se do roku 1774 prostřednictvím inscenace večeře, která se v tomto místě skutečně odehrála. Skvělá atmosféra s výkladem profesionálního průvodce.",
+    price: "od 110 000 Kč",
     image: "/images/prostory/terezian-vecere-marie-terezie.webp",
     alt: "Slavnostní večeře Marie Terezie v Tereziánském sále",
   },
@@ -49,13 +52,16 @@ export function Upsell() {
                 <p className="mt-4 leading-relaxed text-brand-white/70">
                   {card.text}
                 </p>
+                <p className="mt-4 text-sm font-bold text-brand-red">
+                  {card.price} bez DPH
+                </p>
               </div>
             </div>
           ))}
         </div>
 
         <p className="mt-10 text-center text-sm text-brand-white/50">
-          Dostupnost a ceny doplňkových zážitků na vyžádání.
+          Ceny jsou orientační, bez DPH. Dostupnost a finální kalkulaci rádi upřesníme.
         </p>
       </div>
     </section>
