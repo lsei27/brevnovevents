@@ -8,6 +8,8 @@ import {
   getVideoObjectSchema,
   getBreadcrumbSchema,
 } from "@/lib/schema";
+import { CookieConsent } from "@/components/ui/CookieConsent";
+import Script from "next/script";
 import "./globals.css";
 
 const satoshi = localFont({
@@ -54,6 +56,24 @@ export default function RootLayout({
 
   return (
     <html lang="cs" className={satoshi.variable}>
+      <head>
+        <Script
+          id="google-consent-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'analytics_storage': 'denied'
+              });
+            `,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
         <a href="#hlavni-obsah" className="skip-link">
           Přejít na obsah
@@ -70,6 +90,7 @@ export default function RootLayout({
         <Header />
         <main id="hlavni-obsah">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );

@@ -1,0 +1,216 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/Button";
+
+type ConsentState = {
+  ad_storage: "granted" | "denied";
+  ad_user_data: "granted" | "denied";
+  ad_personalization: "granted" | "denied";
+  analytics_storage: "granted" | "denied";
+};
+
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+  }
+}
+
+export function CookieConsent() {
+  const [showBanner, setShowBanner] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  
+  const [analyticsConsent, setAnalyticsConsent] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
+
+  useEffect(() => {
+    // Check if user already made a choice
+    const savedConsent = localStorage.getItem("cookie_consent");
+    if (!savedConsent) {
+      setShowBanner(true);
+    } else {
+      try {
+        const parsed: ConsentState = JSON.parse(savedConsent);
+        setAnalyticsConsent(parsed.analytics_storage === "granted");
+        setMarketingConsent(parsed.ad_storage === "granted");
+        
+        // Push update immediately on load if previously saved
+        if (typeof window.gtag === "function") {
+          window.gtag("consent", "update", parsed);
+        }
+      } catch (e) {
+        console.error("Failed to parse cookie consent", e);
+        setShowBanner(true);
+      }
+    }
+  }, []);
+
+  const handleSave = (state: ConsentState) => {
+    localStorage.setItem("cookie_consent", JSON.stringify(state));
+    
+    // Update Google Consent Mode
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", state);
+    } else {
+      // Fallback in case gtag is not ready yet
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "consent_update",
+        consent_state: state
+      });
+    }
+
+    setShowBanner(false);
+    setShowSettings(false);
+  };
+
+  const acceptAll = () => {
+    handleSave({
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+      analytics_storage: "granted",
+    });
+  };
+
+  const rejectAll = () => {
+    handleSave({
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+    });
+  };
+
+  const saveSettings = () => {
+    handleSave({
+      ad_storage: marketingConsent ? "granted" : "denied",
+      ad_user_data: marketingConsent ? "granted" : "denied",
+      ad_personalization: marketingConsent ? "granted" : "denied",
+      analytics_storage: analyticsConsent ? "granted" : "denied",
+    });
+  };
+
+  if (!showBanner && !showSettings) return null;
+
+  return (
+    <>
+      {/* Banner */}
+      {showBanner && !showSettings && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-brand-gray-dark/20 bg-brand-black/95 p-6 backdrop-blur-md shadow-2xl">
+          <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+            <div className="max-w-3xl">
+              <h2 className="text-lg font-bold text-brand-white">
+                Vážíme si vašeho soukromí
+              </h2>
+              <p className="mt-2 text-sm text-brand-white/70">
+                Tyto webové stránky používají soubory cookies a podobné
+                technologie pro zajištění základních funkcí webu, analýzu
+                návštěvnosti a personalizaci obsahu či reklam. Sdílené
+                informace nám pomáhají zlepšovat naše služby.
+              </p>
+            </div>
+            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <button
+                onClick={() => setShowSettings(true)}
+                className="text-sm font-medium text-brand-white/70 hover:text-brand-white transition-colors py-2 px-4"
+              >
+                Nastavení
+              </button>
+              <Button onClick={rejectAll} variant="secondary">
+                Odmítnout
+              </Button>
+              <Button onClick={acceptAll} variant="primary">
+                Přijmout vše
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Settings Modal */}
+      {showSettings && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-2xl rounded-2xl border border-brand-gray-dark/20 bg-brand-black p-6 md:p-8">
+            <h2 className="text-2xl font-bold">Nastavení soukromí</h2>
+            <p className="mt-4 text-sm text-brand-white/70">
+              Níže si můžete přizpůsobit, jaké typy cookies nám povolíte
+              ukládat. Vaše nastavení můžete kdykoliv změnit.
+            </p>
+
+            <div className="mt-8 space-y-6">
+              {/* Necessary */}
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="font-semibold text-brand-white">Nezbytné</h3>
+                  <p className="mt-1 text-xs text-brand-white/60">
+                    Technické cookies nutné pro správné fungování webu a uložení vašich preferencí. Tyto cookies nelze vypnout.
+                  </p>
+                </div>
+                <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-brand-red">
+                  <span className="inline-block h-4 w-4 translate-x-6 rounded-full bg-white" />
+                </div>
+              </div>
+
+              {/* Analytics */}
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="font-semibold text-brand-white">Analytické</h3>
+                  <p className="mt-1 text-xs text-brand-white/60">
+                    Pomáhají nám pochopit, jak návštěvníci používají náš web, díky
+                    čemuž ho můžeme neustále vylepšovat (např. Google Analytics).
+                  </p>
+                </div>
+                <button
+                  onClick={() => setAnalyticsConsent(!analyticsConsent)}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                    analyticsConsent ? "bg-brand-red" : "bg-brand-gray-dark/40"
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      analyticsConsent ? "translate-x-6" : "translate-x-1"
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {/* Marketing */}
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="font-semibold text-brand-white">Marketingové</h3>
+                  <p className="mt-1 text-xs text-brand-white/60">
+                    Slouží ke sledování návštěvníků napříč weby a umožňují 
+                    zobrazovat reklamy, které jsou pro vás relevantní.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setMarketingConsent(!marketingConsent)}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                    marketingConsent ? "bg-brand-red" : "bg-brand-gray-dark/40"
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      marketingConsent ? "translate-x-6" : "translate-x-1"
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-10 flex flex-col justify-end gap-4 sm:flex-row">
+              <Button onClick={() => setShowSettings(false)} variant="secondary">
+                Zpět
+              </Button>
+              <Button onClick={saveSettings} variant="primary">
+                Uložit nastavení
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
