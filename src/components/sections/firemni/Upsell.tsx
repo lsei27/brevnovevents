@@ -60,6 +60,33 @@ export function Upsell() {
           ))}
         </div>
 
+        <div className="mx-auto mt-16 max-w-4xl rounded-2xl border border-brand-gray-dark/20 bg-brand-black p-8 md:p-12">
+          <h3 className="mb-8 text-center text-2xl font-bold">Další zážitky na vyžádání</h3>
+          <ul className="grid gap-6 md:grid-cols-2">
+            {[
+              { name: "Tržiště z královského dvora", price: "od 50 000 Kč" },
+              { name: "Scénické vystoupení „Večer s mnichy“", price: "od 50 000 Kč" },
+              { name: "Domácí zabíjačka", price: "od 20 000 Kč" },
+              { name: "Koncert barokního kvarteta", price: "od 25 000 Kč" },
+              { name: "Speciální světelné efekty", price: "od 40 000 Kč" },
+              { name: "Květinové dekorace", price: "od 20 000 Kč" },
+            ].map((item) => (
+              <li
+                key={item.name}
+                className="flex items-center justify-between rounded-xl bg-brand-black-alt p-4 transition-colors hover:bg-brand-gray-dark/10"
+              >
+                <div className="flex-1">
+                  <span className="font-semibold text-brand-white">{item.name}</span>
+                </div>
+                <div className="ml-4 whitespace-nowrap text-right">
+                  <span className="text-sm font-bold text-brand-red">{item.price}</span>
+                  <span className="ml-1 text-xs text-brand-white/50">bez DPH</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <p className="mt-10 text-center text-sm text-brand-white/50">
           Ceny jsou orientační, bez DPH. Dostupnost a finální kalkulaci rádi upřesníme.
         </p>
