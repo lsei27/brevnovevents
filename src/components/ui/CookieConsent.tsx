@@ -92,10 +92,37 @@ export function CookieConsent() {
     });
   };
 
-  if (!showBanner && !showSettings) return null;
-
   return (
     <>
+      {/* Floating Button always accessible when banner is hidden */}
+      {!showBanner && !showSettings && (
+        <button
+          onClick={() => setShowSettings(true)}
+          className="fixed bottom-4 right-4 z-40 rounded-full bg-brand-black/80 p-3 text-brand-white shadow-lg backdrop-blur-md transition-colors hover:bg-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-2 focus:ring-offset-brand-black overflow-hidden group"
+          aria-label="Nastavení cookies"
+          title="Cookies"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="transition-transform group-hover:scale-110"
+          >
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+            <path d="M8.5 8.5v.01" />
+            <path d="M16 12.5v.01" />
+            <path d="M12 16v.01" />
+            <path d="M11 11v.01" />
+            <path d="M15 17v.01" />
+          </svg>
+        </button>
+      )}
       {/* Banner */}
       {showBanner && !showSettings && (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-brand-gray-dark/20 bg-brand-black/95 p-6 backdrop-blur-md shadow-2xl">
