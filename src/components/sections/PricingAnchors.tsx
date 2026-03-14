@@ -92,12 +92,15 @@ export function PricingAnchors() {
                         {pkg.venue}
                       </p>
                       <p className="mt-2 text-sm text-brand-white/60">
-                        od (100 osob)
+                        od
                       </p>
                       <p className="text-3xl font-black text-brand-white">
                         {pkg.price}&nbsp;Kč
                       </p>
                       <p className="mt-2 text-sm text-brand-white/50">
+                        orientační cena akce pro 100 osob
+                      </p>
+                      <p className="mt-1 text-sm text-brand-white/50">
                         200 osob od {pkg.price200}&nbsp;Kč
                       </p>
                     </div>
