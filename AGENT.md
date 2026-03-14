@@ -72,7 +72,8 @@ Balíčky zobrazené jako Embla carousel (5 karet):
 | Gala večeře | 265 000 | 440 000 | – | – |
 | Firemní večírek | 235 000 | 380 000 | 200 000 | 345 000 |
 
-Doprovodné programy (Upsell sekce): Pivovar od 250 Kč/os, Krypta od 180 Kč/os, Stůl Marie Terezie od 110 000 Kč.
+Doprovodné programy (Upsell sekce): Pivovar od 250 Kč/os, Krypta od 180 Kč/os, Stůl Marie Terezie od 110 000 Kč. 
+Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Večer s mnichy (od 50 000 Kč), Domácí zabíjačka (od 20 000 Kč), Koncert barokního kvarteta (od 25 000 Kč), Světelné efekty (od 40 000 Kč), Květinové dekorace (od 20 000 Kč).
 
 ## 4. UI / UX
 
