@@ -96,3 +96,11 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 5. **Obrázky:** Formát WebP, ukládat do příslušné podsložky v `public/images/`. Nepoužívané obrázky mazat.
 6. **Carousel:** Pro seznamy 4+ položek používat Embla carousel se stávajícím patternem (šipky pod obsahem + dots).
 7. **Přístupnost:** Kontrolovat kontrast v dark módu, `text-left` pro odstavce, skip-link na `#hlavni-obsah`.
+
+## 6. Sledování a analytika (Cookies)
+
+Web implementuje **Google Consent Mode v2** a custom `<CookieConsent />` banner (`src/components/ui/CookieConsent.tsx`).
+- Vložen přímo v `layout.tsx` pod hlavičkou jako globální script vracející defaultní signál `denied`.
+- Tlačítko pro vyvolání nastavení je plovoucí, vizuálně fixované vpravo dole, když je banner skrytý.
+- Při přijetí nebo zamítnutí se stav uloží do `localStorage` (pod klíčem `cookie_consent`) a do datové vrstvy se odešle signál `update` (např. `analytics_storage: 'granted'`).
+- Web je tak plně připraven na napojení s **Google Tag Manager** (v budoucnu k vložení do hlavičky layoutu pod consent-init script).
