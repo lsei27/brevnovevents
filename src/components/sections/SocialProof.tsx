@@ -44,6 +44,19 @@ const references: Reference[] = [
       { number: "1", label: "tematická výzdoba" },
     ],
   },
+  {
+    title: "Posedlí Dakarem – vítěz rally Dakar v břevnovském klášteře",
+    image: "/images/reference/dakar-brevnov.webp",
+    alt: "Posedlí Dakarem – dakarské speciály na nádvoří Břevnovského kláštera s Martinem Macíkem Jr.",
+    description:
+      "Tour Posedlí Dakarem s vítězem rally Dakar Martinem Macíkem Jr. Klášterní nádvoří se proměnilo v unikátní kulisu, kde se potkaly osmitunové dakarské speciály s barokní architekturou. Kontrast motorsportu a historického prostředí vytvořil nezapomenutelný zážitek.",
+    stats: [
+      { number: "2", label: "dakarské speciály" },
+      { number: "1", label: "vítěz Dakaru" },
+      { number: "8", label: "tun – váha kamionu Prometeon" },
+      { number: "1", label: "unikátní kulisa" },
+    ],
+  },
 ];
 
 export function SocialProof() {

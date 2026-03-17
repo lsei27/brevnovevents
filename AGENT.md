@@ -3,7 +3,7 @@
 Referenční příručka pro AI agenty a vývojáře pracující na projektu **Břevnovský klášter Events** (brevnovevents).
 
 ## 1. Technologický stack
-- **Framework:** Next.js 16 (App Router)
+- **Framework:** Next.js 16.1.7 (App Router)
 - **Knihovna:** React 19
 - **Stylování:** Tailwind CSS v4 (prostřednictvím PostCSS pluginů)
 - **Jazyk:** TypeScript (strict mode)
@@ -40,7 +40,7 @@ public/
 ├── images/
 │   ├── hero/                # Hero obrázky
 │   ├── prostory/            # Fotky prostor (sály, salonky, nádvoří, pivovar, krypta)
-│   ├── reference/           # Reference / case studies (Speedchain, Evropa 2)
+│   ├── reference/           # Reference / case studies (Speedchain, Evropa 2, Dakar)
 │   └── svatby/              # Svatební fotografie
 ├── downloads/               # PDF ceník + technický rider
 └── robots.txt
@@ -104,3 +104,9 @@ Web implementuje **Google Consent Mode v2** a custom `<CookieConsent />` banner 
 - Tlačítko pro vyvolání nastavení je plovoucí, vizuálně fixované vpravo dole, když je banner skrytý.
 - Při přijetí nebo zamítnutí se stav uloží do `localStorage` (pod klíčem `cookie_consent`) a do datové vrstvy se odešle signál `update` (např. `analytics_storage: 'granted'`).
 - Web je tak plně připraven na napojení s **Google Tag Manager** (v budoucnu k vložení do hlavičky layoutu pod consent-init script).
+
+## 7. Changelog
+
+### 2026-03-17
+- **Social Proof – Dakar karta:** Přidána nová reference "Posedlí Dakarem – vítěz rally Dakar v břevnovském klášteře" do `SocialProof.tsx` (zobrazuje se na homepage i `/firemni-eventy`). Obrázek `dakar-brevnov.webp` přidán do `public/images/reference/`.
+- **Next.js upgrade:** Aktualizace z 16.1.6 na 16.1.7.
