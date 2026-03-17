@@ -36,6 +36,16 @@ export function Button({
   const styles = `${base} ${variantStyles[variant]} ${className}`;
 
   if (href) {
+    const isStaticFile = /\.\w+$/.test(href);
+
+    if (isStaticFile) {
+      return (
+        <a href={href} className={styles} download>
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link href={href} className={styles}>
         {children}
