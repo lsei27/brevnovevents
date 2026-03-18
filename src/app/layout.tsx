@@ -57,6 +57,7 @@ export default function RootLayout({
   return (
     <html lang="cs" className={satoshi.variable}>
       <head>
+        {/* Google Consent Mode v2 — must run before any Google scripts */}
         <Script
           id="google-consent-init"
           strategy="beforeInteractive"
@@ -69,6 +70,7 @@ export default function RootLayout({
                 'ad_user_data': 'denied',
                 'ad_personalization': 'denied',
                 'analytics_storage': 'denied',
+                'wait_for_update': 500,
                 'region': ['CZ', 'AT', 'BE', 'BG', 'HR', 'CY', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO', 'GB', 'CH']
               });
               gtag('consent', 'default', {
@@ -80,7 +82,25 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* Google Tag Manager */}
+        {/* Google Analytics GA4 — direct gtag.js */}
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-RG0DWSMGKC"
+        />
+        <Script
+          id="google-analytics-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-RG0DWSMGKC', { send_page_view: true });
+            `,
+          }}
+        />
+        {/* Google Tag Manager — for future marketing tags */}
         <Script
           id="google-tag-manager"
           strategy="afterInteractive"
