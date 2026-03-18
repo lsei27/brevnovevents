@@ -122,6 +122,8 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 ## 7. Changelog
 
 ### 2026-03-18
+- **Aktualizace PDF ceníku:** Nahrazen `cenik-brevnovsky-klaster.pdf` novým ceníkem 2026 (`Cenik_BK_26.pdf`).
+- **Aktualizace cen AV techniky:** Základní ozvučení 6 000 → 13 000 Kč/sál, Ozvučení + promítání + plátno/plazma 11 000 → 25 000 Kč/sál (`PriceList.tsx`).
 - **GA4 přesunuto z GTM na přímý gtag.js:** GTM `googtag` tag měl chybu "Undefined parameter - lowercaseType" a GA4 nepřijímalo data. Nahrazeno přímým `gtag.js` + `gtag('config', 'G-RG0DWSMGKC')` v `layout.tsx`. GTM kontejner ponechán prázdný pro budoucí marketing tagy.
 - **Consent Mode v2 – vylepšení:** Přidán `wait_for_update: 500` pro EU regiony. Opraven consent fallback v CookieConsent na gtag-kompatibilní formát. Odstraněn redundantní kód (dvojitá definice `dataLayer`/`gtag`).
 - **Consent Mode v2 – region fix:** Consent default `denied` platí jen pro EHP + UK + CH. Pro ostatní regiony je default `granted`.

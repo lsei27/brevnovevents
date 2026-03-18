@@ -20,8 +20,8 @@ const firstFloor: PriceRow[] = [
 const extras: PriceRow[] = [
   { item: "Nádvoří (dle dispozic akce)", price: "12 000 Kč/den" },
   { item: "Nádvoří pro welcome drink (do 1 hod.)", price: "zdarma" },
-  { item: "Základní ozvučení", price: "6 000 Kč/sál" },
-  { item: "Ozvučení + promítání + plátno/plazma", price: "11 000 Kč/sál" },
+  { item: "Základní ozvučení", price: "13 000 Kč/sál" },
+  { item: "Ozvučení + promítání + plátno/plazma", price: "25 000 Kč/sál" },
   { item: "Prodloužení akce (24:00–02:00, max. 2 hod.)", price: "10 000 Kč/hod." },
   { item: "Přípravný den – příprava do 21:00", price: "35 % z ceny pronájmu" },
   { item: "Přípravný den – příprava po 21:00", price: "50 % z ceny pronájmu" },
