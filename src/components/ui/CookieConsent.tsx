@@ -48,17 +48,14 @@ export function CookieConsent() {
 
   const handleSave = (state: ConsentState) => {
     localStorage.setItem("cookie_consent", JSON.stringify(state));
-    
-    // Update Google Consent Mode
+
+    // Update Google Consent Mode v2
     if (typeof window.gtag === "function") {
       window.gtag("consent", "update", state);
     } else {
-      // Fallback in case gtag is not ready yet
+      // Fallback: push consent update in gtag-compatible format
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "consent_update",
-        consent_state: state
-      });
+      window.dataLayer.push("consent", "update", state);
     }
 
     setShowBanner(false);

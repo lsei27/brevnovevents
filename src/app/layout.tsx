@@ -93,10 +93,8 @@ export default function RootLayout({
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){window.dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-RG0DWSMGKC', { send_page_view: true });
+              gtag('config', 'G-RG0DWSMGKC');
             `,
           }}
         />
