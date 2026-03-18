@@ -99,25 +99,32 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 
 ## 6. Sledování a analytika
 
-### Google Tag Manager & Google Analytics
+### Google Analytics GA4
+- **GA4 Measurement ID:** `G-RG0DWSMGKC` — načítán přímo přes `gtag.js` v `layout.tsx` (ne přes GTM tag).
+- Skripty: `gtag/js?id=G-RG0DWSMGKC` + `gtag('config', 'G-RG0DWSMGKC')`, obojí `afterInteractive`.
+- GA4 respektuje Consent Mode v2 — při `analytics_storage: denied` odesílá pouze cookieless pingy.
+
+### Google Tag Manager
 - **GTM kontejner:** `GTM-PSPHVDMV` (účet `brevnovevents`, ID 6344880060, container ID 246650647).
-- **GA4 Measurement ID:** `G-RG0DWSMGKC` — vloženo jako Google tag (`googtag`) v GTM, trigger All Pages.
-- GTM snippet je vložen v `layout.tsx` (script `afterInteractive` + noscript fallback v body).
+- GTM snippet v `layout.tsx` (`afterInteractive` + noscript fallback v body).
+- Kontejner je aktuálně prázdný — připraven pro budoucí marketing tagy (Facebook Pixel, remarketing atd.).
+- GA4 tag byl z GTM odstraněn (typ `googtag` měl chybu "Undefined parameter - lowercaseType", nahrazen přímým gtag.js).
 
 ### Google Consent Mode v2
 - Custom `<CookieConsent />` banner (`src/components/ui/CookieConsent.tsx`).
 - Consent default script (`beforeInteractive` v `layout.tsx`):
-  - **EHP + UK + CH:** default `denied` pro všechny kategorie (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`).
+  - **EHP + UK + CH:** default `denied` pro všechny 4 kategorie (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) + `wait_for_update: 500`.
   - **Zbytek světa:** default `granted` — řeší 0% consent rate mimo EHP.
 - Tlačítko pro vyvolání nastavení je plovoucí, vizuálně fixované vpravo dole, když je banner skrytý.
-- Při přijetí nebo zamítnutí se stav uloží do `localStorage` (pod klíčem `cookie_consent`) a do datové vrstvy se odešle signál `update`.
-- GA4 tag v GTM má nastaveno `consentSettings: { consentStatus: "needed", consentType: ["analytics_storage"] }` — tag se spustí pouze při uděleném souhlasu.
+- Při přijetí nebo zamítnutí se stav uloží do `localStorage` (pod klíčem `cookie_consent`) a volá se `gtag('consent', 'update', ...)`.
+- GA4 automaticky respektuje consent stav — při denied odesílá cookieless pingy, při granted plné měření.
 
 ## 7. Changelog
 
 ### 2026-03-18
-- **Google Analytics GA4:** Vložena GA4 značka `G-RG0DWSMGKC` do GTM kontejneru `GTM-PSPHVDMV` přes GTM API. Trigger All Pages, consent required (`analytics_storage`).
-- **Consent Mode v2 – region fix:** Consent default `denied` nyní platí jen pro EHP + UK + CH. Pro ostatní regiony je default `granted` (řeší 0% consent rate mimo EHP).
+- **GA4 přesunuto z GTM na přímý gtag.js:** GTM `googtag` tag měl chybu "Undefined parameter - lowercaseType" a GA4 nepřijímalo data. Nahrazeno přímým `gtag.js` + `gtag('config', 'G-RG0DWSMGKC')` v `layout.tsx`. GTM kontejner ponechán prázdný pro budoucí marketing tagy.
+- **Consent Mode v2 – vylepšení:** Přidán `wait_for_update: 500` pro EU regiony. Opraven consent fallback v CookieConsent na gtag-kompatibilní formát. Odstraněn redundantní kód (dvojitá definice `dataLayer`/`gtag`).
+- **Consent Mode v2 – region fix:** Consent default `denied` platí jen pro EHP + UK + CH. Pro ostatní regiony je default `granted`.
 
 ### 2026-03-17
 - **Social Proof – Dakar karta:** Přidána nová reference "Posedlí Dakarem – vítěz rally Dakar v břevnovském klášteře" do `SocialProof.tsx` (zobrazuje se na homepage i `/firemni-eventy`). Obrázek `dakar-brevnov.webp` přidán do `public/images/reference/`.
