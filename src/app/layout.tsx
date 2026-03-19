@@ -82,22 +82,7 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* Google Analytics GA4 — direct gtag.js */}
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-RG0DWSMGKC"
-        />
-        <Script
-          id="google-analytics-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              gtag('js', new Date());
-              gtag('config', 'G-RG0DWSMGKC');
-            `,
-          }}
-        />
+        {/* GA4 is now loaded via Google Tag Manager (GTM-PSPHVDMV) */}
         {/* Google Tag Manager — for future marketing tags */}
         <Script
           id="google-tag-manager"
