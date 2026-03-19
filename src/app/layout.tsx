@@ -25,6 +25,7 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://brevnovevents.cz"),
   title: "Břevnovský klášter – eventové prostory Praha | brevnovevents.cz",
   description:
     "Pronájem historických prostor pro firemní akce a svatby v Praze. Od komorního meetingu pro 20 osob po kongres pro 1 100 hostů. Parkování zdarma. Provozuje IN CATERING.",

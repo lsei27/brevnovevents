@@ -55,7 +55,7 @@ export function CookieConsent() {
     } else {
       // Fallback: push consent update in gtag-compatible format
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push("consent", "update", state);
+      window.dataLayer.push(["consent", "update", state]);
     }
 
     setShowBanner(false);
