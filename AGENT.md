@@ -99,16 +99,12 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 
 ## 6. Sledování a analytika
 
-### Google Analytics GA4
-- **GA4 Measurement ID:** `G-RG0DWSMGKC` — načítán přímo přes `gtag.js` v `layout.tsx` (ne přes GTM tag).
-- Skripty: `gtag/js?id=G-RG0DWSMGKC` + `gtag('config', 'G-RG0DWSMGKC')`, obojí `afterInteractive`.
-- GA4 respektuje Consent Mode v2 — při `analytics_storage: denied` odesílá pouze cookieless pingy.
-
-### Google Tag Manager
+### Google Tag Manager (GTM)
 - **GTM kontejner:** `GTM-PSPHVDMV` (účet `brevnovevents`, ID 6344880060, container ID 246650647).
 - GTM snippet v `layout.tsx` (`afterInteractive` + noscript fallback v body).
-- Kontejner je aktuálně prázdný — připraven pro budoucí marketing tagy (Facebook Pixel, remarketing atd.).
-- GA4 tag byl z GTM odstraněn (typ `googtag` měl chybu "Undefined parameter - lowercaseType", nahrazen přímým gtag.js).
+- **GA4:** Je nasazeno jako "Značka Google" s Measurement ID `G-RG0DWSMGKC` uvnitř GTM kontejneru. Přímý hardcoded `gtag.js` script byl z webu odstraněn. Značka využívá zabudovanou podporu pro Consent Mode.
+- **Formuláře:** Měření úspěšného odeslání přes Vlastní události. Při odeslání InquiryForm nebo WeddingForm se (díky `useRef` pojistce proti duplicitám z React Strict Mode) pushuje událost:
+  `dataLayer.push({ event: 'form_submit', form_type: 'general_inquiry' | 'wedding_inquiry' })`
 
 ### Google Consent Mode v2
 - Custom `<CookieConsent />` banner (`src/components/ui/CookieConsent.tsx`).
@@ -120,6 +116,11 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 - GA4 automaticky respektuje consent stav — při denied odesílá cookieless pingy, při granted plné měření.
 
 ## 7. Changelog
+
+### 2026-03-19
+- **Přesun GA4 do Google Tag Manageru:** Odstraněn hardcoded `gtag.js` skript s ID `G-RG0DWSMGKC` z `layout.tsx`. Značka GA4 se nyní načítá čistě přes GTM kontejner `GTM-PSPHVDMV` se správnou inicializací Consent Mode.
+- **Oprava Consent Mode Fallbacku:** Opraven chybný zápis fallbacku pro GTM (`dataLayer.push("consent"...)` opraveno na array formu `dataLayer.push(["consent"...])`).
+- **Měření formulářů do datové vrstvy:** Do komponent `InquiryForm` a `WeddingForm` přidán `useEffect` s `useRef` guardem (proti dvojí spuštění kvůli React 18 Strict Mode). Při úspěšném odeslání formuláře pushují event `form_submit` a parametr `form_type` do `window.dataLayer`.
 
 ### 2026-03-18
 - **Aktualizace PDF ceníku:** Nahrazen `cenik-brevnovsky-klaster.pdf` novým ceníkem 2026 (`Cenik_BK_26.pdf`).
