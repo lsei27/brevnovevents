@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useState, useEffect } from "react";
 import { submitInquiry } from "@/app/actions";
 import { Button } from "@/components/ui/Button";
 import {
@@ -25,6 +25,16 @@ const initialState: FormState = {
 export function InquiryForm() {
   const [state, action, isPending] = useActionState(submitInquiry, initialState);
   const [detailsOpen, setDetailsOpen] = useState(false);
+
+  useEffect(() => {
+    if (state.success && state.message) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "form_submit",
+        form_type: "general_inquiry",
+      });
+    }
+  }, [state.success, state.message]);
 
   if (state.success && state.message) {
     return (
