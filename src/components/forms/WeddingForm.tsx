@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, useEffect } from "react";
+import { useActionState, useState, useEffect, useRef } from "react";
 import { submitWeddingInquiry } from "@/app/actions";
 import { Button } from "@/components/ui/Button";
 import {
@@ -25,14 +25,16 @@ const initialState: FormState = {
 export function WeddingForm() {
   const [state, action, isPending] = useActionState(submitWeddingInquiry, initialState);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const trackRef = useRef(false);
 
   useEffect(() => {
-    if (state.success && state.message) {
+    if (state.success && state.message && !trackRef.current) {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: "form_submit",
         form_type: "wedding_inquiry",
       });
+      trackRef.current = true;
     }
   }, [state.success, state.message]);
 
