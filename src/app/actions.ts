@@ -82,7 +82,7 @@ export async function submitInquiry(
 
   try {
     if (emailMode === "webhook") {
-      await sendWebhook(data);
+      await sendWebhook(data, locale);
     } else {
       await sendDirect(data, locale);
     }
@@ -94,7 +94,7 @@ export async function submitInquiry(
   return { success: true, message: t.inquirySuccess };
 }
 
-async function sendWebhook(data: InquiryFormData): Promise<void> {
+async function sendWebhook(data: InquiryFormData, locale: string): Promise<void> {
   const webhookUrl = process.env.WEBHOOK_URL?.trim();
   if (!webhookUrl) {
     throw new Error("WEBHOOK_URL is not configured");
@@ -105,6 +105,7 @@ async function sendWebhook(data: InquiryFormData): Promise<void> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       ...data,
+      locale,
       submittedAt: new Date().toISOString(),
       source_page: "homepage",
     }),
@@ -228,7 +229,7 @@ export async function submitWeddingInquiry(
 
   try {
     if (emailMode === "webhook") {
-      await sendWeddingWebhook(data);
+      await sendWeddingWebhook(data, locale);
     } else {
       await sendWeddingDirect(data, locale);
     }
@@ -240,7 +241,7 @@ export async function submitWeddingInquiry(
   return { success: true, message: t.weddingSuccess };
 }
 
-async function sendWeddingWebhook(data: WeddingFormData): Promise<void> {
+async function sendWeddingWebhook(data: WeddingFormData, locale: string): Promise<void> {
   const webhookUrl = process.env.WEBHOOK_URL?.trim();
   if (!webhookUrl) {
     throw new Error("WEBHOOK_URL is not configured");
@@ -251,6 +252,7 @@ async function sendWeddingWebhook(data: WeddingFormData): Promise<void> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       ...data,
+      locale,
       submittedAt: new Date().toISOString(),
       source_page: "svatba",
     }),
