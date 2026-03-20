@@ -6,6 +6,7 @@ import { useLocale } from "@/lib/locale-context";
 import cs from "@/lib/dictionaries/cs";
 import en from "@/lib/dictionaries/en";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 
 export function SocialProof() {
   const locale = useLocale();
@@ -46,11 +47,12 @@ export function SocialProof() {
                   </h2>
                   <div className="mt-16 grid items-center gap-12 md:grid-cols-2">
                     <div className="aspect-[4/3] overflow-hidden rounded-2xl">
-                      <img
+                      <Image
                         src={ref.image}
                         alt={ref.alt}
-                        loading="lazy"
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
                       />
                     </div>
                     <div>

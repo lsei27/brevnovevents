@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { getDictionary } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 
 export async function WeddingGateway() {
   const headersList = await headers();
@@ -14,11 +15,12 @@ export async function WeddingGateway() {
       className="relative flex min-h-[50vh] items-center py-20 md:py-32"
     >
       {/* Background image */}
-      <img
+      <Image
         src="/images/svatby/vojteska-klasterni-zahrada.webp"
         alt={dict.weddingGateway.imageAlt}
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover"
+        fill
+        sizes="100vw"
+        className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-brand-black/90 via-brand-black/70 to-brand-black/40" />
 
