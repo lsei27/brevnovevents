@@ -142,7 +142,7 @@ const en: Dictionary = {
     subtitle:
       "Indicative prices. Every event is quoted individually.",
     from: "from",
-    currency: "K\u010d",
+    currency: "CZK",
     priceNote: "indicative price for 100 guests",
     price200Label: "200 guests from",
     featured: "Most popular",
@@ -482,7 +482,7 @@ const en: Dictionary = {
     subtitle:
       "Packages serve as a pricing guide. Every event is quoted individually based on your requirements.",
     from: "from",
-    currency: "K\u010d",
+    currency: "CZK",
     priceNote: "indicative price for 100 guests",
     price200Label: "200 guests from",
     featured: "Most popular",
@@ -495,10 +495,10 @@ const en: Dictionary = {
         persons: "100\u2013200 guests",
         featured: false,
         includes: [
-          "Theresian Hall \u2013 full-day hire (from 65,000 K\u010d)",
-          "Basic AV: projector, sound, microphones (from 25,000 K\u010d)",
-          "Catering: 2\u00d7 coffee break + lunch + beverages (from 990 K\u010d/person)",
-          "Staff and furniture (from 20,000 K\u010d)",
+          "Theresian Hall \u2013 full-day hire (from 65,000 CZK)",
+          "Basic AV: projector, sound, microphones (from 25,000 CZK)",
+          "Catering: 2\u00d7 coffee break + lunch + beverages (from 990 CZK/person)",
+          "Staff and furniture (from 20,000 CZK)",
         ],
         price: "210\u00a0000",
         price200: "310\u00a0000",
@@ -512,11 +512,11 @@ const en: Dictionary = {
         persons: "100\u2013200 guests",
         featured: true,
         includes: [
-          "Theresian Hall + adjoining lounges (from 65,000 K\u010d)",
-          "Welcome drink + cold canap\u00e9s (from 260 K\u010d/person)",
-          "Served 3-course menu (from 1,090 K\u010d/person)",
-          "Beverage package with beer and wine (from 430 K\u010d/person)",
-          "Staff and furniture (from 20,000 K\u010d)",
+          "Theresian Hall + adjoining lounges (from 65,000 CZK)",
+          "Welcome drink + cold canap\u00e9s (from 260 CZK/person)",
+          "Served 3-course menu (from 1,090 CZK/person)",
+          "Beverage package with beer and wine (from 430 CZK/person)",
+          "Staff and furniture (from 20,000 CZK)",
         ],
         price: "265\u00a0000",
         price200: "440\u00a0000",
@@ -530,11 +530,11 @@ const en: Dictionary = {
         persons: "100\u2013200 guests",
         featured: false,
         includes: [
-          "Theresian Hall + adjoining spaces (from 65,000 K\u010d)",
-          "Welcome drink + cold canap\u00e9s (from 260 K\u010d/person)",
-          "Buffet dinner (from 790 K\u010d/person)",
-          "Beverage package with beer and wine (from 430 K\u010d/person)",
-          "Staff and furniture (from 20,000 K\u010d)",
+          "Theresian Hall + adjoining spaces (from 65,000 CZK)",
+          "Welcome drink + cold canap\u00e9s (from 260 CZK/person)",
+          "Buffet dinner (from 790 CZK/person)",
+          "Beverage package with beer and wine (from 430 CZK/person)",
+          "Staff and furniture (from 20,000 CZK)",
         ],
         price: "235\u00a0000",
         price200: "380\u00a0000",
@@ -548,10 +548,10 @@ const en: Dictionary = {
         persons: "100\u2013200 guests",
         featured: false,
         includes: [
-          "Sala Terrena + adjoining lounges \u2013 full-day hire (from 30,000 K\u010d)",
-          "Basic AV: projector, sound, microphones (from 25,000 K\u010d)",
-          "Catering: 2\u00d7 coffee break + lunch + beverages (from 990 K\u010d/person)",
-          "Staff and furniture (from 20,000 K\u010d)",
+          "Sala Terrena + adjoining lounges \u2013 full-day hire (from 30,000 CZK)",
+          "Basic AV: projector, sound, microphones (from 25,000 CZK)",
+          "Catering: 2\u00d7 coffee break + lunch + beverages (from 990 CZK/person)",
+          "Staff and furniture (from 20,000 CZK)",
         ],
         price: "175\u00a0000",
         price200: "275\u00a0000",
@@ -565,11 +565,11 @@ const en: Dictionary = {
         persons: "100\u2013200 guests",
         featured: false,
         includes: [
-          "Sala Terrena + adjoining spaces (from 30,000 K\u010d)",
-          "Welcome drink + cold canap\u00e9s (from 260 K\u010d/person)",
-          "Buffet dinner (from 790 K\u010d/person)",
-          "Beverage package with beer and wine (from 430 K\u010d/person)",
-          "Staff and furniture (from 20,000 K\u010d)",
+          "Sala Terrena + adjoining spaces (from 30,000 CZK)",
+          "Welcome drink + cold canap\u00e9s (from 260 CZK/person)",
+          "Buffet dinner (from 790 CZK/person)",
+          "Beverage package with beer and wine (from 430 CZK/person)",
+          "Staff and furniture (from 20,000 CZK)",
         ],
         price: "200\u00a0000",
         price200: "345\u00a0000",
@@ -789,13 +789,13 @@ const en: Dictionary = {
         space: "Sala Terrena",
         capacity: "70\u2013110 guests",
         suitableFor: "Presentation, tasting, smaller conference",
-        price: "From 15,000 K\u010d/day (incl. corridors)",
+        price: "From 15,000 CZK/day (incl. corridors)",
       },
       {
         space: "Benedictine Wine Cellar",
         capacity: "Up to 80 guests",
         suitableFor: "Intimate dinner, tasting, networking",
-        price: "From 20,000 K\u010d/day (incl. Sala Terrena)",
+        price: "From 20,000 CZK/day (incl. Sala Terrena)",
       },
       {
         space: "Brandl Lounge",
@@ -814,50 +814,50 @@ const en: Dictionary = {
     groundFloor: [
       {
         item: "Sala Terrena + corridors",
-        price: "15,000 K\u010d/day",
+        price: "15,000 CZK/day",
       },
       {
         item: "Sala Terrena + lounges + corridors",
-        price: "20,000 K\u010d/day",
+        price: "20,000 CZK/day",
       },
       {
         item: "Benedictine Wine Cellar + Sala Terrena + corridors",
-        price: "20,000 K\u010d/day",
+        price: "20,000 CZK/day",
       },
       {
         item: "Entire ground floor (Sala Terrena, lounges, wine cellar, corridors)",
-        price: "30,000 K\u010d/day",
+        price: "30,000 CZK/day",
       },
     ],
     firstFloorTitle: "1st floor",
     firstFloor: [
       {
         item: "Theresian Hall",
-        price: "65,000 K\u010d/day or 10,000 K\u010d/hr",
+        price: "65,000 CZK/day or 10,000 CZK/hr",
       },
       {
         item: "Entire 1st floor",
-        price: "90,000 K\u010d/day or 10,000 K\u010d/hr",
+        price: "90,000 CZK/day or 10,000 CZK/hr",
       },
     ],
     extrasTitle: "Courtyard and additional services",
     extras: [
       {
         item: "Courtyard (depending on event layout)",
-        price: "12,000 K\u010d/day",
+        price: "12,000 CZK/day",
       },
       {
         item: "Courtyard for welcome drink (up to 1 hr)",
         price: "free",
       },
-      { item: "Basic sound system", price: "13,000 K\u010d/hall" },
+      { item: "Basic sound system", price: "13,000 CZK/hall" },
       {
         item: "Sound + projection + screen/display",
-        price: "25,000 K\u010d/hall",
+        price: "25,000 CZK/hall",
       },
       {
         item: "Event extension (00:00\u201302:00, max 2 hrs)",
-        price: "10,000 K\u010d/hr",
+        price: "10,000 CZK/hr",
       },
       {
         item: "Setup day \u2013 preparation until 21:00",
@@ -882,21 +882,21 @@ const en: Dictionary = {
       {
         title: "Monastery Brewery",
         text: "A guided tour of the monastery brewery with a tasting. Works as team building or a networking add-on. Guests love the backstory \u2013 the Brevnov brewery has been producing beer since the 13th century.",
-        price: "from 250 K\u010d/person",
+        price: "from 250 CZK/person",
         image: "/images/prostory/pivovar-brevnov.webp",
         alt: "Brevnov Monastery Brewery \u2013 copper kettles in Prague",
       },
       {
         title: "Historic Crypt",
         text: "An intimate space beneath the monastery for an unconventional programme opening or an exclusive gathering. An atmosphere no modern venue can replicate. Includes a guided tour.",
-        price: "from 180 K\u010d/person",
+        price: "from 180 CZK/person",
         image: "/images/prostory/krypta-bk.webp",
         alt: "Historic crypt beneath Brevnov Monastery, Prague",
       },
       {
         title: "Maria Theresa\u2019s Table",
         text: "A re-enactment of the ceremonial dinner of Maria Theresa and Joseph II in the Theresian Hall. Travel back to 1774 through a staged dinner that actually took place in this very room. Exceptional atmosphere with a professional guide.",
-        price: "from 110,000 K\u010d",
+        price: "from 110,000 CZK",
         image: "/images/prostory/terezian-vecere-marie-terezie.webp",
         alt: "Maria Theresa ceremonial dinner in the Theresian Hall",
       },
@@ -905,25 +905,25 @@ const en: Dictionary = {
     extras: [
       {
         name: "Royal Court Marketplace",
-        price: "from 50,000 K\u010d",
+        price: "from 50,000 CZK",
       },
       {
         name: "Scenic performance \u201cAn Evening with the Monks\u201d",
-        price: "from 50,000 K\u010d",
+        price: "from 50,000 CZK",
       },
       {
         name: "Traditional Czech hog roast",
-        price: "from 20,000 K\u010d",
+        price: "from 20,000 CZK",
       },
       {
         name: "Baroque quartet concert",
-        price: "from 25,000 K\u010d",
+        price: "from 25,000 CZK",
       },
       {
         name: "Special lighting effects",
-        price: "from 40,000 K\u010d",
+        price: "from 40,000 CZK",
       },
-      { name: "Floral decorations", price: "from 20,000 K\u010d" },
+      { name: "Floral decorations", price: "from 20,000 CZK" },
     ],
     footer:
       "Prices are indicative, excl. VAT. Availability and final pricing confirmed on request.",
@@ -1005,7 +1005,7 @@ const en: Dictionary = {
         question:
           "How much does it cost to hire Brevnov Monastery?",
         answer:
-          "Ground floor from 15,000 K\u010d/day, Theresian Hall 65,000 K\u010d/day, entire 1st floor 90,000 K\u010d/day. All prices are in CZK (Czech Crowns), excl. VAT. See the full price list above. We\u2019ll prepare a custom quote including catering within 24 hours \u2013 no obligation.",
+          "Ground floor from 15,000 CZK/day, Theresian Hall 65,000 CZK/day, entire 1st floor 90,000 CZK/day. All prices are in CZK (Czech Crowns), excl. VAT. See the full price list above. We\u2019ll prepare a custom quote including catering within 24 hours \u2013 no obligation.",
       },
       {
         question: "Is there parking at Brevnov Monastery?",
@@ -1025,12 +1025,12 @@ const en: Dictionary = {
       {
         question: "How late can an event run?",
         answer:
-          "Standard closing time is midnight. Extension until 02:00 is available for a surcharge (10,000 K\u010d/hr, maximum 2 hours).",
+          "Standard closing time is midnight. Extension until 02:00 is available for a surcharge (10,000 CZK/hr, maximum 2 hours).",
       },
       {
         question: "Do you provide AV equipment for conferences?",
         answer:
-          "Yes, from trusted suppliers. Basic sound from 6,000 K\u010d/hall. Full AV solutions (LED walls, live streaming, conference microphones) are quoted based on your event\u2019s requirements.",
+          "Yes, from trusted suppliers. Basic sound from 6,000 CZK/hall. Full AV solutions (LED walls, live streaming, conference microphones) are quoted based on your event\u2019s requirements.",
       },
       {
         question: "Can we visit the venue beforehand?",
@@ -1138,15 +1138,15 @@ const en: Dictionary = {
     rows: [
       {
         room: "Sala Terrena + corridors",
-        price: "15,000 K\u010d/day",
+        price: "15,000 CZK/day",
       },
       {
         room: "Sala Terrena + lounges + corridors",
-        price: "20,000 K\u010d/day",
+        price: "20,000 CZK/day",
       },
       {
         room: "Entire ground floor (Sala Terrena, lounges, wine cellar)",
-        price: "30,000 K\u010d/day",
+        price: "30,000 CZK/day",
       },
       {
         room: "Courtyard for ceremony or welcome drink (up to 1 hr)",
@@ -1154,11 +1154,11 @@ const en: Dictionary = {
       },
       {
         room: "Courtyard \u2013 full day",
-        price: "12,000 K\u010d/day",
+        price: "12,000 CZK/day",
       },
       {
         room: "Extension past midnight (max 2 hrs)",
-        price: "10,000 K\u010d/hr",
+        price: "10,000 CZK/hr",
       },
     ],
     note: "Theresian Hall (1st floor) pricing available on request. All prices excl. VAT. Catering is quoted individually \u2013 from buffet refreshments to a formal wedding menu.",
