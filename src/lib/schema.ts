@@ -21,6 +21,7 @@ export function getEventVenueSchema(locale: Locale = "cs") {
       postalCode: "169 00",
       addressCountry: "CZ",
     },
+    image: `${BASE}/images/hero/BK_pohled_shora.webp`,
     geo: {
       "@type": "GeoCoordinates",
       latitude: 50.0833,
@@ -64,6 +65,8 @@ export function getLocalBusinessSchema() {
       postalCode: "169 00",
       addressCountry: "CZ",
     },
+    image: `${BASE}/images/hero/BK_pohled_shora.webp`,
+    priceRange: "$$",
   };
 }
 
@@ -79,7 +82,7 @@ export function getVideoObjectSchema(locale: Locale = "cs") {
       ? "Video tour of event venues at Brevnov Monastery in Prague — Theresian Hall, Sala Terrena, courtyard, and gardens."
       : "Video prohlídka eventových prostor Břevnovského kláštera v Praze — Tereziánský sál, Sala Terrena, nádvoří a zahrady.",
     thumbnailUrl: "https://i.ytimg.com/vi/ESMihQlQ5LI/maxresdefault.jpg",
-    uploadDate: "2024-01-01",
+    uploadDate: "2024-01-01T09:00:00+01:00",
     contentUrl: "https://www.youtube.com/watch?v=ESMihQlQ5LI",
     embedUrl: "https://www.youtube.com/embed/ESMihQlQ5LI",
   };
