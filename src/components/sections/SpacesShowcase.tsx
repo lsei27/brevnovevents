@@ -8,9 +8,10 @@ export async function SpacesShowcase() {
   const headersList = await headers();
   const locale = (headersList.get("x-locale") || "cs") as Locale;
   const dict = await getDictionary(locale);
+  const sectionId = locale === "en" ? "venues" : "prostory";
 
   return (
-    <section id="prostory" className="bg-brand-black-alt py-20 md:py-32">
+    <section id={sectionId} className="bg-brand-black-alt py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           {dict.spaces.title}

@@ -10,7 +10,7 @@ export async function WeddingGateway() {
 
   return (
     <section
-      id="svatby"
+      id={locale === "en" ? "weddings" : "svatby"}
       className="relative flex min-h-[50vh] items-center py-20 md:py-32"
     >
       {/* Background image */}

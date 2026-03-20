@@ -23,7 +23,9 @@ export async function USP() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <Button href="#prostory" variant="secondary">{dict.usp.cta}</Button>
+          <Button href={locale === "en" ? "#venues" : "#prostory"} variant="secondary">
+            {dict.usp.cta}
+          </Button>
         </div>
       </div>
     </section>

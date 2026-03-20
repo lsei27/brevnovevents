@@ -12,6 +12,7 @@ export function PricingAnchors() {
   const dict = locale === "en" ? en : cs;
   const t = dict.pricing;
   const contactHref = locale === "en" ? "#contact" : "#kontakt";
+  const sectionId = locale === "en" ? "pricing" : "cenik";
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
@@ -39,7 +40,7 @@ export function PricingAnchors() {
   }, [emblaApi, onSelect]);
 
   return (
-    <section id="cenik" className="bg-brand-black-alt py-20 md:py-32">
+    <section id={sectionId} className="bg-brand-black-alt py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           {t.title}
