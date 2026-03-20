@@ -1,12 +1,19 @@
 import Image from "next/image";
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 
-export function SvatbaHero() {
+export async function SvatbaHero() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
+
   return (
     <section className="relative flex min-h-screen items-end pb-20 md:items-center md:pb-0">
       <Image
         src="/images/svatby/bk-vojteska.webp"
-        alt="Svatba v Břevnovském klášteře – Vojtěška a klášterní zahrada"
+        alt={dict.svatbaHero.imageAlt}
         fill
         priority
         className="object-cover"
@@ -16,15 +23,14 @@ export function SvatbaHero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
         <div className="max-w-2xl text-left">
           <h1 className="text-4xl font-black md:text-5xl">
-            Váš den si zaslouží výjimečné místo
+            {dict.svatbaHero.title}
           </h1>
           <p className="mt-6 text-lg font-medium text-white md:text-xl">
-            Obřad v klášterní zahradě, hostina v barokním sále, afterparty
-            ve vinárně – vše v jednom areálu pro 30–200 hostů.
+            {dict.svatbaHero.subtitle}
           </p>
           <div className="mt-8 flex justify-start">
-            <Button href="#kontakt" variant="pink">
-              Domluvit prohlídku pro snoubence
+            <Button href={locale === "en" ? "#contact" : "#kontakt"} variant="pink">
+              {dict.svatbaHero.cta}
             </Button>
           </div>
         </div>

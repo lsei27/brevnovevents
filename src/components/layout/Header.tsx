@@ -3,16 +3,21 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-
-const navLinks = [
-  { label: "Prostory", href: "/#prostory" },
-  { label: "Firemní eventy", href: "/firemni-eventy" },
-  { label: "Svatby", href: "/svatba-v-klastere" },
-  { label: "Kontakt", href: "/#kontakt" },
-];
+import { useLocale } from "@/lib/locale-context";
+import { getAlternatePath } from "@/lib/i18n";
+import cs from "@/lib/dictionaries/cs";
+import en from "@/lib/dictionaries/en";
 
 export function Header() {
+  const locale = useLocale();
+  const dict = locale === "en" ? en : cs;
+
+  const pathname = usePathname();
+  const alternateLang = locale === "en" ? "cs" : "en";
+  const alternateHref = getAlternatePath(pathname, alternateLang);
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -29,16 +34,16 @@ export function Header() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-3" aria-label="Domů">
+        <Link href="/" className="flex items-center gap-3" aria-label={dict.header.logoAlt}>
           <Image
             src="/images/bk-logo.svg"
-            alt="Břevnovský klášter – logo"
+            alt={dict.header.logoAlt}
             width={140}
             height={40}
             priority
           />
           <span className="hidden text-xs text-white lg:block">
-            provozuje
+            {dict.header.operatedBy}
             <Image
               src="/images/in-catering-logo.svg"
               alt="IN CATERING"
@@ -51,7 +56,7 @@ export function Header() {
 
         {/* Desktop nav */}
         <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
+          {dict.header.nav.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
@@ -63,9 +68,18 @@ export function Header() {
           ))}
         </ul>
 
-        <div className="hidden md:block">
-          <Button href="#kontakt" variant="primary">
-            Domluvit prohlídku
+        <div className="hidden items-center gap-4 md:flex">
+          {/* Use <a> instead of <Link> to force full page reload —
+              root layout must re-execute to update <html lang> and server components */}
+          <a
+            href={alternateHref}
+            className="text-sm font-bold uppercase text-white/70 transition-colors hover:text-white"
+            hrefLang={alternateLang}
+          >
+            {alternateLang.toUpperCase()}
+          </a>
+          <Button href={dict.header.ctaHref} variant="primary">
+            {dict.header.cta}
           </Button>
         </div>
 
@@ -74,7 +88,7 @@ export function Header() {
           type="button"
           className="flex flex-col gap-1.5 md:hidden"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          aria-label={isMobileOpen ? "Zavřít menu" : "Otevřít menu"}
+          aria-label={isMobileOpen ? dict.header.closeMenu : dict.header.openMenu}
           aria-expanded={isMobileOpen}
         >
           <span
@@ -99,7 +113,7 @@ export function Header() {
       {isMobileOpen && (
         <div className="border-t border-brand-gray-dark/30 bg-brand-black/95 backdrop-blur-md md:hidden">
           <ul className="flex flex-col gap-4 px-6 py-6">
-            {navLinks.map((link) => (
+            {dict.header.nav.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -111,9 +125,18 @@ export function Header() {
               </li>
             ))}
             <li>
-              <Button href="#kontakt" variant="primary" className="w-full text-center">
-                Domluvit prohlídku
+              <Button href={dict.header.ctaHref} variant="primary" className="w-full text-center">
+                {dict.header.cta}
               </Button>
+            </li>
+            <li>
+              <a
+                href={alternateHref}
+                className="block text-center text-sm font-bold uppercase text-white/70 transition-colors hover:text-white"
+                hrefLang={alternateLang}
+              >
+                {alternateLang === "en" ? "English" : "Česky"}
+              </a>
             </li>
           </ul>
         </div>

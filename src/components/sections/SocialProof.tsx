@@ -2,64 +2,17 @@
 
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { useLocale } from "@/lib/locale-context";
+import cs from "@/lib/dictionaries/cs";
+import en from "@/lib/dictionaries/en";
 import { Button } from "@/components/ui/Button";
 
-interface Stat {
-  number: string;
-  label: string;
-}
-
-interface Reference {
-  title: string;
-  image: string;
-  alt: string;
-  description: string;
-  stats: Stat[];
-}
-
-const references: Reference[] = [
-  {
-    title: "800 účastníků, jeden areál, jeden tým – Speedchain 2024",
-    image: "/images/reference/speedchain-brevnov.webp",
-    alt: "Speedchain 2024 – konference pro 800 účastníků v Břevnovském klášteře",
-    description:
-      "Speedchain International 2024 – mezinárodní logistická konference. Celodenní program s paralelními sekcemi, rauty, VIP lounge a slavnostním večerem. Přestavba sálu z konference na banket za 60 minut.",
-    stats: [
-      { number: "800", label: "účastníků" },
-      { number: "2", label: "paralelní sekce" },
-      { number: "60 min", label: "přestavba sálu" },
-      { number: "1", label: "tým pro vše" },
-    ],
-  },
-  {
-    title: "Gala večeře pro 120 hostů – Evropa 2 v Tereziánském sále",
-    image: "/images/reference/gala-evropa-2.webp",
-    alt: "Gala večeře Evropa 2 – slavnostní večer pro 120 hostů v Tereziánském sále Břevnovského kláštera",
-    description:
-      "Gala večeře pro skupinu Active Radio (Evropa 2, Frekvence 1, Bonton Radio). Tematická výzdoba inspirovaná přírodou a lesem, slavnostní menu v Tereziánském sále s afterparty v Sala Terreně a Benediktinské vinárně.",
-    stats: [
-      { number: "120", label: "hostů" },
-      { number: "2", label: "prostory večera" },
-      { number: "1", label: "kompletní catering" },
-      { number: "1", label: "tematická výzdoba" },
-    ],
-  },
-  {
-    title: "Posedlí Dakarem – vítěz rally Dakar v břevnovském klášteře",
-    image: "/images/reference/dakar-brevnov.webp",
-    alt: "Posedlí Dakarem – dakarské speciály na nádvoří Břevnovského kláštera s Martinem Macíkem Jr.",
-    description:
-      "Tour Posedlí Dakarem s vítězem rally Dakar Martinem Macíkem Jr. Klášterní nádvoří se proměnilo v unikátní kulisu, kde se potkaly osmitunové dakarské speciály s barokní architekturou. Kontrast motorsportu a historického prostředí vytvořil nezapomenutelný zážitek.",
-    stats: [
-      { number: "2", label: "dakarské speciály" },
-      { number: "1", label: "vítěz Dakaru" },
-      { number: "8", label: "tun – váha kamionu Prometeon" },
-      { number: "1", label: "unikátní kulisa" },
-    ],
-  },
-];
-
 export function SocialProof() {
+  const locale = useLocale();
+  const dict = locale === "en" ? en : cs;
+  const t = dict.socialProof;
+  const contactHref = locale === "en" ? "#contact" : "#kontakt";
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -86,7 +39,7 @@ export function SocialProof() {
         <div className="relative">
           <div ref={emblaRef} className="overflow-hidden">
             <div className="flex">
-              {references.map((ref) => (
+              {t.references.map((ref) => (
                 <div key={ref.title} className="min-w-0 flex-[0_0_100%]">
                   <h2 className="text-center text-3xl font-bold md:text-4xl">
                     {ref.title}
@@ -117,8 +70,8 @@ export function SocialProof() {
                         ))}
                       </div>
                       <div className="mt-8">
-                        <Button href="#kontakt" variant="secondary">
-                          Chci podobnou akci
+                        <Button href={contactHref} variant="secondary">
+                          {t.cta}
                         </Button>
                       </div>
                     </div>
@@ -132,53 +85,33 @@ export function SocialProof() {
           <button
             type="button"
             onClick={scrollPrev}
-            aria-label="Předchozí reference"
+            aria-label={t.prev}
             className="absolute left-0 top-1/2 hidden -translate-x-4 -translate-y-1/2 rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40 md:block"
           >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             type="button"
             onClick={scrollNext}
-            aria-label="Další reference"
+            aria-label={t.next}
             className="absolute right-0 top-1/2 hidden -translate-x-[-1rem] -translate-y-1/2 rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40 md:block"
           >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
 
         {/* Dots */}
         <div className="mt-8 flex justify-center gap-2">
-          {references.map((_, index) => (
+          {t.references.map((_, index) => (
             <button
               key={index}
               type="button"
               onClick={() => emblaApi?.scrollTo(index)}
-              aria-label={`Reference ${index + 1}`}
+              aria-label={`${t.goTo} ${index + 1}`}
               className="group flex items-center justify-center p-2"
             >
               <span

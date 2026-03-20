@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -8,7 +9,9 @@ import {
   getVideoObjectSchema,
   getBreadcrumbSchema,
 } from "@/lib/schema";
+import { LocaleProvider } from "@/lib/locale-context";
 import { CookieConsent } from "@/components/ui/CookieConsent";
+import type { Locale } from "@/lib/i18n";
 import Script from "next/script";
 import "./globals.css";
 
@@ -26,37 +29,28 @@ const satoshi = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://brevnovevents.cz"),
-  title: "Břevnovský klášter – eventové prostory Praha | brevnovevents.cz",
-  description:
-    "Pronájem historických prostor pro firemní akce a svatby v Praze. Od komorního meetingu pro 20 osob po kongres pro 1 100 hostů. Parkování zdarma. Provozuje IN CATERING.",
-  openGraph: {
-    title: "Břevnovský klášter – eventové prostory v Praze",
-    description:
-      "Historické prostory pro 20–1 100 hostů. Konference, gala večery, firemní akce i svatby. Parkování zdarma, catering od IN CATERING.",
-    url: "https://brevnovevents.cz",
-    siteName: "brevnovevents.cz",
-    locale: "cs_CZ",
-    type: "website",
-  },
-  alternates: {
-    canonical: "https://brevnovevents.cz",
-  },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+
   const schemas = [
-    getEventVenueSchema(),
+    getEventVenueSchema(locale),
     getLocalBusinessSchema(),
-    getVideoObjectSchema(),
-    getBreadcrumbSchema(),
+    getVideoObjectSchema(locale),
+    getBreadcrumbSchema(locale),
   ];
 
+  const skipText = locale === "en" ? "Skip to content" : "Přejít na obsah";
+  const mainId = locale === "en" ? "main-content" : "hlavni-obsah";
+
   return (
-    <html lang="cs" className={satoshi.variable}>
+    <html lang={locale} className={satoshi.variable}>
       <head>
         {/* Google Consent Mode v2 — must run before any Google scripts */}
         <Script
@@ -107,8 +101,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <a href="#hlavni-obsah" className="skip-link">
-          Přejít na obsah
+        <a href={`#${mainId}`} className="skip-link">
+          {skipText}
         </a>
         {schemas.map((schema, i) => (
           <script
@@ -119,10 +113,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             {JSON.stringify(schema)}
           </script>
         ))}
-        <Header />
-        <main id="hlavni-obsah">{children}</main>
-        <Footer />
-        <CookieConsent />
+        <LocaleProvider locale={locale}>
+          <Header />
+          <main id={mainId}>{children}</main>
+          <Footer />
+          <CookieConsent />
+        </LocaleProvider>
       </body>
     </html>
   );

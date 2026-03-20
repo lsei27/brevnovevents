@@ -1,33 +1,20 @@
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
+import type { PriceRow } from "@/lib/dictionaries/types";
 import { Button } from "@/components/ui/Button";
 
-interface PriceRow {
-  item: string;
-  price: string;
-}
-
-const groundFloor: PriceRow[] = [
-  { item: "Sala Terrena + chodby", price: "15 000 Kč/den" },
-  { item: "Sala Terrena + salonky + chodby", price: "20 000 Kč/den" },
-  { item: "Benediktinská vinárna + Sala Terrena + chodby", price: "20 000 Kč/den" },
-  { item: "Celé přízemí (Sala Terrena, salonky, vinárna, chodby)", price: "30 000 Kč/den" },
-];
-
-const firstFloor: PriceRow[] = [
-  { item: "Tereziánský sál", price: "65 000 Kč/den nebo 10 000 Kč/hod." },
-  { item: "Celé 1. patro", price: "90 000 Kč/den nebo 10 000 Kč/hod." },
-];
-
-const extras: PriceRow[] = [
-  { item: "Nádvoří (dle dispozic akce)", price: "12 000 Kč/den" },
-  { item: "Nádvoří pro welcome drink (do 1 hod.)", price: "zdarma" },
-  { item: "Základní ozvučení", price: "13 000 Kč/sál" },
-  { item: "Ozvučení + promítání + plátno/plazma", price: "25 000 Kč/sál" },
-  { item: "Prodloužení akce (24:00–02:00, max. 2 hod.)", price: "10 000 Kč/hod." },
-  { item: "Přípravný den – příprava do 21:00", price: "35 % z ceny pronájmu" },
-  { item: "Přípravný den – příprava po 21:00", price: "50 % z ceny pronájmu" },
-];
-
-function PriceTable({ title, rows }: { title: string; rows: PriceRow[] }) {
+function PriceTable({
+  title,
+  rows,
+  headerLabel,
+  priceLabel,
+}: {
+  title: string;
+  rows: PriceRow[];
+  headerLabel: string;
+  priceLabel: string;
+}) {
   return (
     <div>
       <h3 className="mb-4 text-lg font-bold md:text-xl">{title}</h3>
@@ -40,9 +27,9 @@ function PriceTable({ title, rows }: { title: string; rows: PriceRow[] }) {
           <thead className="border-b border-brand-gray-dark/40 text-brand-white/60">
             <tr>
               <th className="px-2 py-2 md:px-3 md:py-3 font-semibold">
-                {title === "Nádvoří a doplňkové služby" ? "Služba" : "Prostor"}
+                {headerLabel}
               </th>
-              <th className="px-2 py-2 md:px-3 md:py-3 text-right font-semibold">Cena</th>
+              <th className="px-2 py-2 md:px-3 md:py-3 text-right font-semibold">{priceLabel}</th>
             </tr>
           </thead>
           <tbody>
@@ -62,28 +49,32 @@ function PriceTable({ title, rows }: { title: string; rows: PriceRow[] }) {
   );
 }
 
-export function PriceList() {
+export async function PriceList() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
+  const pl = dict.priceList;
+
   return (
     <section id="cenik" className="bg-brand-black py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Ceník pronájmu prostor Břevnovského kláštera
+          {pl.title}
         </h2>
         <div className="mt-16 flex flex-col gap-12">
-          <PriceTable title="Přízemí" rows={groundFloor} />
-          <PriceTable title="1. patro" rows={firstFloor} />
-          <PriceTable title="Nádvoří a doplňkové služby" rows={extras} />
+          <PriceTable title={pl.groundFloorTitle} rows={pl.groundFloor} headerLabel={pl.spaceHeader} priceLabel={pl.priceHeader} />
+          <PriceTable title={pl.firstFloorTitle} rows={pl.firstFloor} headerLabel={pl.spaceHeader} priceLabel={pl.priceHeader} />
+          <PriceTable title={pl.extrasTitle} rows={pl.extras} headerLabel={pl.serviceHeader} priceLabel={pl.priceHeader} />
         </div>
         <p className="mt-8 text-sm text-brand-white/50">
-          Ceny jsou bez DPH. Catering se kalkuluje individuálně dle rozsahu
-          akce.
+          {pl.note}
         </p>
         <div className="mt-10 text-center">
           <Button
             href="/downloads/cenik-brevnovsky-klaster.pdf"
             variant="secondary"
           >
-            Stáhnout ceník
+            {pl.download}
           </Button>
         </div>
       </div>

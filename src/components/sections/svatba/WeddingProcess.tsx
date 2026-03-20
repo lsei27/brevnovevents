@@ -1,32 +1,19 @@
-const steps = [
-  {
-    number: "1",
-    title: "Prohlídka a první schůzka",
-    text: "Provedeme vás klášterem, ukážeme prostory a probereme vaše představy – počet hostů, průběh dne, styl svatby. Prohlídka je nezávazná a zdarma.",
-  },
-  {
-    number: "2",
-    title: "Nabídka na míru",
-    text: "Připravíme cenovou nabídku na pronájem a catering. V nabídce uvidíte přesný rozpis – bez skrytých položek.",
-  },
-  {
-    number: "3",
-    title: "Plánování detailů",
-    text: "Doladíme menu, rozsazení a harmonogram. Pomůžeme s koordinací vašich dodavatelů (květiny, hudba, fotograf) – máme ověřené kontakty.",
-  },
-  {
-    number: "4",
-    title: "Váš svatební den",
-    text: "Náš tým je na místě od přípravy prostor po úklid. Vy a vaši hosté si užíváte den.",
-  },
-];
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 
-export function WeddingProcess() {
+export async function WeddingProcess() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
+
+  const steps = dict.weddingProcess.steps;
+
   return (
     <section className="bg-brand-black py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Od první schůzky ke svatebnímu dni
+          {dict.weddingProcess.title}
         </h2>
 
         {/* Desktop: horizontal */}

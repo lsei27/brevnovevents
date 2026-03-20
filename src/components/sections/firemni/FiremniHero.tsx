@@ -1,12 +1,19 @@
 import Image from "next/image";
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 
-export function FiremniHero() {
+export async function FiremniHero() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
+
   return (
     <section className="relative flex min-h-screen items-end pb-20 md:items-center md:pb-0">
       <Image
         src="/images/hero/tereziansky-sal-strom-inc.webp"
-        alt="Firemní event v Tereziánském sále Břevnovského kláštera"
+        alt={dict.firemniHero.imageAlt}
         fill
         priority
         className="object-cover"
@@ -16,15 +23,14 @@ export function FiremniHero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
         <div className="max-w-2xl text-left">
           <h1 className="text-4xl font-black md:text-5xl">
-            Uspořádejte event, na který se nezapomíná
+            {dict.firemniHero.title}
           </h1>
           <p className="mt-6 text-lg font-medium text-white md:text-xl">
-            Barokní sály, nádvoří i zahrady pro 20–1 100 hostů. Prostor,
-            catering a technika od jednoho týmu – vy řešíte jen program.
+            {dict.firemniHero.subtitle}
           </p>
           <div className="mt-8 flex justify-start">
-            <Button href="#kontakt" variant="primary">
-              Domluvit prohlídku
+            <Button href={locale === "en" ? "#contact" : "#kontakt"} variant="primary">
+              {dict.firemniHero.cta}
             </Button>
           </div>
         </div>

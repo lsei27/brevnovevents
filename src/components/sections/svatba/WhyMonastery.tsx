@@ -1,40 +1,26 @@
-const reasons = [
-  {
-    title: "Historie, kterou cítíte.",
-    text: "Klášter z roku 993 – fresky, klenby, zahrady s rybníky. Prostor s duší, ne kulisa.",
-  },
-  {
-    title: "V Praze, ne hodinu za Prahou.",
-    text: "Žádné dojíždění na zámek. Hosté přijedou tramvají nebo zaparkují v areálu (60 míst zdarma).",
-  },
-  {
-    title: "Jeden tým pro vše.",
-    text: "Prostor i catering řešíte s IN CATERING. Jeden kontakt, ne tři dodavatelé.",
-  },
-  {
-    title: "Flexibilní prostory.",
-    text: "Obřad venku, hostina v sále, afterparty ve vinárně – vše v jednom areálu, bez přesunů.",
-  },
-  {
-    title: "Ubytování v areálu.",
-    text: "Hotel Adalbert přímo v klášteře – pohodlí pro novomanžele i hosty.",
-  },
-];
-
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import Image from "next/image";
 
-export function WhyMonastery() {
+export async function WhyMonastery() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
+
+  const reasons = dict.whyMonastery.reasons;
+
   return (
     <section className="bg-brand-black-alt py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Co odlišuje klášter od hotelových a zámeckých svateb
+          {dict.whyMonastery.title}
         </h2>
 
         <div className="mt-12 overflow-hidden rounded-2xl">
           <Image
             src="/images/svatby/svatba-exterier.webp"
-            alt="Nádvoří Břevnovského kláštera – historický prostor pro svatební den"
+            alt={dict.whyMonastery.imageAlt}
             width={1200}
             height={500}
             className="h-[28rem] w-full object-cover md:h-[32rem]"

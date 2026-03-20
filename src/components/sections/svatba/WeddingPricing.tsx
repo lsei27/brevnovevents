@@ -1,31 +1,22 @@
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 
-interface PriceRow {
-  room: string;
-  price: string;
-}
+export async function WeddingPricing() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
 
-const rows: PriceRow[] = [
-  { room: "Sala Terrena + chodby", price: "15 000 Kč/den" },
-  { room: "Sala Terrena + salonky + chodby", price: "20 000 Kč/den" },
-  { room: "Celé přízemí (Sala Terrena, salonky, vinárna)", price: "30 000 Kč/den" },
-  { room: "Nádvoří pro obřad nebo welcome drink (do 1 hod.)", price: "zdarma" },
-  { room: "Nádvoří na celý den", price: "12 000 Kč/den" },
-  { room: "Prodloužení po půlnoci (max. 2 hod.)", price: "10 000 Kč/hod." },
-];
-
-const headers = ["Prostor", "Cena"];
-
-export function WeddingPricing() {
   return (
     <section className="bg-brand-black py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Kolik stojí svatba v Břevnovském klášteře
+          {dict.weddingPricing.title}
         </h2>
 
         <h3 className="mt-16 text-xl font-bold md:text-2xl">
-          Pronájem prostor
+          {dict.weddingPricing.rentalTitle}
         </h3>
 
         <div className="mt-6 overflow-x-auto">
@@ -36,12 +27,12 @@ export function WeddingPricing() {
             </colgroup>
             <thead className="border-b border-brand-gray-dark/40 text-brand-white/60">
               <tr>
-                <th className="px-2 py-2 md:px-3 md:py-3 font-semibold">Prostor</th>
-                <th className="px-2 py-2 md:px-3 md:py-3 text-right font-semibold">Cena</th>
+                <th className="px-2 py-2 md:px-3 md:py-3 font-semibold">{dict.weddingPricing.headers[0]}</th>
+                <th className="px-2 py-2 md:px-3 md:py-3 text-right font-semibold">{dict.weddingPricing.headers[1]}</th>
               </tr>
             </thead>
             <tbody>
-              {rows.map((row) => (
+              {dict.weddingPricing.rows.map((row) => (
                 <tr
                   key={row.room}
                   className="border-b border-brand-gray-dark/10"
@@ -55,14 +46,12 @@ export function WeddingPricing() {
         </div>
 
         <p className="mt-6 text-sm text-brand-white/50">
-          Cena Tereziánského sálu (1. patro) na vyžádání. Ceny bez DPH.
-          Catering se kalkuluje individuálně – od rautového občerstvení po
-          slavnostní menu.
+          {dict.weddingPricing.note}
         </p>
 
         <div className="mt-10 text-center">
-          <Button href="#kontakt" variant="pink">
-            Nezávazná nabídka na vaši svatbu
+          <Button href={locale === "en" ? "#contact" : "#kontakt"} variant="pink">
+            {dict.weddingPricing.cta}
           </Button>
         </div>
       </div>

@@ -3,12 +3,9 @@
 import { useActionState, useState, useEffect, useRef } from "react";
 import { submitWeddingInquiry } from "@/app/actions";
 import { Button } from "@/components/ui/Button";
-import {
-  weddingGuestCountOptions,
-  celebrationTypeOptions,
-  weddingCateringOptions,
-  weddingSourceOptions,
-} from "@/lib/wedding-validation";
+import { useLocale } from "@/lib/locale-context";
+import cs from "@/lib/dictionaries/cs";
+import en from "@/lib/dictionaries/en";
 
 interface FormState {
   success: boolean;
@@ -23,6 +20,10 @@ const initialState: FormState = {
 };
 
 export function WeddingForm() {
+  const locale = useLocale();
+  const dict = locale === "en" ? en : cs;
+  const t = dict.weddingForm;
+
   const [state, action, isPending] = useActionState(submitWeddingInquiry, initialState);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const trackRef = useRef(false);
@@ -42,11 +43,11 @@ export function WeddingForm() {
     return (
       <div className="rounded-2xl border border-green-600/30 bg-green-900/20 p-8">
         <p className="text-lg font-bold text-green-400">
-          ✓ Poptávka odeslána
+          {t.successTitle}
         </p>
         <p className="mt-2 text-brand-white/80">{state.message}</p>
         <p className="mt-4 text-sm text-brand-white/60">
-          Pro urgentní požadavky volejte{" "}
+          {t.urgentNote}{" "}
           <a href="tel:+420602346729" className="underline">
             +420 602 346 729
           </a>
@@ -70,54 +71,57 @@ export function WeddingForm() {
         />
       </div>
 
+      <input type="hidden" name="locale" value={locale} />
+
       {/* Visible required fields */}
       <FormField
-        label="Jméno a příjmení"
+        label={t.name}
         name="name"
         type="text"
         required
         errors={state.errors?.name}
       />
       <FormField
-        label="E-mail"
+        label={t.email}
         name="email"
         type="email"
         required
         errors={state.errors?.email}
       />
       <FormField
-        label="Telefon"
+        label={t.phone}
         name="phone"
         type="tel"
         required
         errors={state.errors?.phone}
       />
       <FormField
-        label="Preferovaný termín"
+        label={t.preferredDate}
         name="preferredDate"
         type="text"
         required
-        placeholder="Konkrétní datum nebo období (např. červen 2026)"
+        placeholder={t.preferredDatePlaceholder}
         errors={state.errors?.preferredDate}
       />
       <SelectField
-        label="Počet hostů"
+        label={t.guestCount}
         name="guestCount"
         required
-        options={weddingGuestCountOptions}
+        options={t.guestCountOptions}
+        selectPlaceholder={t.selectPlaceholder}
         errors={state.errors?.guestCount}
       />
       <CheckboxGroup
-        label="Jaký typ oslavy plánujete?"
+        label={t.celebrationType}
         name="celebrationType"
-        options={celebrationTypeOptions}
+        options={t.celebrationTypeOptions}
         required
         errors={state.errors?.celebrationType}
       />
       <RadioGroup
-        label="Potřebujete catering?"
+        label={t.catering}
         name="catering"
-        options={weddingCateringOptions}
+        options={t.cateringOptions}
         required
         errors={state.errors?.catering}
       />
@@ -130,7 +134,7 @@ export function WeddingForm() {
         }
       >
         <summary className="cursor-pointer text-sm text-brand-white/60 hover:text-brand-white">
-          Další informace (nepovinné)
+          {t.moreInfo}
         </summary>
         <div className="mt-4 space-y-5">
           <div>
@@ -138,20 +142,21 @@ export function WeddingForm() {
               htmlFor="field-vision"
               className="mb-1 block text-sm font-bold"
             >
-              Vaše představa
+              {t.vision}
             </label>
             <textarea
               id="field-vision"
               name="vision"
               rows={3}
-              placeholder="Styl svatby, speciální požadavky, alergie, cokoliv důležitého…"
+              placeholder={t.visionPlaceholder}
               className="w-full rounded-lg border border-brand-gray-dark/40 bg-brand-black-alt px-4 py-3 text-brand-white placeholder:text-brand-white/30 focus:border-brand-pink focus:outline-none focus:ring-1 focus:ring-brand-pink"
             />
           </div>
           <SelectField
-            label="Jak jste se o nás dozvěděli?"
+            label={t.source}
             name="source"
-            options={weddingSourceOptions}
+            options={t.sourceOptions}
+            selectPlaceholder={t.selectPlaceholder}
           />
         </div>
       </details>
@@ -163,10 +168,10 @@ export function WeddingForm() {
 
       {/* Submit */}
       <Button type="submit" variant="pink" disabled={isPending} className="w-full">
-        {isPending ? "Odesílám…" : "Odeslat nezávaznou poptávku"}
+        {isPending ? t.submitting : t.submit}
       </Button>
       <p className="text-center text-xs text-brand-white/40">
-        Ozveme se do 1 pracovního dne. Vaše data zpracováváme v souladu s GDPR.
+        {t.gdprNote}
       </p>
     </form>
   );
@@ -224,12 +229,14 @@ function SelectField({
   name,
   required,
   options,
+  selectPlaceholder,
   errors,
 }: {
   label: string;
   name: string;
   required?: boolean;
   options: string[];
+  selectPlaceholder: string;
   errors?: string[];
 }) {
   const id = `field-${name}`;
@@ -253,7 +260,7 @@ function SelectField({
         } bg-brand-black-alt`}
       >
         <option value="" disabled>
-          Vyberte…
+          {selectPlaceholder}
         </option>
         {options.map((opt) => (
           <option key={opt} value={opt}>

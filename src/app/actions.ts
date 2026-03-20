@@ -9,15 +9,49 @@ interface ActionResult {
   message?: string;
 }
 
+const messages = {
+  cs: {
+    badForm: "Formulář nebyl správně odeslán. Zkuste to znovu.",
+    error: "Něco se nepovedlo. Zkuste to znovu nebo napište na brevnov@incatering.cz.",
+    inquirySuccess: "Děkujeme za poptávku. Ozveme se do 1 pracovního dne s předběžnou nabídkou.",
+    weddingSuccess: "Děkujeme za vaši poptávku. Ozveme se do 1 pracovního dne a domluvíme prohlídku kláštera.",
+    confirmSubject: "Potvrzení poptávky — Břevnovský klášter",
+    weddingConfirmSubject: "Potvrzení svatební poptávky – Břevnovský klášter",
+    confirmBody: (name: string) =>
+      `Dobrý den ${name},\n\nděkujeme za Vaši poptávku. Ozveme se do 1 pracovního dne s předběžnou nabídkou.\n\nPro urgentní požadavky volejte +420 602 346 729.\n\nS pozdravem,\nTým IN CATERING\nbrevnov@incatering.cz`,
+    weddingConfirmBody: (name: string) =>
+      `Dobrý den ${name},\n\nděkujeme za Vaši svatební poptávku. Ozveme se do 1 pracovního dne a domluvíme prohlídku kláštera.\n\nPro urgentní požadavky volejte +420 602 346 729.\n\nS pozdravem,\nTým IN CATERING\nbrevnov@incatering.cz`,
+  },
+  en: {
+    badForm: "The form was not submitted correctly. Please try again.",
+    error: "Something went wrong. Please try again or email brevnov@incatering.cz.",
+    inquirySuccess: "Thank you for your enquiry. We will get back to you within 1 business day with an initial quote.",
+    weddingSuccess: "Thank you for your enquiry. We will get back to you within 1 business day to arrange a venue tour.",
+    confirmSubject: "Enquiry Confirmation — Brevnov Monastery",
+    weddingConfirmSubject: "Wedding Enquiry Confirmation — Brevnov Monastery",
+    confirmBody: (name: string) =>
+      `Dear ${name},\n\nThank you for your enquiry. We will get back to you within 1 business day with an initial quote.\n\nFor urgent requests, please call +420 602 346 729.\n\nKind regards,\nIN CATERING Team\nbrevnov@incatering.cz`,
+    weddingConfirmBody: (name: string) =>
+      `Dear ${name},\n\nThank you for your wedding enquiry. We will get back to you within 1 business day to arrange a venue tour.\n\nFor urgent requests, please call +420 602 346 729.\n\nKind regards,\nIN CATERING Team\nbrevnov@incatering.cz`,
+  },
+} as const;
+
+type SupportedLocale = keyof typeof messages;
+
+function getLocale(formData: FormData): SupportedLocale {
+  const loc = formData.get("locale");
+  return loc === "en" ? "en" : "cs";
+}
+
 export async function submitInquiry(
   _prevState: ActionResult,
   formData: FormData
 ): Promise<ActionResult> {
+  const locale = getLocale(formData);
+  const t = messages[locale];
+
   if (!formData || !(formData instanceof FormData)) {
-    return {
-      success: false,
-      message: "Formulář nebyl správně odeslán. Zkuste to znovu.",
-    };
+    return { success: false, message: t.badForm };
   }
 
   const raw: Record<string, string> = {};
@@ -50,22 +84,14 @@ export async function submitInquiry(
     if (emailMode === "webhook") {
       await sendWebhook(data);
     } else {
-      await sendDirect(data);
+      await sendDirect(data, locale);
     }
   } catch (error) {
     console.error("Form submission error:", error);
-    return {
-      success: false,
-      message:
-        "Něco se nepovedlo. Zkuste to znovu nebo napište na brevnov@incatering.cz.",
-    };
+    return { success: false, message: t.error };
   }
 
-  return {
-    success: true,
-    message:
-      "Děkujeme za poptávku. Ozveme se do 1 pracovního dne s předběžnou nabídkou.",
-  };
+  return { success: true, message: t.inquirySuccess };
 }
 
 async function sendWebhook(data: InquiryFormData): Promise<void> {
@@ -90,9 +116,10 @@ async function sendWebhook(data: InquiryFormData): Promise<void> {
   }
 }
 
-async function sendDirect(data: InquiryFormData): Promise<void> {
+async function sendDirect(data: InquiryFormData, locale: SupportedLocale = "cs"): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? "brevnov@incatering.cz";
+  const t = messages[locale];
 
   if (!apiKey) {
     throw new Error("RESEND_API_KEY is not configured");
@@ -127,8 +154,8 @@ async function sendDirect(data: InquiryFormData): Promise<void> {
     body: JSON.stringify({
       from: fromEmail,
       to: data.email,
-      subject: "Potvrzení poptávky — Břevnovský klášter",
-      text: `Dobrý den ${data.name},\n\nděkujeme za Vaši poptávku. Ozveme se do 1 pracovního dne s předběžnou nabídkou.\n\nPro urgentní požadavky volejte +420 602 346 729.\n\nS pozdravem,\nTým IN CATERING\nbrevnov@incatering.cz`,
+      subject: t.confirmSubject,
+      text: t.confirmBody(data.name),
     }),
   });
 
@@ -162,11 +189,11 @@ export async function submitWeddingInquiry(
   _prevState: ActionResult,
   formData: FormData
 ): Promise<ActionResult> {
+  const locale = getLocale(formData);
+  const t = messages[locale];
+
   if (!formData || !(formData instanceof FormData)) {
-    return {
-      success: false,
-      message: "Formulář nebyl správně odeslán. Zkuste to znovu.",
-    };
+    return { success: false, message: t.badForm };
   }
 
   const raw: Record<string, string> = {};
@@ -203,22 +230,14 @@ export async function submitWeddingInquiry(
     if (emailMode === "webhook") {
       await sendWeddingWebhook(data);
     } else {
-      await sendWeddingDirect(data);
+      await sendWeddingDirect(data, locale);
     }
   } catch (error) {
     console.error("Wedding form submission error:", error);
-    return {
-      success: false,
-      message:
-        "Něco se nepovedlo. Zkuste to znovu nebo napište na brevnov@incatering.cz.",
-    };
+    return { success: false, message: t.error };
   }
 
-  return {
-    success: true,
-    message:
-      "Děkujeme za vaši poptávku. Ozveme se do 1 pracovního dne a domluvíme prohlídku kláštera.",
-  };
+  return { success: true, message: t.weddingSuccess };
 }
 
 async function sendWeddingWebhook(data: WeddingFormData): Promise<void> {
@@ -243,9 +262,10 @@ async function sendWeddingWebhook(data: WeddingFormData): Promise<void> {
   }
 }
 
-async function sendWeddingDirect(data: WeddingFormData): Promise<void> {
+async function sendWeddingDirect(data: WeddingFormData, locale: SupportedLocale = "cs"): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? "brevnov@incatering.cz";
+  const t = messages[locale];
 
   if (!apiKey) {
     throw new Error("RESEND_API_KEY is not configured");
@@ -280,8 +300,8 @@ async function sendWeddingDirect(data: WeddingFormData): Promise<void> {
     body: JSON.stringify({
       from: fromEmail,
       to: data.email,
-      subject: "Potvrzení svatební poptávky – Břevnovský klášter",
-      text: `Dobrý den ${data.name},\n\nděkujeme za Vaši svatební poptávku. Ozveme se do 1 pracovního dne a domluvíme prohlídku kláštera.\n\nPro urgentní požadavky volejte +420 602 346 729.\n\nS pozdravem,\nTým IN CATERING\nbrevnov@incatering.cz`,
+      subject: t.weddingConfirmSubject,
+      text: t.weddingConfirmBody(data.name),
     }),
   });
 

@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
+import { useLocale } from "@/lib/locale-context";
+import cs from "@/lib/dictionaries/cs";
+import en from "@/lib/dictionaries/en";
 
 type ConsentState = {
   ad_storage: "granted" | "denied";
@@ -18,9 +21,13 @@ declare global {
 }
 
 export function CookieConsent() {
+  const locale = useLocale();
+  const dict = locale === "en" ? en : cs;
+  const t = dict.cookieConsent;
+
   const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  
+
   const [analyticsConsent, setAnalyticsConsent] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
 
@@ -34,7 +41,7 @@ export function CookieConsent() {
         const parsed: ConsentState = JSON.parse(savedConsent);
         setAnalyticsConsent(parsed.analytics_storage === "granted");
         setMarketingConsent(parsed.ad_storage === "granted");
-        
+
         // Push update immediately on load if previously saved
         if (typeof window.gtag === "function") {
           window.gtag("consent", "update", parsed);
@@ -96,7 +103,7 @@ export function CookieConsent() {
         <button
           onClick={() => setShowSettings(true)}
           className="fixed bottom-4 right-4 z-40 rounded-full bg-brand-black/80 p-3 text-brand-white shadow-lg backdrop-blur-md transition-colors hover:bg-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-2 focus:ring-offset-brand-black overflow-hidden group"
-          aria-label="Nastavení cookies"
+          aria-label={t.cookieButtonLabel}
           title="Cookies"
         >
           <svg
@@ -126,13 +133,10 @@ export function CookieConsent() {
           <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div className="max-w-3xl">
               <h2 className="text-lg font-bold text-brand-white">
-                Vážíme si vašeho soukromí
+                {t.title}
               </h2>
               <p className="mt-2 text-sm text-brand-white/70">
-                Tyto webové stránky používají soubory cookies a podobné
-                technologie pro zajištění základních funkcí webu, analýzu
-                návštěvnosti a personalizaci obsahu či reklam. Sdílené
-                informace nám pomáhají zlepšovat naše služby.
+                {t.text}
               </p>
             </div>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
@@ -140,13 +144,13 @@ export function CookieConsent() {
                 onClick={() => setShowSettings(true)}
                 className="text-sm font-medium text-brand-white/70 hover:text-brand-white transition-colors py-2 px-4"
               >
-                Nastavení
+                {t.settings}
               </button>
               <Button onClick={rejectAll} variant="secondary">
-                Odmítnout
+                {t.reject}
               </Button>
               <Button onClick={acceptAll} variant="primary">
-                Přijmout vše
+                {t.acceptAll}
               </Button>
             </div>
           </div>
@@ -157,19 +161,18 @@ export function CookieConsent() {
       {showSettings && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 backdrop-blur-sm">
           <div className="w-full max-w-2xl rounded-2xl border border-brand-gray-dark/20 bg-brand-black p-6 md:p-8">
-            <h2 className="text-2xl font-bold">Nastavení soukromí</h2>
+            <h2 className="text-2xl font-bold">{t.settingsTitle}</h2>
             <p className="mt-4 text-sm text-brand-white/70">
-              Níže si můžete přizpůsobit, jaké typy cookies nám povolíte
-              ukládat. Vaše nastavení můžete kdykoliv změnit.
+              {t.settingsText}
             </p>
 
             <div className="mt-8 space-y-6">
               {/* Necessary */}
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-semibold text-brand-white">Nezbytné</h3>
+                  <h3 className="font-semibold text-brand-white">{t.necessary}</h3>
                   <p className="mt-1 text-xs text-brand-white/60">
-                    Technické cookies nutné pro správné fungování webu a uložení vašich preferencí. Tyto cookies nelze vypnout.
+                    {t.necessaryDesc}
                   </p>
                 </div>
                 <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-brand-red">
@@ -180,10 +183,9 @@ export function CookieConsent() {
               {/* Analytics */}
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-semibold text-brand-white">Analytické</h3>
+                  <h3 className="font-semibold text-brand-white">{t.analytics}</h3>
                   <p className="mt-1 text-xs text-brand-white/60">
-                    Pomáhají nám pochopit, jak návštěvníci používají náš web, díky
-                    čemuž ho můžeme neustále vylepšovat (např. Google Analytics).
+                    {t.analyticsDesc}
                   </p>
                 </div>
                 <button
@@ -203,10 +205,9 @@ export function CookieConsent() {
               {/* Marketing */}
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-semibold text-brand-white">Marketingové</h3>
+                  <h3 className="font-semibold text-brand-white">{t.marketing}</h3>
                   <p className="mt-1 text-xs text-brand-white/60">
-                    Slouží ke sledování návštěvníků napříč weby a umožňují 
-                    zobrazovat reklamy, které jsou pro vás relevantní.
+                    {t.marketingDesc}
                   </p>
                 </div>
                 <button
@@ -226,10 +227,10 @@ export function CookieConsent() {
 
             <div className="mt-10 flex flex-col justify-end gap-4 sm:flex-row">
               <Button onClick={() => setShowSettings(false)} variant="secondary">
-                Zpět
+                {t.back}
               </Button>
               <Button onClick={saveSettings} variant="primary">
-                Uložit nastavení
+                {t.save}
               </Button>
             </div>
           </div>

@@ -6,6 +6,11 @@ export const metadata: Metadata = {
     "Zásady ochrany osobních údajů společnosti IN CATERING s.r.o. pro návštěvníky brevnovevents.cz.",
   alternates: {
     canonical: "https://brevnovevents.cz/gdpr",
+    languages: {
+      "cs": "https://brevnovevents.cz/gdpr",
+      "en": "https://brevnovevents.cz/en/privacy-policy",
+      "x-default": "https://brevnovevents.cz/en/privacy-policy",
+    },
   },
 };
 

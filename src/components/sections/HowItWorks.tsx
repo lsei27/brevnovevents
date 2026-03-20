@@ -1,15 +1,18 @@
-const steps = [
-  { number: "1", title: "Poptávka a prohlídka", text: "Odpovíme do 24 hodin. Provedeme vás klášterem a ukážeme, jak prostory fungují v praxi. Nezávazně." },
-  { number: "2", title: "Nabídka na míru", text: "Transparentní cenová nabídka – pronájem, catering, technika. Bez skrytých položek." },
-  { number: "3", title: "Plánování a produkce", text: "Doladíme harmonogram, dispozice, menu a techniku. Vy řešíte obsah programu – o zbytek se staráme my." },
-  { number: "4", title: "Den D", text: "Náš tým je na místě od přípravy po úklid." },
-];
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 
-export function HowItWorks() {
+export async function HowItWorks() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
+
+  const steps = dict.howItWorks.steps;
+
   return (
     <section className="bg-brand-black-alt py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-bold md:text-4xl">Od poptávky po bezchybnou akci</h2>
+        <h2 className="text-center text-3xl font-bold md:text-4xl">{dict.howItWorks.title}</h2>
         {/* Desktop: horizontal */}
         <div className="mt-16 hidden gap-4 md:grid md:grid-cols-4">
           {steps.map((step, index) => (

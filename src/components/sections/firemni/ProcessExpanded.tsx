@@ -1,36 +1,18 @@
-const steps = [
-  {
-    number: "1",
-    title: "Poptávka a prohlídka",
-    timing: "den 1–5",
-    text: "Odpovíme do 24 hodin. Provedeme vás klášterem, prodiskutujeme rozsah akce a ukážeme, jak prostory fungují v praxi. Prohlídka je nezávazná.",
-  },
-  {
-    number: "2",
-    title: "Nabídka na míru",
-    timing: "do 24 hod. po prohlídce",
-    text: "Připravíme cenovou nabídku včetně pronájmu, cateringu a techniky. Transparentně rozepsanou, bez skrytých položek. Pokud nabídka nesedí, řeknete – žádný závazek.",
-  },
-  {
-    number: "3",
-    title: "Plánování a produkce",
-    timing: undefined,
-    text: "Doladíme harmonogram, dispozice, menu a technické požadavky. Koordinujeme AV dodavatele, dekorace a logistiku. Vy řešíte obsah programu – o zbytek se staráme my.",
-  },
-  {
-    number: "4",
-    title: "Den D – bezchybná exekuce",
-    timing: undefined,
-    text: "Náš tým je na místě od přípravy po úklid. Přestavbu Tereziánského sálu z konference na banket zvládáme za 60 minut – ověřeno na Speedchain 2024 (800 účastníků, celodenní program).",
-  },
-];
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 
-export function ProcessExpanded() {
+export async function ProcessExpanded() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
+  const { title, steps } = dict.processExpanded;
+
   return (
     <section className="bg-brand-black py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Od poptávky po bezchybnou akci – jak spolupráce funguje
+          {title}
         </h2>
 
         {/* Desktop: horizontal */}

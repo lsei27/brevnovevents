@@ -1,33 +1,21 @@
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 
-const uspCards = [
-  {
-    title: "Kapacita bez kompromisů",
-    text: "Až 1 100 hostů – více než Lobkowiczký palác (350), Martinický palác (200) nebo klášter Minoritů (250). Od salonku pro 20 po celý areál.",
-  },
-  {
-    title: "Vše pod jednou střechou",
-    text: "Dvě podlaží, nádvoří a zahrady fungují nezávisle. Paralelní program, networking i slavnostní večeře v jednom areálu, bez přesunů.",
-  },
-  {
-    title: "Logistika, která funguje",
-    text: "60 parkovacích míst zdarma přímo před areálem. MHD ke dveřím. Letiště 15 minut autem. V centru Prahy toto nenajdete.",
-  },
-  {
-    title: "Jeden tým pro prostor i catering",
-    text: "IN CATERING provozuje klášter a zajišťuje gastronomii. Jeden kontakt, jeden harmonogram, jedna faktura. Žádná koordinace mezi dodavateli.",
-  },
-];
+export async function USP() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
 
-export function USP() {
   return (
     <section className="bg-brand-black pt-10 pb-20 md:pt-16 md:pb-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Proč si firmy a event agentury vybírají Břevnovský klášter
+          {dict.usp.title}
         </h2>
         <div className="mt-16 grid gap-6 sm:grid-cols-2">
-          {uspCards.map((card) => (
+          {dict.usp.cards.map((card) => (
             <div key={card.title} className="rounded-2xl border border-brand-gray-dark/20 bg-brand-black-alt p-8">
               <h3 className="text-xl font-bold md:text-2xl">{card.title}</h3>
               <p className="mt-3 leading-relaxed text-brand-white/70">{card.text}</p>
@@ -35,7 +23,7 @@ export function USP() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <Button href="#prostory" variant="secondary">Prohlédnout prostory</Button>
+          <Button href="#prostory" variant="secondary">{dict.usp.cta}</Button>
         </div>
       </div>
     </section>

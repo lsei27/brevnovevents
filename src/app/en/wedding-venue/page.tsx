@@ -11,20 +11,20 @@ import { FAQSvatba } from "@/components/sections/svatba/FAQSvatba";
 import { WeddingContact } from "@/components/sections/svatba/WeddingContact";
 
 export const metadata: Metadata = {
-  title: "Svatba v Břevnovském klášteře | Barokní sály a zahrady | Praha",
+  title: "Wedding Venue Prague | Brevnov Monastery – Baroque Halls & Gardens",
   description:
-    "Svatba v nejstarším klášteře v Čechách – venkovní obřad v zahradě, hostina v sále s freskami, catering na míru. 30–200 hostů. Nezávazná prohlídka pro snoubence zdarma.",
+    "Wedding venue in Prague's oldest monastery. Outdoor ceremony in gardens, reception in baroque halls, afterparty in the wine cellar. 30–200 guests. Free tour for couples.",
   openGraph: {
-    title: "Svatba v Břevnovském klášteře – historické prostory v Praze",
+    title: "Wedding Venue Prague – Brevnov Monastery",
     description:
-      "Obřad v zahradě, hostina v barokním sále, afterparty ve vinárně. Vše v jednom areálu s cateringem od IN CATERING.",
-    url: "https://brevnovevents.cz/svatba-v-klastere",
+      "Ceremony in the garden, reception in a baroque hall, afterparty in the wine cellar. All under one roof with in-house catering by IN CATERING.",
+    url: "https://brevnovevents.cz/en/wedding-venue",
     siteName: "brevnovevents.cz",
-    locale: "cs_CZ",
+    locale: "en_US",
     type: "website",
   },
   alternates: {
-    canonical: "https://brevnovevents.cz/svatba-v-klastere",
+    canonical: "https://brevnovevents.cz/en/wedding-venue",
     languages: {
       "cs": "https://brevnovevents.cz/svatba-v-klastere",
       "en": "https://brevnovevents.cz/en/wedding-venue",
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function SvatbaPage() {
-  const schemas = [getSvatbaFAQSchema(), getSvatbaBreadcrumbSchema()];
+export default function WeddingVenuePage() {
+  const schemas = [getSvatbaFAQSchema("en"), getSvatbaBreadcrumbSchema("en")];
   return (
     <>
       {schemas.map((schema, i) => (

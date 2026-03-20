@@ -1,26 +1,34 @@
 import Image from "next/image";
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 
-export function Contact() {
+export async function Contact() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
+
+  const sectionId = locale === "en" ? "contact" : "kontakt";
+
   return (
-    <section id="kontakt" className="bg-brand-black py-20 md:py-32">
+    <section id={sectionId} className="bg-brand-black py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Domluvte si nezávaznou prohlídku Břevnovského kláštera
+          {dict.contact.title}
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-brand-white/60">
-          Provedeme vás prostory, probereme váš záměr a připravíme nezávaznou
-          nabídku do 24 hodin.
+          {dict.contact.subtitle}
         </p>
 
         <div className="mt-16 grid gap-12 md:grid-cols-2">
-          {/* Contact info + image */}
+          {/* Contact info */}
           <div>
-            <h3 className="text-xl font-bold">Kontakt</h3>
+            <h3 className="text-xl font-bold">{dict.contact.contactLabel}</h3>
             <div className="mt-6 space-y-4 text-brand-white/70">
               <p>
                 <span className="block text-sm font-bold text-brand-white">
-                  E-mail
+                  {dict.contact.emailLabel}
                 </span>
                 <a
                   href="mailto:brevnov@incatering.cz"
@@ -31,7 +39,7 @@ export function Contact() {
               </p>
               <p>
                 <span className="block text-sm font-bold text-brand-white">
-                  Telefon
+                  {dict.contact.phoneLabel}
                 </span>
                 <a
                   href="tel:+420602346729"
@@ -42,15 +50,15 @@ export function Contact() {
               </p>
               <p>
                 <span className="block text-sm font-bold text-brand-white">
-                  Web
+                  {dict.contact.webLabel}
                 </span>
                 www.brevnovevents.cz
               </p>
             </div>
             <div className="mt-8 overflow-hidden rounded-2xl">
               <Image
-                src="/images/reference/terezian-vecere-marie-terezie.webp"
-                alt="Slavnostní večeře v Tereziánském sále Břevnovského kláštera"
+                src="/images/prostory/tereziansky-sal-konference.webp"
+                alt={dict.contact.imageAlt}
                 width={600}
                 height={400}
                 className="aspect-[3/2] w-full object-cover"

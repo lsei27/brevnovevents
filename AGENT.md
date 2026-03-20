@@ -16,23 +16,36 @@ Referenční příručka pro AI agenty a vývojáře pracující na projektu **B
 ```text
 src/
 ├── app/
-│   ├── layout.tsx           # Root layout – Satoshi font, Header, Footer, Schema.org JSON-LD
-│   ├── page.tsx             # Homepage (10 sekcí)
-│   ├── actions.ts           # Server Actions (InquiryForm + WeddingForm)
-│   ├── sitemap.ts           # Sitemap generátor
+│   ├── layout.tsx           # Root layout – Satoshi font, Header, Footer, Schema.org JSON-LD, LocaleProvider
+│   ├── page.tsx             # Homepage CS (10 sekcí)
+│   ├── actions.ts           # Server Actions (InquiryForm + WeddingForm), locale-aware odpovědi
+│   ├── sitemap.ts           # Sitemap generátor (CS + EN s hreflang alternates)
 │   ├── globals.css          # Tailwind + CSS proměnné
-│   ├── gdpr/page.tsx        # GDPR stránka
-│   ├── firemni-eventy/page.tsx   # B2B stránka (13 sekcí)
-│   └── svatba-v-klastere/page.tsx # Svatby (9 sekcí)
+│   ├── middleware.ts         # Locale detection → x-locale header
+│   ├── gdpr/page.tsx        # GDPR stránka (CS)
+│   ├── firemni-eventy/page.tsx   # B2B stránka (CS, 13 sekcí)
+│   ├── svatba-v-klastere/page.tsx # Svatby (CS, 9 sekcí)
+│   └── en/                  # Anglické stránky
+│       ├── page.tsx             # Homepage EN
+│       ├── corporate-events/page.tsx  # Corporate events EN
+│       ├── wedding-venue/page.tsx     # Wedding venue EN
+│       └── privacy-policy/page.tsx    # Privacy policy EN
 ├── components/
-│   ├── forms/               # InquiryForm.tsx (B2B), WeddingForm.tsx (svatby)
-│   ├── layout/              # Header.tsx, Footer.tsx
-│   ├── sections/            # Sdílené sekce (Hero, USP, SocialProof, Location, Contact, PricingAnchors, ...)
-│   │   ├── firemni/         # Sekce specifické pro /firemni-eventy
-│   │   └── svatba/          # Sekce specifické pro /svatba-v-klastere
-│   └── ui/                  # Button, ImageCarousel (s lightbox), YouTubeEmbed
+│   ├── forms/               # InquiryForm.tsx (B2B), WeddingForm.tsx (svatby) – locale-aware
+│   ├── layout/              # Header.tsx (s CS/EN přepínačem), Footer.tsx
+│   ├── sections/            # Sdílené sekce – všechny locale-aware přes dictionary systém
+│   │   ├── firemni/         # Sekce specifické pro /firemni-eventy + /en/corporate-events
+│   │   └── svatba/          # Sekce specifické pro /svatba-v-klastere + /en/wedding-venue
+│   └── ui/                  # Button, ImageCarousel (s lightbox), YouTubeEmbed, CookieConsent
 ├── lib/
-│   ├── schema.ts            # Schema.org JSON-LD definice
+│   ├── dictionaries/        # Jazykový systém
+│   │   ├── types.ts         # TypeScript interface Dictionary
+│   │   ├── cs.ts            # Český dictionary (kompletní)
+│   │   ├── en.ts            # Anglický dictionary (lokalizovaný, ne přeložený)
+│   │   └── index.ts         # getDictionary() async loader
+│   ├── i18n.ts              # Locale typy, routeMap, getAlternatePath()
+│   ├── locale-context.tsx   # useLocale() hook (odvozuje z pathname)
+│   ├── schema.ts            # Schema.org JSON-LD definice (locale-aware)
 │   ├── validation.ts        # Zod schéma pro InquiryForm
 │   └── wedding-validation.ts # Zod schéma pro WeddingForm
 public/
@@ -43,21 +56,35 @@ public/
 │   ├── reference/           # Reference / case studies (Speedchain, Evropa 2, Dakar)
 │   └── svatby/              # Svatební fotografie
 ├── downloads/               # PDF ceník + technický rider
+├── llms.txt                 # LLM context file (CS + EN)
 └── robots.txt
 ```
 
 ## 3. Klíčové procesy
 
-### 3.1. Formuláře (Server Actions)
+### 3.1. Internacionalizace (i18n)
+- **Routing:** Subpath – CS na `/` (bez prefixu), EN na `/en/...` s lokalizovanými slugy.
+- **Route mapping:** `/` ↔ `/en`, `/firemni-eventy` ↔ `/en/corporate-events`, `/svatba-v-klastere` ↔ `/en/wedding-venue`, `/gdpr` ↔ `/en/privacy-policy`.
+- **Middleware** (`src/middleware.ts`): Detekuje locale z URL, nastavuje `x-locale` request header.
+- **Dictionary systém** (`src/lib/dictionaries/`): Typované slovníky CS/EN se všemi sekcemi webu. EN není překlad, ale profesionální lokalizace cílená na expaty a zahraniční firmy.
+- **Server components:** Async pattern – `const locale = (await headers()).get("x-locale") || "cs"` → `getDictionary(locale)`.
+- **Client components:** `useLocale()` hook odvozuje locale z `usePathname()` (ne z context, protože root layout se při client-side navigaci nepřerenderuje).
+- **Přepínač jazyků:** `<a>` tag (ne `<Link>`) → full page reload, aby se root layout přerenderoval se správným `<html lang>` a server components.
+- **SEO:** Hreflang (CS ↔ EN + x-default), self-referencing canonical, sitemap s alternates, lokalizované Schema.org.
+- **Klíčová slova EN:** "prague venues", "event venues Prague", "events in prague", "prague events".
+- **Anchor linky:** Locale-aware (`#kontakt` / `#contact`).
+
+### 3.2. Formuláře (Server Actions)
 - Zpracování přes **React Server Actions** (`src/app/actions.ts`), ne API routy.
 - Dva formuláře: `InquiryForm` (B2B) a `WeddingForm` (svatby) s `useActionState`.
 - Server-side + client-side validace přes **Zod**.
 - **Honeypot:** Skryté pole `website` – pokud vyplněno, server předstírá úspěch.
+- **Locale-aware:** Formuláře posílají hidden pole `locale`. Server vrací lokalizované zprávy a potvrzovací emaily.
 
-### 3.2. E-maily a integrace
-- `EMAIL_MODE=webhook` (výchozí) → POST na `WEBHOOK_URL` (n8n/Make)
+### 3.3. E-maily a integrace
+- `EMAIL_MODE=webhook` (výchozí) → POST na `WEBHOOK_URL` (n8n/Make). Webhook payload obsahuje pole `locale`.
 - `EMAIL_MODE=direct` → Resend API (`RESEND_API_KEY`, `RESEND_FROM_EMAIL`)
-- Notifikace na `brevnov@incatering.cz` + potvrzovací e-mail klientovi.
+- Notifikace na `brevnov@incatering.cz` + potvrzovací e-mail klientovi (v jazyce formuláře).
 
 ### 3.3. Cenové balíčky
 Ceny jsou kalkulované z PPTX nabídek (složka `Context_project/Nabídky_balíčky/`).
@@ -92,10 +119,12 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 1. **Server Actions architektura:** Nepřidávat API routy tam, kde stačí Server Actions.
 2. **TypeScript + Tailwind:** Striktní typování propů. Utility třídy přímo v JSX, ne `@apply`.
 3. **Validace:** Při změně formulářů VŽDY aktualizovat Zod schéma (`validation.ts` / `wedding-validation.ts`).
-4. **SEO:** S každou novou stránkou upravit `sitemap.ts` a přidat Schema.org JSON-LD (`lib/schema.ts`).
+4. **SEO:** S každou novou stránkou upravit `sitemap.ts` a přidat Schema.org JSON-LD (`lib/schema.ts`). Přidat hreflang alternates.
 5. **Obrázky:** Formát WebP, ukládat do příslušné podsložky v `public/images/`. Nepoužívané obrázky mazat.
 6. **Carousel:** Pro seznamy 4+ položek používat Embla carousel se stávajícím patternem (šipky pod obsahem + dots).
-7. **Přístupnost:** Kontrolovat kontrast v dark módu, `text-left` pro odstavce, skip-link na `#hlavni-obsah`.
+7. **Přístupnost:** Kontrolovat kontrast v dark módu, `text-left` pro odstavce, skip-link na `#hlavni-obsah` / `#main-content`.
+8. **i18n:** Nový obsah VŽDY přidat do obou slovníků (`cs.ts` + `en.ts`) a aktualizovat `types.ts`. Hardcoded texty v komponentách jsou zakázány. Anchor linky musí být locale-aware (`#kontakt` / `#contact`).
+9. **Přepínač jazyků:** Vždy `<a>` tag, nikdy `<Link>` — root layout se musí přerenderovat pro správný `<html lang>` a server components.
 
 ## 6. Sledování a analytika
 
@@ -116,6 +145,13 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 - GA4 automaticky respektuje consent stav — při denied odesílá cookieless pingy, při granted plné měření.
 
 ## 7. Changelog
+
+### 2026-03-20
+- **Kompletní anglická lokalizace webu:** Subpath i18n routing (`/en/*`), dictionary systém (CS + EN), middleware locale detection, všech 40+ komponent locale-aware.
+- **Anglické stránky:** `/en` (homepage), `/en/corporate-events`, `/en/wedding-venue`, `/en/privacy-policy` s vlastní metadata, hreflang a Schema.org.
+- **CS/EN přepínač v headeru:** Desktop i mobile, full page reload pro správný `<html lang>` a server component rendering.
+- **SEO:** Hreflang tagy na všech stránkách, sitemap s alternates, lokalizované Schema.org (FAQ, breadcrumbs, EventVenue, VideoObject), aktualizovaný `llms.txt`.
+- **Formuláře locale-aware:** Hidden `locale` pole, lokalizované server odpovědi a potvrzovací emaily. Webhook payload obsahuje `locale`.
 
 ### 2026-03-19
 - **Přesun GA4 do Google Tag Manageru:** Odstraněn hardcoded `gtag.js` skript s ID `G-RG0DWSMGKC` z `layout.tsx`. Značka GA4 se nyní načítá čistě přes GTM kontejner `GTM-PSPHVDMV` se správnou inicializací Consent Mode.

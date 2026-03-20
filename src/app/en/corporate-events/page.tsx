@@ -19,21 +19,20 @@ import { Location } from "@/components/sections/Location";
 import { Contact } from "@/components/sections/Contact";
 
 export const metadata: Metadata = {
-  title:
-    "Pronájem eventových prostor Praha | Břevnovský klášter – až 1 100 hostů",
+  title: "Corporate Event Venues Prague | Brevnov Monastery – Up to 1,100",
   description:
-    "Historické prostory pro konference, gala večery a firemní akce v Praze. Kapacita 20–1 100 hostů, 60 parkovacích míst zdarma, catering od IN CATERING. Nezávazná nabídka do 24 h.",
+    "Historic event venues in Prague for conferences, gala dinners and corporate events. Capacity 20–1,100 guests, free parking, in-house catering. Get a quote within 24 hours.",
   openGraph: {
-    title: "Firemní eventy v Břevnovském klášteře | Praha 6",
+    title: "Corporate Events at Brevnov Monastery | Prague",
     description:
-      "Konference, gala večery a firemní akce v barokních sálech z 10. století. Až 1 100 hostů, parkování zdarma, jeden tým pro prostor i catering.",
-    url: "https://brevnovevents.cz/firemni-eventy",
+      "Conferences, gala dinners and corporate events in baroque halls dating to 993 AD. Up to 1,100 guests, free parking, one team for venue and catering.",
+    url: "https://brevnovevents.cz/en/corporate-events",
     siteName: "brevnovevents.cz",
-    locale: "cs_CZ",
+    locale: "en_US",
     type: "website",
   },
   alternates: {
-    canonical: "https://brevnovevents.cz/firemni-eventy",
+    canonical: "https://brevnovevents.cz/en/corporate-events",
     languages: {
       "cs": "https://brevnovevents.cz/firemni-eventy",
       "en": "https://brevnovevents.cz/en/corporate-events",
@@ -42,8 +41,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FiremniEventyPage() {
-  const schemas = [getFiremniEventyFAQSchema(), getFiremniBreadcrumbSchema()];
+export default function CorporateEventsPage() {
+  const schemas = [getFiremniEventyFAQSchema("en"), getFiremniBreadcrumbSchema("en")];
   return (
     <>
       {schemas.map((schema, i) => (

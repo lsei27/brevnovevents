@@ -1,13 +1,13 @@
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 
-const features = [
-  "Venkovní obřad v klášterní zahradě",
-  "Slavnostní hostina v Tereziánském sále (120 osob banket)",
-  "Ubytování v Hotelu Adalbert přímo v areálu",
-  "Parkování pro 60 aut zdarma",
-];
+export async function WeddingGateway() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
 
-export function WeddingGateway() {
   return (
     <section
       id="svatby"
@@ -16,7 +16,7 @@ export function WeddingGateway() {
       {/* Background image */}
       <img
         src="/images/svatby/vojteska-klasterni-zahrada.webp"
-        alt="Svatba v Břevnovském klášteře – venkovní obřad v klášterní zahradě"
+        alt={dict.weddingGateway.imageAlt}
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -26,16 +26,14 @@ export function WeddingGateway() {
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="max-w-xl">
           <h2 className="text-3xl font-bold md:text-4xl">
-            Svatba v Břevnovském klášteře
+            {dict.weddingGateway.title}
           </h2>
           <p className="mt-4 leading-relaxed text-brand-white/80">
-            Barokní sály, klášterní zahrady a catering na míru pro 30 až 200
-            hostů. Obřad v zahradě, hostina v sále s freskami, afterparty ve
-            vinárně – vše v jednom areálu.
+            {dict.weddingGateway.text}
           </p>
 
           <ul className="mt-8 space-y-3">
-            {features.map((feature) => (
+            {dict.weddingGateway.features.map((feature) => (
               <li
                 key={feature}
                 className="flex items-start gap-3 text-brand-white/80"
@@ -47,15 +45,15 @@ export function WeddingGateway() {
           </ul>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <Button href="/svatba-v-klastere" variant="pink">
-              Více o svatbách
+            <Button href={dict.weddingGateway.ctaPrimaryHref} variant="pink">
+              {dict.weddingGateway.ctaPrimary}
             </Button>
             <Button
-              href="#kontakt"
+              href={locale === "en" ? "#contact" : "#kontakt"}
               variant="secondary"
               className="border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-brand-black"
             >
-              Domluvit prohlídku
+              {dict.weddingGateway.ctaSecondary}
             </Button>
           </div>
         </div>

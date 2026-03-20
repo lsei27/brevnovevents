@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
+import { getDictionary } from "@/lib/dictionaries";
+import type { Locale } from "@/lib/i18n";
 
-const footerLinks = [
-  { label: "Prostory", href: "/#prostory" },
-  { label: "Firemní eventy", href: "/firemni-eventy" },
-  { label: "Svatby", href: "/svatba-v-klastere" },
-  { label: "Kontakt", href: "/#kontakt" },
-];
+export async function Footer() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "cs") as Locale;
+  const dict = await getDictionary(locale);
 
-export function Footer() {
   return (
     <footer className="border-t border-brand-gray-dark/30 bg-brand-black-alt">
       <div className="mx-auto max-w-7xl px-6 py-16">
@@ -17,12 +17,12 @@ export function Footer() {
           <div className="space-y-4">
             <Image
               src="/images/bk-logo.svg"
-              alt="Břevnovský klášter – logo"
+              alt={dict.header.logoAlt}
               width={160}
               height={45}
             />
             <p className="flex items-center gap-2 text-sm text-white/70">
-              Provozuje
+              {dict.footer.operatedBy}
               <a
                 href="https://incatering.cz"
                 target="_blank"
@@ -39,10 +39,10 @@ export function Footer() {
           </div>
 
           {/* Navigation */}
-          <nav aria-label="Patička">
-            <h3 className="mb-4 font-bold text-brand-white">Navigace</h3>
+          <nav aria-label={dict.footer.navigation}>
+            <h3 className="mb-4 font-bold text-brand-white">{dict.footer.navigation}</h3>
             <ul className="space-y-2">
-              {footerLinks.map((link) => (
+              {dict.footer.nav.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -57,7 +57,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="mb-4 font-bold text-brand-white">Kontakt</h3>
+            <h3 className="mb-4 font-bold text-brand-white">{dict.footer.contact}</h3>
             <address className="space-y-2 text-sm not-italic text-white/70">
               <p>Markétská 1/28</p>
               <p>169 00 Praha 6 – Břevnov</p>
@@ -104,10 +104,10 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 border-t border-brand-gray-dark/30 pt-8 text-center text-sm text-white/50">
           <p>
-            &copy; 2026 IN CATERING s.r.o. Všechna práva vyhrazena.
+            &copy; 2026 {dict.footer.copyright}
             {" · "}
-            <Link href="/gdpr" className="underline hover:text-white">
-              Zásady ochrany osobních údajů
+            <Link href={dict.footer.privacyHref} className="underline hover:text-white">
+              {dict.footer.privacy}
             </Link>
           </p>
         </div>

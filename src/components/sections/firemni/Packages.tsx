@@ -4,114 +4,15 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-
-interface PackageCard {
-  name: string;
-  venue: string;
-  persons: string;
-  featured: boolean;
-  includes: string[];
-  price: string;
-  price200: string;
-  cta: string;
-  image: string;
-  alt: string;
-}
-
-const packages: PackageCard[] = [
-  // ── Reprezentační prostory – 1. patro ──
-  {
-    name: "Konference · 1. patro",
-    venue: "Reprezentační prostory",
-    persons: "100–200 osob",
-    featured: false,
-    includes: [
-      "Tereziánský sál – celodenní pronájem (od 65 000 Kč)",
-      "Základní AV technika: projektor, ozvučení, mikrofony (od 25 000 Kč)",
-      "Catering: 2× coffee break + oběd + nápoje (od 990 Kč/os)",
-      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
-    ],
-    price: "210 000",
-    price200: "310 000",
-    cta: "Nezávazná nabídka",
-    image: "/images/prostory/tereziansky-sal-konference.webp",
-    alt: "Tereziánský sál v konferenčním uspořádání",
-  },
-  {
-    name: "Gala večeře · 1. patro",
-    venue: "Reprezentační prostory",
-    persons: "100–200 osob",
-    featured: true,
-    includes: [
-      "Tereziánský sál + přilehlé salonky (od 65 000 Kč)",
-      "Welcome drink + studené kanapky (od 260 Kč/os)",
-      "Servírované 3chodové menu (od 1 090 Kč/os)",
-      "Nápojový balíček s pivem a vínem (od 430 Kč/os)",
-      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
-    ],
-    price: "265 000",
-    price200: "440 000",
-    cta: "Nezávazná nabídka",
-    image: "/images/prostory/gala-bk.webp",
-    alt: "Gala večeře v Břevnovském klášteře",
-  },
-  {
-    name: "Firemní večírek · 1. patro",
-    venue: "Reprezentační prostory",
-    persons: "100–200 osob",
-    featured: false,
-    includes: [
-      "Tereziánský sál + přilehlé prostory (od 65 000 Kč)",
-      "Welcome drink + studené kanapky (od 260 Kč/os)",
-      "Bufetová večeře (od 790 Kč/os)",
-      "Nápojový balíček s pivem a vínem (od 430 Kč/os)",
-      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
-    ],
-    price: "235 000",
-    price200: "380 000",
-    cta: "Nezávazná nabídka",
-    image: "/images/prostory/brevnovsky-klaster-pohled-shora.webp",
-    alt: "Břevnovský klášter z výšky – celý areál pro firemní večírek",
-  },
-  // ── Klášterní prostory – přízemí ──
-  {
-    name: "Konference · přízemí",
-    venue: "Klášterní prostory",
-    persons: "100–200 osob",
-    featured: false,
-    includes: [
-      "Sala Terrena + přilehlé salonky – celodenní pronájem (od 30 000 Kč)",
-      "Základní AV technika: projektor, ozvučení, mikrofony (od 25 000 Kč)",
-      "Catering: 2× coffee break + oběd + nápoje (od 990 Kč/os)",
-      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
-    ],
-    price: "175 000",
-    price200: "275 000",
-    cta: "Nezávazná nabídka",
-    image: "/images/prostory/sala-terrena-raut.webp",
-    alt: "Sala Terrena – konferenční uspořádání v klášterních prostorách",
-  },
-  {
-    name: "Firemní večírek · přízemí",
-    venue: "Klášterní prostory",
-    persons: "100–200 osob",
-    featured: false,
-    includes: [
-      "Sala Terrena + přilehlé prostory (od 30 000 Kč)",
-      "Welcome drink + studené kanapky (od 260 Kč/os)",
-      "Bufetová večeře (od 790 Kč/os)",
-      "Nápojový balíček s pivem a vínem (od 430 Kč/os)",
-      "Personální zabezpečení a mobiliář (od 20 000 Kč)",
-    ],
-    price: "200 000",
-    price200: "345 000",
-    cta: "Nezávazná nabídka",
-    image: "/images/prostory/salonek-prizemi.webp",
-    alt: "Klášterní prostory v přízemí – firemní večírek",
-  },
-];
+import { useLocale } from "@/lib/locale-context";
+import cs from "@/lib/dictionaries/cs";
+import en from "@/lib/dictionaries/en";
 
 export function Packages() {
+  const locale = useLocale();
+  const dict = locale === "en" ? en : cs;
+  const d = dict.packagesDetail;
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
@@ -141,17 +42,16 @@ export function Packages() {
     <section className="bg-brand-black-alt py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
-          Orientační balíčky pro firemní akce – kolik stojí event v klášteře
+          {d.title}
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-brand-white/70">
-          Balíčky slouží jako cenová orientace. Každou akci kalkulujeme
-          individuálně dle vašich potřeb.
+          {d.subtitle}
         </p>
 
         <div className="mt-16">
           <div ref={emblaRef} className="overflow-hidden">
             <div className="-ml-6 flex">
-              {packages.map((pkg) => (
+              {d.packages.map((pkg) => (
                 <div
                   key={`${pkg.venue}-${pkg.name}`}
                   className="min-w-0 flex-[0_0_85%] pl-6 sm:flex-[0_0_48%] lg:flex-[0_0_33.333%]"
@@ -173,7 +73,7 @@ export function Packages() {
                       />
                       {pkg.featured && (
                         <span className="absolute right-3 top-3 rounded-full bg-brand-red px-4 py-1.5 text-xs font-bold uppercase tracking-wide shadow-lg">
-                          Nejoblíbenější
+                          {d.featured}
                         </span>
                       )}
                     </div>
@@ -197,21 +97,21 @@ export function Packages() {
                           {pkg.venue}
                         </p>
                         <p className="mt-2 text-sm text-brand-white/60">
-                          od
+                          {d.from}
                         </p>
                         <p className="text-3xl font-black">
-                          {pkg.price} Kč
+                          {pkg.price} {d.currency}
                         </p>
                         <p className="mt-2 text-sm text-brand-white/50">
-                          orientační cena akce pro 100 osob
+                          {d.priceNote}
                         </p>
                         <p className="mt-1 text-sm text-brand-white/50">
-                          200 osob od {pkg.price200} Kč
+                          {d.price200Label} {pkg.price200} {d.currency}
                         </p>
                       </div>
                       <div className="mt-6">
                         <Button
-                          href="#kontakt"
+                          href={locale === "en" ? "#contact" : "#kontakt"}
                           variant={pkg.featured ? "primary" : "secondary"}
                         >
                           {pkg.cta}
@@ -229,7 +129,7 @@ export function Packages() {
             <button
               type="button"
               onClick={scrollPrev}
-              aria-label="Předchozí balíček"
+              aria-label={d.prev}
               className="rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -238,12 +138,12 @@ export function Packages() {
             </button>
 
             <div className="flex gap-2">
-              {packages.map((pkg, index) => (
+              {d.packages.map((pkg, index) => (
                 <button
                   key={`dot-${pkg.venue}-${pkg.name}`}
                   type="button"
                   onClick={() => emblaApi?.scrollTo(index)}
-                  aria-label={`Balíček ${index + 1}`}
+                  aria-label={`${d.goTo} ${index + 1}`}
                   className="group flex items-center justify-center p-2"
                 >
                   <span
@@ -260,7 +160,7 @@ export function Packages() {
             <button
               type="button"
               onClick={scrollNext}
-              aria-label="Další balíček"
+              aria-label={d.next}
               className="rounded-full bg-white/20 p-3 backdrop-blur transition-colors hover:bg-white/40"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -271,9 +171,7 @@ export function Packages() {
         </div>
 
         <p className="mx-auto mt-12 max-w-3xl text-center text-sm text-brand-white/50">
-          Ceny jsou orientační, bez DPH. Finální kalkulace závisí na rozsahu
-          akce, termínu a požadavcích na techniku a catering. Nabídku na míru
-          připravíme do 24 hodin.
+          {d.footer}
         </p>
       </div>
     </section>

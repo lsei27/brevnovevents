@@ -11,20 +11,20 @@ import { Location } from "@/components/sections/Location";
 import { Contact } from "@/components/sections/Contact";
 
 export const metadata: Metadata = {
-  title: "Břevnovský klášter – eventové prostory Praha | brevnovevents.cz",
+  title: "Event Venues Prague | Brevnov Monastery | brevnovevents.cz",
   description:
-    "Pronájem historických prostor pro firemní akce a svatby v Praze. Od komorního meetingu pro 20 osob po kongres pro 1 100 hostů. Parkování zdarma. Provozuje IN CATERING.",
+    "Premium event venues in Prague for 20–1,100 guests. Baroque halls, courtyards and gardens at Brevnov Monastery. Free parking, in-house catering. Request a tour today.",
   openGraph: {
-    title: "Břevnovský klášter – eventové prostory v Praze",
+    title: "Event Venues Prague – Brevnov Monastery",
     description:
-      "Historické prostory pro 20–1 100 hostů. Konference, gala večery, firemní akce i svatby. Parkování zdarma, catering od IN CATERING.",
-    url: "https://brevnovevents.cz",
+      "Historic Prague venues for 20–1,100 guests. Conferences, gala dinners, corporate events and weddings. Free parking, catering by IN CATERING.",
+    url: "https://brevnovevents.cz/en",
     siteName: "brevnovevents.cz",
-    locale: "cs_CZ",
+    locale: "en_US",
     type: "website",
   },
   alternates: {
-    canonical: "https://brevnovevents.cz",
+    canonical: "https://brevnovevents.cz/en",
     languages: {
       "cs": "https://brevnovevents.cz",
       "en": "https://brevnovevents.cz/en",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default function HomePageEN() {
   return (
     <>
       <Hero />
