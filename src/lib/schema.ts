@@ -81,10 +81,10 @@ export function getVideoObjectSchema(locale: Locale = "cs") {
     description: isEn
       ? "Video tour of event venues at Brevnov Monastery in Prague — Theresian Hall, Sala Terrena, courtyard, and gardens."
       : "Video prohlídka eventových prostor Břevnovského kláštera v Praze — Tereziánský sál, Sala Terrena, nádvoří a zahrady.",
-    thumbnailUrl: "https://i.ytimg.com/vi/ESMihQlQ5LI/maxresdefault.jpg",
+    thumbnailUrl: "https://i.ytimg.com/vi/5Pd6MxRdk9c/maxresdefault.jpg",
     uploadDate: "2024-01-01T09:00:00+01:00",
-    contentUrl: "https://www.youtube.com/watch?v=ESMihQlQ5LI",
-    embedUrl: "https://www.youtube.com/embed/ESMihQlQ5LI",
+    contentUrl: "https://www.youtube.com/watch?v=5Pd6MxRdk9c",
+    embedUrl: "https://www.youtube.com/embed/5Pd6MxRdk9c",
   };
 }
 

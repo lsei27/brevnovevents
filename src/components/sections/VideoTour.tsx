@@ -13,7 +13,7 @@ export async function VideoTour() {
       <div className="mx-auto max-w-4xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">{dict.videoTour.title}</h2>
         <div className="relative mt-12 aspect-video overflow-hidden rounded-2xl">
-          <YouTubeEmbed videoId="ESMihQlQ5LI" title={dict.videoTour.videoTitle} />
+          <YouTubeEmbed videoId="5Pd6MxRdk9c" title={dict.videoTour.videoTitle} />
         </div>
       </div>
     </section>
