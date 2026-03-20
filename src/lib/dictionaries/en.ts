@@ -6,13 +6,13 @@ const en: Dictionary = {
 
   header: {
     nav: [
-      { label: "Venues", href: "/#venues" },
+      { label: "Venues", href: "/en/#venues" },
       { label: "Corporate Events", href: "/en/corporate-events" },
       { label: "Weddings", href: "/en/wedding-venue" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Contact", href: "/en/#contact" },
     ],
     cta: "Schedule a tour",
-    ctaHref: "#contact",
+    ctaHref: "/en/#contact",
     logoAlt: "Brevnov Monastery \u2013 logo",
     operatedBy: "operated by",
     openMenu: "Open menu",
@@ -21,10 +21,10 @@ const en: Dictionary = {
 
   footer: {
     nav: [
-      { label: "Venues", href: "/#venues" },
+      { label: "Venues", href: "/en/#venues" },
       { label: "Corporate Events", href: "/en/corporate-events" },
       { label: "Weddings", href: "/en/wedding-venue" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Contact", href: "/en/#contact" },
     ],
     operatedBy: "Operated by",
     navigation: "Navigation",
