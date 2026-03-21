@@ -46,7 +46,7 @@ export function SocialProof() {
                     {ref.title}
                   </h2>
                   <div className="mt-16 grid items-center gap-12 md:grid-cols-2">
-                    <div className="aspect-[4/3] overflow-hidden rounded-2xl">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                       <Image
                         src={ref.image}
                         alt={ref.alt}
