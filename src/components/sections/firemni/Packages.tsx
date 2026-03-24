@@ -31,7 +31,6 @@ export function Packages() {
 
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect();
     emblaApi.on("select", onSelect);
     return () => {
       emblaApi.off("select", onSelect);

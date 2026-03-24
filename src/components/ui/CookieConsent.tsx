@@ -14,9 +14,10 @@ type ConsentState = {
 };
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- GTM dataLayer and gtag use heterogeneous argument lists
   interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
+    dataLayer: Array<Record<string, unknown> | unknown[]>;
+    gtag: (...args: unknown[]) => void;
   }
 }
 
@@ -25,33 +26,32 @@ export function CookieConsent() {
   const dict = locale === "en" ? en : cs;
   const t = dict.cookieConsent;
 
-  const [showBanner, setShowBanner] = useState(false);
+  const savedConsent = typeof window !== "undefined"
+    ? (() => {
+        try {
+          const raw = localStorage.getItem("cookie_consent");
+          return raw ? (JSON.parse(raw) as ConsentState) : null;
+        } catch {
+          return null;
+        }
+      })()
+    : null;
+
+  const [showBanner, setShowBanner] = useState(!savedConsent);
   const [showSettings, setShowSettings] = useState(false);
 
-  const [analyticsConsent, setAnalyticsConsent] = useState(false);
-  const [marketingConsent, setMarketingConsent] = useState(false);
+  const [analyticsConsent, setAnalyticsConsent] = useState(
+    savedConsent?.analytics_storage === "granted"
+  );
+  const [marketingConsent, setMarketingConsent] = useState(
+    savedConsent?.ad_storage === "granted"
+  );
 
   useEffect(() => {
-    // Check if user already made a choice
-    const savedConsent = localStorage.getItem("cookie_consent");
-    if (!savedConsent) {
-      setShowBanner(true);
-    } else {
-      try {
-        const parsed: ConsentState = JSON.parse(savedConsent);
-        setAnalyticsConsent(parsed.analytics_storage === "granted");
-        setMarketingConsent(parsed.ad_storage === "granted");
-
-        // Push update immediately on load if previously saved
-        if (typeof window.gtag === "function") {
-          window.gtag("consent", "update", parsed);
-        }
-      } catch (e) {
-        console.error("Failed to parse cookie consent", e);
-        setShowBanner(true);
-      }
+    if (savedConsent && typeof window.gtag === "function") {
+      window.gtag("consent", "update", savedConsent);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSave = (state: ConsentState) => {
     localStorage.setItem("cookie_consent", JSON.stringify(state));
