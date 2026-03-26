@@ -24,7 +24,7 @@ export async function SpacesShowcase() {
             {dict.spaces.ctaPrimary}
           </Button>
           <Button
-            href="/downloads/BK_Technicky_rider.pdf"
+            href={dict.spaces.ctaSecondaryHref}
             variant="secondary"
           >
             {dict.spaces.ctaSecondary}

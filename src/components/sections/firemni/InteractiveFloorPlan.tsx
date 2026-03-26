@@ -681,7 +681,7 @@ export function InteractiveFloorPlan() {
   }, [selectedRoom]);
 
   return (
-    <section className="bg-brand-black-alt pb-12 pt-8 md:pb-20 md:pt-12">
+    <section id="planek" className="bg-brand-black-alt pb-12 pt-8 md:pb-20 md:pt-12">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           Interaktivní plánek prostor

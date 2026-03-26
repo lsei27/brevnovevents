@@ -63,7 +63,8 @@ const cs: Dictionary = {
   spaces: {
     title: "Prostory pro každý formát – od komorního meetingu po kongres",
     ctaPrimary: "Všechny prostory",
-    ctaSecondary: "Technický rider",
+    ctaSecondary: "Plánek prostoru",
+    ctaSecondaryHref: "/firemni-eventy#planek",
     items: [
       { image: "/images/prostory/tereziansky-sal-konference.webp", alt: "Tereziánský sál – konferenční sál pro 180 osob v Břevnovském klášteře", title: "Tereziánský sál", capacity: "180 osob divadlo / 100 banket", description: "Barokní sál s freskami. Hlavní prostor pro konference a gala večery." },
       { image: "/images/prostory/sala-terrena-raut.webp", alt: "Sala Terrena – eventový prostor pro rauty a prezentace, kapacita 110 osob", title: "Sala Terrena", capacity: "110 osob recepce / 70 banket", description: "Prostor s přímým vstupem do zahrady. Rauty, prezentace, menší konference." },

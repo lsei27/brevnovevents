@@ -207,6 +207,7 @@ export interface Dictionary {
     title: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    ctaSecondaryHref: string;
     items: SpaceItem[];
   };
 

@@ -72,6 +72,7 @@ const en: Dictionary = {
     title: "Prague event venues for every format \u2013 from boardroom to congress",
     ctaPrimary: "All venues",
     ctaSecondary: "Technical rider",
+    ctaSecondaryHref: "/downloads/BK_Technicky_rider.pdf",
     items: [
       {
         image: "/images/prostory/tereziansky-sal-konference.webp",
