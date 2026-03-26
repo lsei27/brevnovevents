@@ -640,7 +640,7 @@ type Floor = "ground" | "first";
 
 export function InteractiveFloorPlan() {
   const [activeFloor, setActiveFloor] = useState<Floor>("first");
-  const [selectedRoom, setSelectedRoom] = useState<FloorPlanRoom>(DEFAULT_FIRST_FLOOR_ROOM);
+  const [selectedRoom, setSelectedRoom] = useState<FloorPlanRoom | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
   const hasInteracted = useRef(false);
@@ -662,7 +662,7 @@ export function InteractiveFloorPlan() {
   function handleFloorSwitch(floor: Floor) {
     hasInteracted.current = true;
     setActiveFloor(floor);
-    setSelectedRoom(floor === "ground" ? DEFAULT_GROUND_FLOOR_ROOM : DEFAULT_FIRST_FLOOR_ROOM);
+    setSelectedRoom(null);
   }
 
   function handleRoomClick(room: FloorPlanRoom) {
@@ -673,12 +673,14 @@ export function InteractiveFloorPlan() {
   // Auto-scroll to detail panel on mobile when room changes (skip initial mount)
   useEffect(() => {
     if (!hasInteracted.current) return;
-    if (detailRef.current && window.innerWidth < 1024) {
+    if (selectedRoom && detailRef.current && window.innerWidth < 1024) {
       setTimeout(() => {
         detailRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }, 100);
     }
   }, [selectedRoom]);
+
+  const isDetailOpen = selectedRoom !== null;
 
   return (
     <section id="planek" className="scroll-mt-20 bg-brand-black-alt pb-12 pt-8 md:pb-8 md:pt-6">
@@ -718,8 +720,14 @@ export function InteractiveFloorPlan() {
           </div>
         </div>
 
-        {/* Desktop: side-by-side layout / Mobile: stacked */}
-        <div className="mt-4 grid items-stretch gap-4 md:mt-5 lg:grid-cols-[1fr_360px]">
+        {/* Layout: centered plan by default, shifts left + detail on click */}
+        <div
+          className={`mt-4 grid items-stretch gap-4 transition-all duration-500 ease-in-out md:mt-5 ${
+            isDetailOpen
+              ? "lg:grid-cols-[1fr_360px]"
+              : "mx-auto lg:max-w-[640px]"
+          }`}
+        >
           {/* Floor plan with hotspots */}
           <div className="relative mx-auto w-full max-w-3xl lg:max-w-none">
             <Image
@@ -755,7 +763,7 @@ export function InteractiveFloorPlan() {
                 {/* Ring — animated ping only for selected, static glow for others */}
                 <span
                   className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
-                    selectedRoom.id === room.id
+                    selectedRoom?.id === room.id
                       ? "h-6 w-6 animate-ping bg-brand-red/40 md:h-8 md:w-8"
                       : "h-7 w-7 bg-brand-red/15 md:h-9 md:w-9"
                   }`}
@@ -763,7 +771,7 @@ export function InteractiveFloorPlan() {
                 {/* Dot */}
                 <span
                   className={`relative block h-3 w-3 rounded-full border-[1.5px] transition-transform md:h-4 md:w-4 md:border-2 ${
-                    selectedRoom.id === room.id
+                    selectedRoom?.id === room.id
                       ? "scale-125 border-white bg-brand-red"
                       : "border-brand-red/60 bg-brand-red/80 group-hover:scale-110 group-hover:border-white group-hover:bg-brand-red"
                   }`}
@@ -777,12 +785,12 @@ export function InteractiveFloorPlan() {
             })}
           </div>
 
-          {/* Room detail panel — fixed height matching floor plan on desktop */}
-          <div ref={detailRef} className="lg:flex lg:flex-col">
-            <RoomDetail room={selectedRoom} onClose={() => setSelectedRoom(
-              activeFloor === "ground" ? DEFAULT_GROUND_FLOOR_ROOM : DEFAULT_FIRST_FLOOR_ROOM
-            )} />
-          </div>
+          {/* Room detail panel — appears only after hotspot click */}
+          {selectedRoom && (
+            <div ref={detailRef} className="lg:flex lg:flex-col">
+              <RoomDetail room={selectedRoom} onClose={() => setSelectedRoom(null)} />
+            </div>
+          )}
         </div>
       </div>
     </section>
