@@ -643,6 +643,7 @@ export function InteractiveFloorPlan() {
   const [selectedRoom, setSelectedRoom] = useState<FloorPlanRoom>(DEFAULT_FIRST_FLOOR_ROOM);
   const [isMobile, setIsMobile] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
+  const hasInteracted = useRef(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1023px)");
@@ -659,16 +660,19 @@ export function InteractiveFloorPlan() {
       : "/images/planek/planek-1patro.webp";
 
   function handleFloorSwitch(floor: Floor) {
+    hasInteracted.current = true;
     setActiveFloor(floor);
     setSelectedRoom(floor === "ground" ? DEFAULT_GROUND_FLOOR_ROOM : DEFAULT_FIRST_FLOOR_ROOM);
   }
 
   function handleRoomClick(room: FloorPlanRoom) {
+    hasInteracted.current = true;
     setSelectedRoom(room);
   }
 
-  // Auto-scroll to detail panel on mobile when room changes
+  // Auto-scroll to detail panel on mobile when room changes (skip initial mount)
   useEffect(() => {
+    if (!hasInteracted.current) return;
     if (detailRef.current && window.innerWidth < 1024) {
       setTimeout(() => {
         detailRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
