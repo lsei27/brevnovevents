@@ -81,7 +81,7 @@ const groundFloorRooms: FloorPlanRoom[] = [
     id: "chodba-prizemi",
     name: "Chodba – přízemí",
     x: 35.0,
-    y: 22.0,
+    y: 20.0,
     area: "–",
     dimensions: "–",
     capacity: { reception: "–", theatre: "–", school: "–", banquet: "–" },
@@ -637,7 +637,7 @@ export function InteractiveFloorPlan() {
   }, [selectedRoom]);
 
   return (
-    <section className="bg-brand-black-alt py-20 md:py-32">
+    <section className="bg-brand-black-alt py-12 md:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           Interaktivní plánek prostor

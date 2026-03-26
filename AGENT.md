@@ -3,7 +3,7 @@
 Referenční příručka pro AI agenty a vývojáře pracující na projektu **Břevnovský klášter Events** (brevnovevents).
 
 ## 1. Technologický stack
-- **Framework:** Next.js 16.1.7 (App Router)
+- **Framework:** Next.js 16.2.1 (App Router)
 - **Knihovna:** React 19
 - **Stylování:** Tailwind CSS v4 (prostřednictvím PostCSS pluginů)
 - **Jazyk:** TypeScript (strict mode)
@@ -34,7 +34,7 @@ src/
 │   ├── forms/               # InquiryForm.tsx (B2B), WeddingForm.tsx (svatby) – locale-aware
 │   ├── layout/              # Header.tsx (s CS/EN přepínačem), Footer.tsx
 │   ├── sections/            # Sdílené sekce – všechny locale-aware přes dictionary systém
-│   │   ├── firemni/         # Sekce specifické pro /firemni-eventy + /en/corporate-events
+│   │   ├── firemni/         # Sekce specifické pro /firemni-eventy + /en/corporate-events (vč. InteractiveFloorPlan)
 │   │   └── svatba/          # Sekce specifické pro /svatba-v-klastere + /en/wedding-venue
 │   └── ui/                  # Button, ImageCarousel (s lightbox), YouTubeEmbed, CookieConsent
 ├── lib/
@@ -53,6 +53,7 @@ public/
 ├── images/
 │   ├── hero/                # Hero obrázky
 │   ├── prostory/            # Fotky prostor (sály, salonky, nádvoří, pivovar, krypta)
+│   ├── planek/              # Interaktivní plánek – plánky podlaží + fotky místností (35 souborů)
 │   ├── reference/           # Reference / case studies (Speedchain, Evropa 2, Dakar)
 │   └── svatby/              # Svatební fotografie
 ├── downloads/               # PDF ceník + technický rider
@@ -111,6 +112,7 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 - **Responzivita:** Mobile-First. Tabulky bez horizontálního scrollu na mobilu.
 - **Carousel pattern:** Embla Carousel s loop, dots pagination a šipkami pod obsahem. Používáno pro: PricingAnchors, Packages, SocialProof, ImageCarousel (SpacesShowcase, SpacesGallery).
 - **ImageCarousel lightbox:** Klik na obrázek otevře fullscreen overlay s navigací (šipky, Escape, prev/next).
+- **InteractiveFloorPlan:** Klikatelný plánek prostor (přízemí + 1. patro) s hotspoty na místnostech. Desktop: side-by-side layout (plánek vlevo, detail vpravo). Mobile: stacked s auto-scrollem. Detail místnosti: carousel fotek s lightbox, popis, rozměry, kapacitní tabulka. Pouze CS verze. Default místnosti: Sala Terrena (přízemí), Tereziánský sál (1. patro).
 - **Featured badge:** U karty "Nejoblíbenější" je badge jako overlay v pravém horním rohu obrázku (ne v body karty), aby nadpisy karet zůstaly zarovnané.
 - **Hero H1 copy:** Krátké, benefit-driven nadpisy zaměřené na zákazníka (ne popisné SEO texty). Font size `text-5xl` na desktopu.
 
@@ -145,6 +147,13 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 - GA4 automaticky respektuje consent stav — při denied odesílá cookieless pingy, při granted plné měření.
 
 ## 7. Changelog
+
+### 2026-03-26
+- **Interaktivní plánek prostor:** Nová komponenta `InteractiveFloorPlan.tsx` na stránce `/firemni-eventy`. Klikatelné hotspoty na architektonických plánech přízemí a 1. patra s detaily místností (fotky v carousel + lightbox, kapacity, rozměry, popis). Přepínač podlaží, side-by-side layout na desktopu, stacked na mobilu. 33 fotografií místností + 2 čisté plánky podlaží v `public/images/planek/`. Pouze CS verze. Zmenšený padding (`py-12 md:py-20`) pro plynulejší přechod od sekce Packages.
+- **Fix Script placement v layout.tsx:** `<Script>` komponenty přesunuty z `<head>` do `<body>` (App Router požadavek) — opravuje console warning. GTM/GA4 měření neovlivněno — `beforeInteractive` strategy v body funguje identicky.
+- **Fix CookieConsent hydration mismatch:** Čtení `localStorage` přesunuto z render fáze do `useEffect` s `mounted` guardem — opravuje React hydration error. Consent Mode update zachován.
+- **Next.js upgrade:** Aktualizace z 16.1.7 na 16.2.1.
+- **Ověřeno:** robots.txt, llms.txt, sitemap.ts nevyžadují změny (plánek je součást existující stránky). GTM/GA4 tracking neovlivněn — InteractiveFloorPlan neobsahuje žádný tracking kód.
 
 ### 2026-03-20
 - **Kompletní anglická lokalizace webu:** Subpath i18n routing (`/en/*`), dictionary systém (CS + EN), middleware locale detection, všech 40+ komponent locale-aware.
