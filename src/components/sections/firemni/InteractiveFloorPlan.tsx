@@ -557,16 +557,6 @@ function RoomDetail({
       <div className="overflow-hidden rounded-2xl border border-brand-gray-dark/30 bg-brand-black-alt">
         <div className="flex items-center justify-between border-b border-brand-gray-dark/20 px-5 py-3 md:px-6 md:py-4">
           <h3 className="text-lg font-bold md:text-xl">{room.name}</h3>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Zavřít detail"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
         </div>
         <div className="p-5 md:p-6">
           <RoomCarousel images={room.images} roomName={room.name} onImageClick={onImageClick} />
@@ -623,9 +613,8 @@ type Floor = "ground" | "first";
 
 export function InteractiveFloorPlan() {
   const [activeFloor, setActiveFloor] = useState<Floor>("first");
-  const [selectedRoom, setSelectedRoom] = useState<FloorPlanRoom | null>(null);
+  const [selectedRoom, setSelectedRoom] = useState<FloorPlanRoom>(DEFAULT_FIRST_FLOOR_ROOM);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
   const [isChangingFloor, setIsChangingFloor] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
@@ -645,43 +634,21 @@ export function InteractiveFloorPlan() {
       ? "/images/planek/mapa_BK-new_2.webp"
       : "/images/planek/mapa_BK-new_1.webp";
 
-  function handleCloseDetail() {
-    setIsClosing(true);
-    setTimeout(() => {
-      setSelectedRoom(null);
-      setIsClosing(false);
-    }, 300); // Matches the 0.3s duration of genie-out animation
-  }
-
   function handleFloorSwitch(floor: Floor) {
     if (activeFloor === floor || isChangingFloor) return;
     hasInteracted.current = true;
 
-    const performMapSwitch = () => {
-      setIsChangingFloor(true);
-      setTimeout(() => {
-        setActiveFloor(floor);
-        setIsChangingFloor(false);
-      }, 300);
-    };
-
-    if (selectedRoom) {
-      setIsClosing(true);
-      setTimeout(() => {
-        setSelectedRoom(null);
-        setIsClosing(false);
-        performMapSwitch();
-      }, 300);
-    } else {
-      performMapSwitch();
-    }
+    const newDefaultRoom = floor === "ground" ? DEFAULT_GROUND_FLOOR_ROOM : DEFAULT_FIRST_FLOOR_ROOM;
+    setIsChangingFloor(true);
+    setTimeout(() => {
+      setActiveFloor(floor);
+      setSelectedRoom(newDefaultRoom);
+      setIsChangingFloor(false);
+    }, 300);
   }
 
   function handleRoomClick(room: FloorPlanRoom) {
     hasInteracted.current = true;
-    // If opening a new room while another is open, just switch instantly
-    // (or optionally close and reopen - but instant switch keeps it snappy)
-    if (isClosing) setIsClosing(false);
     setSelectedRoom(room);
   }
 
@@ -695,7 +662,6 @@ export function InteractiveFloorPlan() {
     }
   }, [selectedRoom]);
 
-  const isDetailOpen = selectedRoom !== null;
 
   return (
     <section id="planek" className="scroll-mt-20 bg-brand-black-alt pb-12 pt-8 md:pb-8 md:pt-6">
@@ -737,11 +703,7 @@ export function InteractiveFloorPlan() {
 
         {/* Layout: centered plan by default, shifts left + detail on click */}
         <div
-          className={`mt-4 grid items-start gap-4 transition-all duration-500 ease-in-out md:mt-5 ${
-            isDetailOpen
-              ? "lg:grid-cols-[1fr_360px]"
-              : "mx-auto lg:max-w-[640px]"
-          }`}
+          className="mt-4 grid items-start gap-4 transition-all duration-500 ease-in-out md:mt-5 lg:grid-cols-[1fr_360px]"
         >
           {/* Floor plan with hotspots */}
           <div
@@ -807,26 +769,20 @@ export function InteractiveFloorPlan() {
             })}
           </div>
 
-          {/* Room detail panel — appears only after hotspot click with genie animation */}
-          {(selectedRoom || isClosing) && selectedRoom && (
-            <div
-              ref={detailRef}
-              className={`lg:flex lg:flex-col ${
-                isClosing
-                  ? "animate-[genie-out_0.3s_ease-in_forwards]"
-                  : "animate-[genie_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]"
-              }`}
-              style={{
-                transformOrigin: "left center", // scale from left for desktop (from map to card)
-              }}
-            >
-              <RoomDetail
-                room={selectedRoom}
-                onClose={handleCloseDetail}
-                onImageClick={(i) => setLightboxIndex(i)}
-              />
-            </div>
-          )}
+          {/* Room detail panel — always visible */}
+          <div
+            ref={detailRef}
+            className="animate-[genie_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards] lg:flex lg:flex-col"
+            style={{
+              transformOrigin: "left center", // scale from left for desktop (from map to card)
+            }}
+          >
+            <RoomDetail
+              room={selectedRoom}
+              onClose={() => {}}
+              onImageClick={(i) => setLightboxIndex(i)}
+            />
+          </div>
         </div>
       </div>
 
