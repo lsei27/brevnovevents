@@ -57,7 +57,7 @@ export async function Upsell() {
                 </div>
                 <div className="ml-4 whitespace-nowrap text-right">
                   <span className="text-sm font-bold text-brand-red">{item.price}</span>
-                  <span className="ml-1 text-xs text-brand-white/50">{u.vatNote}</span>
+                  <span className="ml-1 text-xs font-bold text-brand-red">{u.vatNote}</span>
                 </div>
               </li>
             ))}
