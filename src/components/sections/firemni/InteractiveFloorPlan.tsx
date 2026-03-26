@@ -681,17 +681,17 @@ export function InteractiveFloorPlan() {
   }, [selectedRoom]);
 
   return (
-    <section id="planek" className="bg-brand-black-alt pb-12 pt-8 md:pb-12 md:pt-8">
+    <section id="planek" className="scroll-mt-20 bg-brand-black-alt pb-12 pt-8 md:pb-8 md:pt-6">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-bold md:text-4xl">
+        <h2 className="text-center text-3xl font-bold">
           Interaktivní plánek prostor
         </h2>
-        <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-brand-white/70 md:mt-3">
+        <p className="mx-auto mt-1 max-w-2xl text-center text-sm text-brand-white/70 md:mt-2">
           Klikněte na bod v plánku pro zobrazení detailu místnosti s fotografiemi a kapacitami.
         </p>
 
         {/* Floor switcher */}
-        <div className="mt-6 flex justify-center md:mt-5">
+        <div className="mt-4 flex justify-center md:mt-3">
           <div className="inline-flex overflow-hidden rounded-full border border-brand-gray-dark/30 bg-brand-black">
             <button
               type="button"
@@ -719,7 +719,7 @@ export function InteractiveFloorPlan() {
         </div>
 
         {/* Desktop: side-by-side layout / Mobile: stacked */}
-        <div className="mt-6 grid items-stretch gap-6 md:mt-5 lg:grid-cols-[1fr_400px]">
+        <div className="mt-4 grid items-stretch gap-4 md:mt-3 lg:grid-cols-[1fr_380px]">
           {/* Floor plan with hotspots */}
           <div className="relative mx-auto w-full max-w-3xl lg:max-w-none">
             <Image
