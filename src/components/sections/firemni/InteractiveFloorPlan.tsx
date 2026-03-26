@@ -719,9 +719,8 @@ export function InteractiveFloorPlan() {
         </div>
 
         {/* Layout: centered plan by default, shifts left + detail on click */}
-        {/* Layout: centered plan by default, shifts left + detail on click */}
         <div
-          className={`relative mt-4 grid items-stretch gap-4 transition-all duration-500 ease-in-out md:mt-5 ${
+          className={`mt-4 grid items-stretch gap-4 transition-all duration-500 ease-in-out md:mt-5 ${
             isDetailOpen
               ? "lg:grid-cols-[1fr_360px]"
               : "mx-auto lg:max-w-[640px]"
@@ -792,9 +791,9 @@ export function InteractiveFloorPlan() {
                 isClosing
                   ? "animate-[genie-out_0.3s_ease-in_forwards]"
                   : "animate-[genie_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]"
-              } absolute inset-0 z-30 overflow-y-auto bg-brand-black/90 backdrop-blur-md lg:relative lg:inset-auto lg:z-0 lg:overflow-visible lg:bg-transparent lg:backdrop-blur-none`}
+              }`}
               style={{
-                transformOrigin: isMobile ? "center center" : "left center",
+                transformOrigin: "left center", // scale from left for desktop (from map to card)
               }}
             >
               <RoomDetail
