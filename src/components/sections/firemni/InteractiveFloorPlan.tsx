@@ -489,7 +489,7 @@ function RoomCarousel({
           type="button"
           onClick={scrollPrev}
           aria-label="Předchozí fotka"
-          className="rounded-full bg-white/15 p-2 transition-colors hover:bg-white/30"
+          className="shrink-0 aspect-square rounded-full bg-white/15 p-2 transition-colors hover:bg-white/30"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -516,7 +516,7 @@ function RoomCarousel({
           type="button"
           onClick={scrollNext}
           aria-label="Další fotka"
-          className="rounded-full bg-white/15 p-2 transition-colors hover:bg-white/30"
+          className="shrink-0 aspect-square rounded-full bg-white/15 p-2 transition-colors hover:bg-white/30"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -563,7 +563,7 @@ function RoomDetail({ room, onClose }: { room: FloorPlanRoom; onClose: () => voi
             type="button"
             onClick={onClose}
             aria-label="Zavřít detail"
-            className="rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
+            className="shrink-0 aspect-square rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
