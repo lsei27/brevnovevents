@@ -159,6 +159,7 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 - **Ověřeno:** robots.txt, llms.txt, sitemap.ts nevyžadují změny (plánek je součást existující stránky). GTM/GA4 tracking neovlivněn — InteractiveFloorPlan neobsahuje žádný tracking kód.
 - **Odstranění SpacesGallery z CS stránky:** SpacesGallery odstraněna z `/firemni-eventy` — InteractiveFloorPlan plně nahrazuje její funkci (fotky + kapacity + popisy). EN stránka (`/en/corporate-events`) SpacesGallery ponechává.
 - **Aktualizace technického rideru:** PDF `BK_Technicky_rider.pdf` nahrazen novým souborem (`BK_Technicky_rider_w.pdf`). Stahuje se z HP (Hero, SpacesShowcase) i z `/firemni-eventy` (CapacityTables).
+- **Zmenšené mezery FAQ → Location:** Redukovaný padding mezi FAQ sekcí a nadpisem „Kde nás najdete" (FAQFiremni/FAQSvatba pb: 20→10/32→16, Location pt: 20→10/32→16, Location vnitřní mt: 16→10). Platí pro oba jazyky i obě stránky (firemní i svatby).
 
 ### 2026-03-20
 - **Kompletní anglická lokalizace webu:** Subpath i18n routing (`/en/*`), dictionary systém (CS + EN), middleware locale detection, všech 40+ komponent locale-aware.

@@ -8,13 +8,13 @@ export async function Location() {
   const dict = await getDictionary(locale);
 
   return (
-    <section className="bg-brand-black-alt py-20 md:py-32">
+    <section className="bg-brand-black-alt pt-10 pb-20 md:pt-16 md:pb-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           {dict.location.title}
         </h2>
 
-        <div className="mt-16 grid gap-12 md:grid-cols-2">
+        <div className="mt-10 grid gap-12 md:grid-cols-2">
           {/* Map */}
           <div className="overflow-hidden rounded-2xl">
             <iframe

@@ -8,7 +8,7 @@ export async function FAQSvatba() {
   const dict = await getDictionary(locale);
 
   return (
-    <section className="bg-brand-black-alt py-20 md:py-32">
+    <section className="bg-brand-black-alt pt-20 pb-10 md:pt-32 md:pb-16">
       <div className="mx-auto max-w-3xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           {dict.faqSvatba.title}
