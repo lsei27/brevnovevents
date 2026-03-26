@@ -19,6 +19,9 @@ interface FloorPlanRoom {
   /** Hotspot position as % of image */
   x: number;
   y: number;
+  /** Optional mobile-specific position to avoid overlapping text labels */
+  mobileX?: number;
+  mobileY?: number;
   area: string;
   dimensions: string;
   capacity: RoomCapacity;
@@ -32,6 +35,8 @@ const groundFloorRooms: FloorPlanRoom[] = [
     name: "Sala Terrena",
     x: 67.1,
     y: 49.9,
+    mobileX: 67.1,
+    mobileY: 56,
     area: "100 m²",
     dimensions: "16,5 × 6,0 m",
     capacity: { reception: "110", theatre: "100", school: "70", banquet: "70" },
@@ -48,6 +53,8 @@ const groundFloorRooms: FloorPlanRoom[] = [
     name: "Zlatý salonek",
     x: 66.9,
     y: 25.7,
+    mobileX: 66.9,
+    mobileY: 30,
     area: "50 m²",
     dimensions: "7,3 × 6,8 m",
     capacity: { reception: "40", theatre: "50", school: "30", banquet: "30" },
@@ -59,6 +66,8 @@ const groundFloorRooms: FloorPlanRoom[] = [
     name: "Modrý salonek",
     x: 67.3,
     y: 11.7,
+    mobileX: 67.3,
+    mobileY: 7,
     area: "40 m²",
     dimensions: "5,8 × 6,8 m",
     capacity: { reception: "20", theatre: "30", school: "20", banquet: "20" },
@@ -70,6 +79,8 @@ const groundFloorRooms: FloorPlanRoom[] = [
     name: "Kašna",
     x: 46.7,
     y: 11.8,
+    mobileX: 42,
+    mobileY: 8,
     area: "–",
     dimensions: "–",
     capacity: { reception: "–", theatre: "–", school: "–", banquet: "–" },
@@ -82,6 +93,8 @@ const groundFloorRooms: FloorPlanRoom[] = [
     name: "Chodba – přízemí",
     x: 35.0,
     y: 20.0,
+    mobileX: 28,
+    mobileY: 24,
     area: "–",
     dimensions: "–",
     capacity: { reception: "–", theatre: "–", school: "–", banquet: "–" },
@@ -94,6 +107,8 @@ const groundFloorRooms: FloorPlanRoom[] = [
     name: "Benediktinská vinárna",
     x: 34.3,
     y: 83.7,
+    mobileX: 40,
+    mobileY: 87,
     area: "105 m²",
     dimensions: "17,2 × 6,0 m",
     capacity: { reception: "80", theatre: "–", school: "–", banquet: "–" },
@@ -129,6 +144,8 @@ const firstFloorRooms: FloorPlanRoom[] = [
     name: "Tereziánský sál",
     x: 64.0,
     y: 49.8,
+    mobileX: 64.0,
+    mobileY: 55,
     area: "200 m²",
     dimensions: "11,5 × 17,5 m",
     capacity: { reception: "150", theatre: "180", school: "100", banquet: "100" },
@@ -145,6 +162,8 @@ const firstFloorRooms: FloorPlanRoom[] = [
     name: "Opatská jídelna",
     x: 26.7,
     y: 80.8,
+    mobileX: 26.7,
+    mobileY: 85,
     area: "90 m²",
     dimensions: "7,0 × 13,0 m",
     capacity: { reception: "80", theatre: "80", school: "50", banquet: "50" },
@@ -157,6 +176,8 @@ const firstFloorRooms: FloorPlanRoom[] = [
     name: "Přijímací salonek",
     x: 46.1,
     y: 81.1,
+    mobileX: 46.1,
+    mobileY: 85,
     area: "60 m²",
     dimensions: "7,0 × 8,6 m",
     capacity: { reception: "40", theatre: "40", school: "30", banquet: "30" },
@@ -169,6 +190,8 @@ const firstFloorRooms: FloorPlanRoom[] = [
     name: "Pompejský salonek",
     x: 59.7,
     y: 81.2,
+    mobileX: 59.7,
+    mobileY: 85,
     area: "40 m²",
     dimensions: "6,3 × 6,8 m",
     capacity: { reception: "30", theatre: "30", school: "20", banquet: "20" },
@@ -181,6 +204,8 @@ const firstFloorRooms: FloorPlanRoom[] = [
     name: "Nádvoří",
     x: 34.4,
     y: 46.0,
+    mobileX: 34.4,
+    mobileY: 50,
     area: "525 m²",
     dimensions: "21,0 × 25,0 m",
     capacity: { reception: "300", theatre: "–", school: "–", banquet: "–" },
@@ -199,6 +224,8 @@ const firstFloorRooms: FloorPlanRoom[] = [
     name: "Chodba – 1. patro",
     x: 12.2,
     y: 34.0,
+    mobileX: 8,
+    mobileY: 40,
     area: "–",
     dimensions: "–",
     capacity: { reception: "–", theatre: "–", school: "–", banquet: "–" },
@@ -610,7 +637,16 @@ type Floor = "ground" | "first";
 export function InteractiveFloorPlan() {
   const [activeFloor, setActiveFloor] = useState<Floor>("first");
   const [selectedRoom, setSelectedRoom] = useState<FloorPlanRoom>(DEFAULT_FIRST_FLOOR_ROOM);
+  const [isMobile, setIsMobile] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   const rooms = activeFloor === "ground" ? groundFloorRooms : firstFloorRooms;
   const floorImage =
@@ -637,7 +673,7 @@ export function InteractiveFloorPlan() {
   }, [selectedRoom]);
 
   return (
-    <section className="bg-brand-black-alt py-12 md:py-20">
+    <section className="bg-brand-black-alt pb-12 pt-8 md:pb-20 md:pt-12">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           Interaktivní plánek prostor
@@ -692,7 +728,10 @@ export function InteractiveFloorPlan() {
             />
 
             {/* Hotspots */}
-            {rooms.map((room) => (
+            {rooms.map((room) => {
+              const hotX = isMobile && room.mobileX != null ? room.mobileX : room.x;
+              const hotY = isMobile && room.mobileY != null ? room.mobileY : room.y;
+              return (
               <button
                 key={room.id}
                 type="button"
@@ -700,8 +739,8 @@ export function InteractiveFloorPlan() {
                 aria-label={`Zobrazit detail: ${room.name}`}
                 className="group absolute -m-2 p-2 md:-m-1 md:p-1"
                 style={{
-                  left: `${room.x}%`,
-                  top: `${room.y}%`,
+                  left: `${hotX}%`,
+                  top: `${hotY}%`,
                   transform: "translate(-50%, -50%)",
                 }}
               >
@@ -726,7 +765,8 @@ export function InteractiveFloorPlan() {
                   {room.name}
                 </span>
               </button>
-            ))}
+              );
+            })}
           </div>
 
           {/* Room detail panel — fixed height matching floor plan on desktop */}

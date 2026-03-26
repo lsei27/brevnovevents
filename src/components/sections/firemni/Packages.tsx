@@ -38,7 +38,7 @@ export function Packages() {
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="bg-brand-black-alt py-20 md:py-32">
+    <section className="bg-brand-black-alt pb-10 pt-20 md:pb-16 md:pt-32">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-center text-3xl font-bold md:text-4xl">
           {d.title}

@@ -10,6 +10,7 @@ import { CapacityTables } from "@/components/sections/firemni/CapacityTables";
 
 import { SmallerEvents } from "@/components/sections/firemni/SmallerEvents";
 import { InteractiveFloorPlan } from "@/components/sections/firemni/InteractiveFloorPlan";
+import { EventBanner } from "@/components/sections/firemni/EventBanner";
 import { PriceList } from "@/components/sections/firemni/PriceList";
 import { Upsell } from "@/components/sections/firemni/Upsell";
 import { ProcessExpanded } from "@/components/sections/firemni/ProcessExpanded";
@@ -58,6 +59,7 @@ export default function FiremniEventyPage() {
       <InteractiveFloorPlan />
       <CapacityTables />
       <SmallerEvents />
+      <EventBanner />
       <PriceList />
       <Upsell />
       <ProcessExpanded />

@@ -149,7 +149,10 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 ## 7. Changelog
 
 ### 2026-03-26
-- **Interaktivní plánek prostor:** Nová komponenta `InteractiveFloorPlan.tsx` na stránce `/firemni-eventy`. Klikatelné hotspoty na architektonických plánech přízemí a 1. patra s detaily místností (fotky v carousel + lightbox, kapacity, rozměry, popis). Přepínač podlaží, side-by-side layout na desktopu, stacked na mobilu. 33 fotografií místností + 2 čisté plánky podlaží v `public/images/planek/`. Pouze CS verze. Zmenšený padding (`py-12 md:py-20`) pro plynulejší přechod od sekce Packages.
+- **Interaktivní plánek prostor:** Nová komponenta `InteractiveFloorPlan.tsx` na stránce `/firemni-eventy`. Klikatelné hotspoty na architektonických plánech přízemí a 1. patra s detaily místností (fotky v carousel + lightbox, kapacity, rozměry, popis). Přepínač podlaží, side-by-side layout na desktopu, stacked na mobilu. 33 fotografií místností + 2 čisté plánky podlaží v `public/images/planek/`. Pouze CS verze.
+- **Mobilní hotspot pozice:** Přidány `mobileX`/`mobileY` souřadnice pro hotspoty v InteractiveFloorPlan — na mobilu (<1024px) se body posouvají mimo textové popisky v obrázku plánku, aby nepřekrývaly názvy místností. Desktop pozice zůstávají beze změny.
+- **EventBanner:** Nový vizuální pruh (`EventBanner.tsx`) mezi sekcí SmallerEvents a PriceList. Fullwidth obrázek nádvoří s overlay textem zaměřeným na firemní cílovku ("Prostory, které dodají vašemu eventu noblesy a prestiže"). Obrázek v `public/images/firemni/nadvori-banner.webp`.
+- **Zmenšené mezery:** Redukovaný padding mezi Packages a InteractiveFloorPlan (Packages pb: 20→10/32→16, InteractiveFloorPlan pt: 12→8/20→12) pro plynulejší přechod.
 - **Fix Script placement v layout.tsx:** `<Script>` komponenty přesunuty z `<head>` do `<body>` (App Router požadavek) — opravuje console warning. GTM/GA4 měření neovlivněno — `beforeInteractive` strategy v body funguje identicky.
 - **Fix CookieConsent hydration mismatch:** Čtení `localStorage` přesunuto z render fáze do `useEffect` s `mounted` guardem — opravuje React hydration error. Consent Mode update zachován.
 - **Next.js upgrade:** Aktualizace z 16.1.7 na 16.2.1.
