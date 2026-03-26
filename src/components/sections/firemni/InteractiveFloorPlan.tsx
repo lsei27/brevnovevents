@@ -728,7 +728,7 @@ export function InteractiveFloorPlan() {
 
         {/* Layout: centered plan by default, shifts left + detail on click */}
         <div
-          className={`mt-4 grid items-stretch gap-4 transition-all duration-500 ease-in-out md:mt-5 ${
+          className={`mt-4 grid items-start gap-4 transition-all duration-500 ease-in-out md:mt-5 ${
             isDetailOpen
               ? "lg:grid-cols-[1fr_360px]"
               : "mx-auto lg:max-w-[640px]"
