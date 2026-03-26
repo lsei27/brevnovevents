@@ -203,32 +203,32 @@ export function ImageCarousel({ slides }: ImageCarouselProps) {
 
           {/* Image + info */}
           <div
-            className="flex max-h-[90vh] max-w-5xl flex-col items-center px-16"
+            className="flex h-full max-h-[96vh] w-full max-w-[96vw] flex-col items-center px-4 md:px-12"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg md:aspect-[16/9]">
+            <div className="relative w-full flex-1 overflow-hidden">
               <Image
                 src={slides[lightboxIndex].image}
                 alt={slides[lightboxIndex].alt}
                 fill
-                sizes="(max-width: 1280px) 90vw, 1200px"
+                sizes="95vw"
                 className="object-contain"
                 priority
               />
             </div>
-            <div className="mt-4 text-center">
-              <h3 className="text-xl font-bold">
+            <div className="mt-6 shrink-0 text-center pb-4">
+              <h3 className="text-xl font-bold md:text-2xl">
                 {slides[lightboxIndex].title}
               </h3>
               {slides[lightboxIndex].capacity && (
-                <p className="mt-1 text-sm text-brand-red">
+                <p className="mt-1 text-base font-semibold text-brand-red">
                   {slides[lightboxIndex].capacity}
                 </p>
               )}
-              <p className="mt-1 text-sm text-brand-white/60">
+              <p className="mt-2 max-w-2xl text-sm text-brand-white/80 md:text-base">
                 {slides[lightboxIndex].description}
               </p>
-              <p className="mt-2 text-xs text-brand-white/40">
+              <p className="mt-3 text-xs text-brand-white/40">
                 {lightboxIndex + 1} / {slides.length}
               </p>
             </div>

@@ -32,7 +32,7 @@ export async function Hero() {
             <Button href={locale === "en" ? "#contact" : "#kontakt"} variant="primary">
               {dict.hero.cta}
             </Button>
-            <Button href="/downloads/technicky-rider-brevnovsky-klaster.pdf" variant="secondary">
+            <Button href="/downloads/BK_Technicky_rider.pdf" variant="secondary">
               {dict.hero.ctaSecondary}
             </Button>
           </div>

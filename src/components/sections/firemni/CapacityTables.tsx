@@ -77,7 +77,7 @@ export async function CapacityTables() {
         </div>
         <div className="mt-12 text-center">
           <Button
-            href="/downloads/technicky-rider-brevnovsky-klaster.pdf"
+            href="/downloads/BK_Technicky_rider.pdf"
             variant="secondary"
           >
             {ct.downloadRider}
