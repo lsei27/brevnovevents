@@ -26,32 +26,33 @@ export function CookieConsent() {
   const dict = locale === "en" ? en : cs;
   const t = dict.cookieConsent;
 
-  const savedConsent = typeof window !== "undefined"
-    ? (() => {
-        try {
-          const raw = localStorage.getItem("cookie_consent");
-          return raw ? (JSON.parse(raw) as ConsentState) : null;
-        } catch {
-          return null;
-        }
-      })()
-    : null;
-
-  const [showBanner, setShowBanner] = useState(!savedConsent);
+  const [mounted, setMounted] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [analyticsConsent, setAnalyticsConsent] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
 
-  const [analyticsConsent, setAnalyticsConsent] = useState(
-    savedConsent?.analytics_storage === "granted"
-  );
-  const [marketingConsent, setMarketingConsent] = useState(
-    savedConsent?.ad_storage === "granted"
-  );
-
+  // Read localStorage only on the client after mount to avoid hydration mismatch
   useEffect(() => {
-    if (savedConsent && typeof window.gtag === "function") {
-      window.gtag("consent", "update", savedConsent);
+    let saved: ConsentState | null = null;
+    try {
+      const raw = localStorage.getItem("cookie_consent");
+      saved = raw ? (JSON.parse(raw) as ConsentState) : null;
+    } catch {
+      // ignore
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    if (saved) {
+      setAnalyticsConsent(saved.analytics_storage === "granted");
+      setMarketingConsent(saved.ad_storage === "granted");
+      if (typeof window.gtag === "function") {
+        window.gtag("consent", "update", saved);
+      }
+    } else {
+      setShowBanner(true);
+    }
+    setMounted(true);
+  }, []);
 
   const handleSave = (state: ConsentState) => {
     localStorage.setItem("cookie_consent", JSON.stringify(state));
@@ -95,6 +96,9 @@ export function CookieConsent() {
       analytics_storage: analyticsConsent ? "granted" : "denied",
     });
   };
+
+  // Don't render until client-side state is resolved to prevent hydration mismatch
+  if (!mounted) return null;
 
   return (
     <>

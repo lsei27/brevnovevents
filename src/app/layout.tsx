@@ -51,7 +51,8 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={satoshi.variable}>
-      <head>
+      <head />
+      <body className="font-sans antialiased" suppressHydrationWarning>
         {/* Google Consent Mode v2 — must run before any Google scripts */}
         <Script
           id="google-consent-init"
@@ -77,8 +78,7 @@ export default async function RootLayout({
             `,
           }}
         />
-        {/* GA4 is now loaded via Google Tag Manager (GTM-PSPHVDMV) */}
-        {/* Google Tag Manager — for future marketing tags */}
+        {/* Google Tag Manager */}
         <Script
           id="google-tag-manager"
           strategy="afterInteractive"
@@ -90,8 +90,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PSPHVDMV');`,
           }}
         />
-      </head>
-      <body className="font-sans antialiased" suppressHydrationWarning>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
