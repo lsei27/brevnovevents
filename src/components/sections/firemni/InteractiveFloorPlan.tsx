@@ -785,9 +785,15 @@ export function InteractiveFloorPlan() {
             })}
           </div>
 
-          {/* Room detail panel — appears only after hotspot click */}
+          {/* Room detail panel — appears only after hotspot click with genie animation */}
           {selectedRoom && (
-            <div ref={detailRef} className="lg:flex lg:flex-col">
+            <div
+              ref={detailRef}
+              className="lg:flex lg:flex-col animate-[genie_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]"
+              style={{
+                transformOrigin: "left center", // scale from left for desktop (from map to card)
+              }}
+            >
               <RoomDetail room={selectedRoom} onClose={() => setSelectedRoom(null)} />
             </div>
           )}
