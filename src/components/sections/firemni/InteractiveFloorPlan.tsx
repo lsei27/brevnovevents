@@ -682,7 +682,7 @@ export function InteractiveFloorPlan() {
 
   return (
     <section id="planek" className="scroll-mt-20 bg-brand-black-alt pb-12 pt-8 md:pb-8 md:pt-6">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <h2 className="text-center text-3xl font-bold">
           Interaktivní plánek prostor
         </h2>
@@ -719,7 +719,7 @@ export function InteractiveFloorPlan() {
         </div>
 
         {/* Desktop: side-by-side layout / Mobile: stacked */}
-        <div className="mt-4 grid items-stretch gap-4 md:mt-3 lg:grid-cols-[1fr_380px]">
+        <div className="mt-4 grid items-stretch gap-4 md:mt-5 lg:grid-cols-[1fr_360px]">
           {/* Floor plan with hotspots */}
           <div className="relative mx-auto w-full max-w-3xl lg:max-w-none">
             <Image
