@@ -7,7 +7,7 @@ import { FiremniHero } from "@/components/sections/firemni/FiremniHero";
 import { USPExpanded } from "@/components/sections/firemni/USPExpanded";
 import { Packages } from "@/components/sections/firemni/Packages";
 import { CapacityTables } from "@/components/sections/firemni/CapacityTables";
-import { SpacesGallery } from "@/components/sections/firemni/SpacesGallery";
+
 import { SmallerEvents } from "@/components/sections/firemni/SmallerEvents";
 import { InteractiveFloorPlan } from "@/components/sections/firemni/InteractiveFloorPlan";
 import { PriceList } from "@/components/sections/firemni/PriceList";
@@ -57,7 +57,6 @@ export default function FiremniEventyPage() {
       <Packages />
       <InteractiveFloorPlan />
       <CapacityTables />
-      <SpacesGallery />
       <SmallerEvents />
       <PriceList />
       <Upsell />

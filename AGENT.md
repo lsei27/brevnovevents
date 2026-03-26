@@ -23,7 +23,7 @@ src/
 │   ├── globals.css          # Tailwind + CSS proměnné
 │   ├── middleware.ts         # Locale detection → x-locale header
 │   ├── gdpr/page.tsx        # GDPR stránka (CS)
-│   ├── firemni-eventy/page.tsx   # B2B stránka (CS, 13 sekcí)
+│   ├── firemni-eventy/page.tsx   # B2B stránka (CS, 13 sekcí, bez SpacesGallery — nahrazena InteractiveFloorPlan)
 │   ├── svatba-v-klastere/page.tsx # Svatby (CS, 9 sekcí)
 │   └── en/                  # Anglické stránky
 │       ├── page.tsx             # Homepage EN
@@ -154,6 +154,8 @@ Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Veče
 - **Fix CookieConsent hydration mismatch:** Čtení `localStorage` přesunuto z render fáze do `useEffect` s `mounted` guardem — opravuje React hydration error. Consent Mode update zachován.
 - **Next.js upgrade:** Aktualizace z 16.1.7 na 16.2.1.
 - **Ověřeno:** robots.txt, llms.txt, sitemap.ts nevyžadují změny (plánek je součást existující stránky). GTM/GA4 tracking neovlivněn — InteractiveFloorPlan neobsahuje žádný tracking kód.
+- **Odstranění SpacesGallery z CS stránky:** SpacesGallery odstraněna z `/firemni-eventy` — InteractiveFloorPlan plně nahrazuje její funkci (fotky + kapacity + popisy). EN stránka (`/en/corporate-events`) SpacesGallery ponechává.
+- **Aktualizace technického rideru:** PDF `BK_Technicky_rider.pdf` nahrazen novým souborem (`BK_Technicky_rider_w.pdf`). Stahuje se z HP (Hero, SpacesShowcase) i z `/firemni-eventy` (CapacityTables).
 
 ### 2026-03-20
 - **Kompletní anglická lokalizace webu:** Subpath i18n routing (`/en/*`), dictionary systém (CS + EN), middleware locale detection, všech 40+ komponent locale-aware.
