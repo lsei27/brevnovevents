@@ -756,8 +756,8 @@ export function InteractiveFloorPlan() {
                 <span
                   className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
                     selectedRoom.id === room.id
-                      ? "h-5 w-5 animate-ping bg-brand-red/40 md:h-7 md:w-7"
-                      : "h-6 w-6 bg-white/20 md:h-8 md:w-8"
+                      ? "h-6 w-6 animate-ping bg-brand-red/40 md:h-8 md:w-8"
+                      : "h-7 w-7 bg-brand-red/15 md:h-9 md:w-9"
                   }`}
                 />
                 {/* Dot */}
