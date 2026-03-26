@@ -642,8 +642,8 @@ export function InteractiveFloorPlan() {
   const rooms = activeFloor === "ground" ? groundFloorRooms : firstFloorRooms;
   const floorImage =
     activeFloor === "ground"
-      ? "/images/planek/planek-prizemi.webp"
-      : "/images/planek/planek-1patro.webp";
+      ? "/images/planek/mapa_BK-new_2.webp"
+      : "/images/planek/mapa_BK-new_1.webp";
 
   function handleCloseDetail() {
     setIsClosing(true);
