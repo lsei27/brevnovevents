@@ -653,10 +653,18 @@ export function InteractiveFloorPlan() {
   }
 
   function handleFloorSwitch(floor: Floor) {
+    if (activeFloor === floor) return;
     hasInteracted.current = true;
-    setActiveFloor(floor);
+
     if (selectedRoom) {
-      handleCloseDetail();
+      setIsClosing(true);
+      setTimeout(() => {
+        setSelectedRoom(null);
+        setIsClosing(false);
+        setActiveFloor(floor); // Switch floor only after the room detail is closed
+      }, 300);
+    } else {
+      setActiveFloor(floor);
     }
   }
 
