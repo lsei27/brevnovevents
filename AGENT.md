@@ -1,185 +1,28 @@
-# Břevnov Events – Agent Context & Architecture Guide
+# Project Summary: Břevnov Events Web
 
-Referenční příručka pro AI agenty a vývojáře pracující na projektu **Břevnovský klášter Events** (brevnovevents).
+## Overview
+A modern, multilingual (CS/EN) landing page for Břevnov Monastery event venues, built with Next.js 15, React, and Vanilla CSS. The site features interactive elements, localization, and SEO optimization.
 
-## 1. Technologický stack
-- **Framework:** Next.js 16.2.1 (App Router)
-- **Knihovna:** React 19
-- **Stylování:** Tailwind CSS v4 (prostřednictvím PostCSS pluginů)
-- **Jazyk:** TypeScript (strict mode)
-- **Validace dat:** Zod v4
-- **Karusel/Slidery:** Embla Carousel (`embla-carousel-react`, `embla-carousel-autoplay`)
-- **Nasazení:** Vercel (auto-deploy z `main` branch)
+## Technology Stack
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Vanilla CSS with custom tokens
+- **Localization**: Custom dictionary-based system (`src/lib/dictionaries`)
+- **Interactive Elements**: Embla Carousel, Framer Motion (implied by animations), Custom SVG Floor Plan
+- **Deployment**: Optimized for performance with `.webp` images and semantic HTML
 
-## 2. Struktura projektu
+## Key Features
+- **Interactive Floor Plan**: Responsive module on `/firemni-eventy` with synchronized floor switching, hotspot pulsing, and persistent room details.
+- **Localization**: Seamless switching between Czech and English.
+- **Dynamic Hero**: Configurable CTAs per language (CS updated, EN remains original).
+- **SEO Ready**: Dynamic `sitemap.ts`, `robots.txt`, and documented `llms.txt`.
 
-```text
-src/
-├── app/
-│   ├── layout.tsx           # Root layout – Satoshi font, Header, Footer, Schema.org JSON-LD, LocaleProvider
-│   ├── page.tsx             # Homepage CS (10 sekcí)
-│   ├── actions.ts           # Server Actions (InquiryForm + WeddingForm), locale-aware odpovědi
-│   ├── sitemap.ts           # Sitemap generátor (CS + EN s hreflang alternates)
-│   ├── globals.css          # Tailwind + CSS proměnné
-│   ├── middleware.ts         # Locale detection → x-locale header
-│   ├── gdpr/page.tsx        # GDPR stránka (CS)
-│   ├── firemni-eventy/page.tsx   # B2B stránka (CS, 13 sekcí, bez SpacesGallery — nahrazena InteractiveFloorPlan)
-│   ├── svatba-v-klastere/page.tsx # Svatby (CS, 9 sekcí)
-│   └── en/                  # Anglické stránky
-│       ├── page.tsx             # Homepage EN
-│       ├── corporate-events/page.tsx  # Corporate events EN
-│       ├── wedding-venue/page.tsx     # Wedding venue EN
-│       └── privacy-policy/page.tsx    # Privacy policy EN
-├── components/
-│   ├── forms/               # InquiryForm.tsx (B2B), WeddingForm.tsx (svatby) – locale-aware
-│   ├── layout/              # Header.tsx (s CS/EN přepínačem), Footer.tsx
-│   ├── sections/            # Sdílené sekce – všechny locale-aware přes dictionary systém
-│   │   ├── firemni/         # Sekce specifické pro /firemni-eventy + /en/corporate-events (vč. InteractiveFloorPlan)
-│   │   └── svatba/          # Sekce specifické pro /svatba-v-klastere + /en/wedding-venue
-│   └── ui/                  # Button, ImageCarousel (s lightbox), YouTubeEmbed, CookieConsent
-├── lib/
-│   ├── dictionaries/        # Jazykový systém
-│   │   ├── types.ts         # TypeScript interface Dictionary
-│   │   ├── cs.ts            # Český dictionary (kompletní)
-│   │   ├── en.ts            # Anglický dictionary (lokalizovaný, ne přeložený)
-│   │   └── index.ts         # getDictionary() async loader
-│   ├── i18n.ts              # Locale typy, routeMap, getAlternatePath()
-│   ├── locale-context.tsx   # useLocale() hook (odvozuje z pathname)
-│   ├── schema.ts            # Schema.org JSON-LD definice (locale-aware)
-│   ├── validation.ts        # Zod schéma pro InquiryForm
-│   └── wedding-validation.ts # Zod schéma pro WeddingForm
-public/
-├── fonts/                   # Satoshi (Light, Regular, Bold, Black)
-├── images/
-│   ├── hero/                # Hero obrázky
-│   ├── prostory/            # Fotky prostor (sály, salonky, nádvoří, pivovar, krypta)
-│   ├── planek/              # Interaktivní plánek – plánky podlaží + fotky místností (35 souborů)
-│   ├── reference/           # Reference / case studies (Speedchain, Evropa 2, Dakar)
-│   └── svatby/              # Svatební fotografie
-├── downloads/               # PDF ceník + technický rider
-├── llms.txt                 # LLM context file (CS + EN)
-└── robots.txt
-```
+## Current Status (as of Mar 26, 2026)
+- **Homepage**: Hero CTA updated (CS: "Plánek prostoru", EN: "Technical rider").
+- **Corporate Events**: Interactive floor plan refined for better UX (always-visible detail, default rooms).
+- **Metadata**: Verified `robots.txt`, `sitemap.xml`, and `llms.txt`.
+- **Performance**: High, using modern image formats and efficient React patterns.
 
-## 3. Klíčové procesy
-
-### 3.1. Internacionalizace (i18n)
-- **Routing:** Subpath – CS na `/` (bez prefixu), EN na `/en/...` s lokalizovanými slugy.
-- **Route mapping:** `/` ↔ `/en`, `/firemni-eventy` ↔ `/en/corporate-events`, `/svatba-v-klastere` ↔ `/en/wedding-venue`, `/gdpr` ↔ `/en/privacy-policy`.
-- **Middleware** (`src/middleware.ts`): Detekuje locale z URL, nastavuje `x-locale` request header.
-- **Dictionary systém** (`src/lib/dictionaries/`): Typované slovníky CS/EN se všemi sekcemi webu. EN není překlad, ale profesionální lokalizace cílená na expaty a zahraniční firmy.
-- **Server components:** Async pattern – `const locale = (await headers()).get("x-locale") || "cs"` → `getDictionary(locale)`.
-- **Client components:** `useLocale()` hook odvozuje locale z `usePathname()` (ne z context, protože root layout se při client-side navigaci nepřerenderuje).
-- **Přepínač jazyků:** `<a>` tag (ne `<Link>`) → full page reload, aby se root layout přerenderoval se správným `<html lang>` a server components.
-- **SEO:** Hreflang (CS ↔ EN + x-default), self-referencing canonical, sitemap s alternates, lokalizované Schema.org.
-- **Klíčová slova EN:** "prague venues", "event venues Prague", "events in prague", "prague events".
-- **Anchor linky:** Locale-aware (`#kontakt` / `#contact`).
-
-### 3.2. Formuláře (Server Actions)
-- Zpracování přes **React Server Actions** (`src/app/actions.ts`), ne API routy.
-- Dva formuláře: `InquiryForm` (B2B) a `WeddingForm` (svatby) s `useActionState`.
-- Server-side + client-side validace přes **Zod**.
-- **Honeypot:** Skryté pole `website` – pokud vyplněno, server předstírá úspěch.
-- **Locale-aware:** Formuláře posílají hidden pole `locale`. Server vrací lokalizované zprávy a potvrzovací emaily.
-
-### 3.3. E-maily a integrace
-- `EMAIL_MODE=webhook` (výchozí) → POST na `WEBHOOK_URL` (n8n/Make). Webhook payload obsahuje pole `locale`.
-- `EMAIL_MODE=direct` → Resend API (`RESEND_API_KEY`, `RESEND_FROM_EMAIL`)
-- Notifikace na `brevnov@incatering.cz` + potvrzovací e-mail klientovi (v jazyce formuláře).
-
-### 3.3. Cenové balíčky
-Ceny jsou kalkulované z PPTX nabídek (složka `Context_project/Nabídky_balíčky/`).
-Dvě kategorie prostor:
-- **Reprezentační prostory · 1. patro** – pronájem od 65 000 Kč (Tereziánský sál)
-- **Klášterní prostory · přízemí** – pronájem od 30 000 Kč (Sala Terrena)
-
-Balíčky zobrazené jako Embla carousel (5 karet):
-| Balíček | Reprez. (100 os.) | Reprez. (200 os.) | Klášt. (100 os.) | Klášt. (200 os.) |
-|---------|-------------------|-------------------|-------------------|-------------------|
-| Konference | 210 000 | 310 000 | 175 000 | 275 000 |
-| Gala večeře | 265 000 | 440 000 | – | – |
-| Firemní večírek | 235 000 | 380 000 | 200 000 | 345 000 |
-
-Doprovodné programy (Upsell sekce): Pivovar od 250 Kč/os, Krypta od 180 Kč/os, Stůl Marie Terezie od 110 000 Kč. 
-Další na vyžádání: Tržiště z královského dvora (od 50 000 Kč), Večer s mnichy (od 50 000 Kč), Domácí zabíjačka (od 20 000 Kč), Koncert barokního kvarteta (od 25 000 Kč), Světelné efekty (od 40 000 Kč), Květinové dekorace (od 20 000 Kč).
-
-## 4. UI / UX
-
-- **Design:** Tmavý premium vzhled. Background `#090909` (brand-black), alternativní sekce `brand-black-alt`.
-- **Barvy:** Firemní = červená (`brand-red`), Svatby = růžová (`brand-pink`, `variant="pink"`).
-- **Typografie:** Font Satoshi (`--font-satoshi`), Light/Regular/Bold/Black.
-- **Hlavička:** Průhledná při načtení (`bg-brand-black/10`), ztmavne při scrollování na 95 %.
-- **Responzivita:** Mobile-First. Tabulky bez horizontálního scrollu na mobilu.
-- **Carousel pattern:** Embla Carousel s loop, dots pagination a šipkami pod obsahem. Používáno pro: PricingAnchors, Packages, SocialProof, ImageCarousel (SpacesShowcase, SpacesGallery).
-- **ImageCarousel lightbox:** Klik na obrázek otevře fullscreen overlay s navigací (šipky, Escape, prev/next).
-- **InteractiveFloorPlan:** Klikatelný plánek prostor (přízemí + 1. patro) s hotspoty na místnostech. Desktop: side-by-side layout (plánek vlevo, detail vpravo). Mobile: stacked s auto-scrollem. Detail místnosti: carousel fotek s lightbox, popis, rozměry, kapacitní tabulka. Pouze CS verze. Default místnosti: Sala Terrena (přízemí), Tereziánský sál (1. patro).
-- **Featured badge:** U karty "Nejoblíbenější" je badge jako overlay v pravém horním rohu obrázku (ne v body karty), aby nadpisy karet zůstaly zarovnané.
-- **Hero H1 copy:** Krátké, benefit-driven nadpisy zaměřené na zákazníka (ne popisné SEO texty). Font size `text-5xl` na desktopu.
-
-## 5. Pravidla pro další vývoj
-
-1. **Server Actions architektura:** Nepřidávat API routy tam, kde stačí Server Actions.
-2. **TypeScript + Tailwind:** Striktní typování propů. Utility třídy přímo v JSX, ne `@apply`.
-3. **Validace:** Při změně formulářů VŽDY aktualizovat Zod schéma (`validation.ts` / `wedding-validation.ts`).
-4. **SEO:** S každou novou stránkou upravit `sitemap.ts` a přidat Schema.org JSON-LD (`lib/schema.ts`). Přidat hreflang alternates.
-5. **Obrázky:** Formát WebP, ukládat do příslušné podsložky v `public/images/`. Nepoužívané obrázky mazat.
-6. **Carousel:** Pro seznamy 4+ položek používat Embla carousel se stávajícím patternem (šipky pod obsahem + dots).
-7. **Přístupnost:** Kontrolovat kontrast v dark módu, `text-left` pro odstavce, skip-link na `#hlavni-obsah` / `#main-content`.
-8. **i18n:** Nový obsah VŽDY přidat do obou slovníků (`cs.ts` + `en.ts`) a aktualizovat `types.ts`. Hardcoded texty v komponentách jsou zakázány. Anchor linky musí být locale-aware (`#kontakt` / `#contact`).
-9. **Přepínač jazyků:** Vždy `<a>` tag, nikdy `<Link>` — root layout se musí přerenderovat pro správný `<html lang>` a server components.
-
-## 6. Sledování a analytika
-
-### Google Tag Manager (GTM)
-- **GTM kontejner:** `GTM-PSPHVDMV` (účet `brevnovevents`, ID 6344880060, container ID 246650647).
-- GTM snippet v `layout.tsx` (`afterInteractive` + noscript fallback v body).
-- **GA4:** Je nasazeno jako "Značka Google" s Measurement ID `G-RG0DWSMGKC` uvnitř GTM kontejneru. Přímý hardcoded `gtag.js` script byl z webu odstraněn. Značka využívá zabudovanou podporu pro Consent Mode.
-- **Formuláře:** Měření úspěšného odeslání přes Vlastní události. Při odeslání InquiryForm nebo WeddingForm se (díky `useRef` pojistce proti duplicitám z React Strict Mode) pushuje událost:
-  `dataLayer.push({ event: 'form_submit', form_type: 'general_inquiry' | 'wedding_inquiry' })`
-
-### Google Consent Mode v2
-- Custom `<CookieConsent />` banner (`src/components/ui/CookieConsent.tsx`).
-- Consent default script (`beforeInteractive` v `layout.tsx`):
-  - **EHP + UK + CH:** default `denied` pro všechny 4 kategorie (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) + `wait_for_update: 500`.
-  - **Zbytek světa:** default `granted` — řeší 0% consent rate mimo EHP.
-- Tlačítko pro vyvolání nastavení je plovoucí, vizuálně fixované vpravo dole, když je banner skrytý.
-- Při přijetí nebo zamítnutí se stav uloží do `localStorage` (pod klíčem `cookie_consent`) a volá se `gtag('consent', 'update', ...)`.
-- GA4 automaticky respektuje consent stav — při denied odesílá cookieless pingy, při granted plné měření.
-
-## 7. Changelog
-
-### 2026-03-26
-- **Interaktivní plánek prostor:** Nová komponenta `InteractiveFloorPlan.tsx` na stránce `/firemni-eventy`. Klikatelné hotspoty na architektonických plánech přízemí a 1. patra s detaily místností (fotky v carousel + lightbox, kapacity, rozměry, popis). Přepínač podlaží, side-by-side layout na desktopu, stacked na mobilu. 33 fotografií místností + 2 čisté plánky podlaží v `public/images/planek/`. Pouze CS verze.
-- **Mobilní hotspot pozice:** Přidány `mobileX`/`mobileY` souřadnice pro hotspoty v InteractiveFloorPlan — na mobilu (<1024px) se body posouvají mimo textové popisky v obrázku plánku, aby nepřekrývaly názvy místností. Desktop pozice zůstávají beze změny.
-- **EventBanner:** Nový vizuální pruh (`EventBanner.tsx`) mezi sekcí SmallerEvents a PriceList. Fullwidth obrázek nádvoří s overlay textem zaměřeným na firemní cílovku ("Prostory, které dodají vašemu eventu noblesy a prestiže"). Obrázek v `public/images/firemni/nadvori-banner.webp`.
-- **Zmenšené mezery:** Redukovaný padding mezi Packages a InteractiveFloorPlan (Packages pb: 20→10/32→16, InteractiveFloorPlan pt: 12→8/20→12) pro plynulejší přechod.
-- **Fix Script placement v layout.tsx:** `<Script>` komponenty přesunuty z `<head>` do `<body>` (App Router požadavek) — opravuje console warning. GTM/GA4 měření neovlivněno — `beforeInteractive` strategy v body funguje identicky.
-- **Fix CookieConsent hydration mismatch:** Čtení `localStorage` přesunuto z render fáze do `useEffect` s `mounted` guardem — opravuje React hydration error. Consent Mode update zachován.
-- **Next.js upgrade:** Aktualizace z 16.1.7 na 16.2.1.
-- **Ověřeno:** robots.txt, llms.txt, sitemap.ts nevyžadují změny (plánek je součást existující stránky). GTM/GA4 tracking neovlivněn — InteractiveFloorPlan neobsahuje žádný tracking kód.
-- **Odstranění SpacesGallery z CS stránky:** SpacesGallery odstraněna z `/firemni-eventy` — InteractiveFloorPlan plně nahrazuje její funkci (fotky + kapacity + popisy). EN stránka (`/en/corporate-events`) SpacesGallery ponechává.
-- **Aktualizace technického rideru:** PDF `BK_Technicky_rider.pdf` nahrazen novým souborem (`BK_Technicky_rider_w.pdf`). Stahuje se z HP (Hero, SpacesShowcase) i z `/firemni-eventy` (CapacityTables).
-- **Zmenšené mezery FAQ → Location:** Redukovaný padding mezi FAQ sekcí a nadpisem „Kde nás najdete" (FAQFiremni/FAQSvatba pb: 20→10/32→16, Location pt: 20→10/32→16, Location vnitřní mt: 16→10). Platí pro oba jazyky i obě stránky (firemní i svatby).
-
-### 2026-03-20
-- **Kompletní anglická lokalizace webu:** Subpath i18n routing (`/en/*`), dictionary systém (CS + EN), middleware locale detection, všech 40+ komponent locale-aware.
-- **Anglické stránky:** `/en` (homepage), `/en/corporate-events`, `/en/wedding-venue`, `/en/privacy-policy` s vlastní metadata, hreflang a Schema.org.
-- **CS/EN přepínač v headeru:** Desktop i mobile, full page reload pro správný `<html lang>` a server component rendering.
-- **SEO:** Hreflang tagy na všech stránkách, sitemap s alternates, lokalizované Schema.org (FAQ, breadcrumbs, EventVenue, VideoObject), aktualizovaný `llms.txt`.
-- **Formuláře locale-aware:** Hidden `locale` pole, lokalizované server odpovědi a potvrzovací emaily. Webhook payload obsahuje `locale`.
-
-### 2026-03-19
-- **Přesun GA4 do Google Tag Manageru:** Odstraněn hardcoded `gtag.js` skript s ID `G-RG0DWSMGKC` z `layout.tsx`. Značka GA4 se nyní načítá čistě přes GTM kontejner `GTM-PSPHVDMV` se správnou inicializací Consent Mode.
-- **Oprava Consent Mode Fallbacku:** Opraven chybný zápis fallbacku pro GTM (`dataLayer.push("consent"...)` opraveno na array formu `dataLayer.push(["consent"...])`).
-- **Měření formulářů do datové vrstvy:** Do komponent `InquiryForm` a `WeddingForm` přidán `useEffect` s `useRef` guardem (proti dvojí spuštění kvůli React 18 Strict Mode). Při úspěšném odeslání formuláře pushují event `form_submit` a parametr `form_type` do `window.dataLayer`.
-
-### 2026-03-18
-- **Aktualizace PDF ceníku:** Nahrazen `cenik-brevnovsky-klaster.pdf` novým ceníkem 2026 (`Cenik_BK_26.pdf`).
-- **Aktualizace cen AV techniky:** Základní ozvučení 6 000 → 13 000 Kč/sál, Ozvučení + promítání + plátno/plazma 11 000 → 25 000 Kč/sál (`PriceList.tsx`).
-- **GA4 přesunuto z GTM na přímý gtag.js:** GTM `googtag` tag měl chybu "Undefined parameter - lowercaseType" a GA4 nepřijímalo data. Nahrazeno přímým `gtag.js` + `gtag('config', 'G-RG0DWSMGKC')` v `layout.tsx`. GTM kontejner ponechán prázdný pro budoucí marketing tagy.
-- **Consent Mode v2 – vylepšení:** Přidán `wait_for_update: 500` pro EU regiony. Opraven consent fallback v CookieConsent na gtag-kompatibilní formát. Odstraněn redundantní kód (dvojitá definice `dataLayer`/`gtag`).
-- **Consent Mode v2 – region fix:** Consent default `denied` platí jen pro EHP + UK + CH. Pro ostatní regiony je default `granted`.
-
-### 2026-03-17
-- **Social Proof – Dakar karta:** Přidána nová reference "Posedlí Dakarem – vítěz rally Dakar v břevnovském klášteře" do `SocialProof.tsx` (zobrazuje se na homepage i `/firemni-eventy`). Obrázek `dakar-brevnov.webp` přidán do `public/images/reference/`.
-- **Next.js upgrade:** Aktualizace z 16.1.6 na 16.1.7.
+## Repository Info
+- **GitHub**: `lsei27/brevnovevents`
+- **Main Branch**: `main`
+- **Owner**: Lukas Seifert
