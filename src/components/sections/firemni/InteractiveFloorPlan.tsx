@@ -541,17 +541,15 @@ function CapacityRow({ label, value }: { label: string; value: string }) {
 
 /* ─── Room detail panel ─── */
 
-function RoomDetail({ room, onClose }: { room: FloorPlanRoom; onClose: () => void }) {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape" && lightboxIndex === null) onClose();
-    }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose, lightboxIndex]);
-
+function RoomDetail({
+  room,
+  onClose,
+  onImageClick,
+}: {
+  room: FloorPlanRoom;
+  onClose: () => void;
+  onImageClick: (index: number) => void;
+}) {
   const hasCapacity = Object.values(room.capacity).some((v) => v !== "–");
 
   return (
@@ -571,12 +569,7 @@ function RoomDetail({ room, onClose }: { room: FloorPlanRoom; onClose: () => voi
           </button>
         </div>
         <div className="p-5 md:p-6">
-          {/* Photos */}
-          <RoomCarousel
-            images={room.images}
-            roomName={room.name}
-            onImageClick={(i) => setLightboxIndex(i)}
-          />
+          <RoomCarousel images={room.images} roomName={room.name} onImageClick={onImageClick} />
 
           {/* Info */}
           <div className="mt-5">
@@ -615,16 +608,6 @@ function RoomDetail({ room, onClose }: { room: FloorPlanRoom; onClose: () => voi
           </div>
         </div>
       </div>
-
-      {/* Lightbox */}
-      {lightboxIndex !== null && (
-        <Lightbox
-          images={room.images}
-          initialIndex={lightboxIndex}
-          roomName={room.name}
-          onClose={() => setLightboxIndex(null)}
-        />
-      )}
     </>
   );
 }
@@ -641,6 +624,8 @@ type Floor = "ground" | "first";
 export function InteractiveFloorPlan() {
   const [activeFloor, setActiveFloor] = useState<Floor>("first");
   const [selectedRoom, setSelectedRoom] = useState<FloorPlanRoom | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
   const hasInteracted = useRef(false);
@@ -659,14 +644,27 @@ export function InteractiveFloorPlan() {
       ? "/images/planek/planek-prizemi.webp"
       : "/images/planek/planek-1patro.webp";
 
+  function handleCloseDetail() {
+    setIsClosing(true);
+    setTimeout(() => {
+      setSelectedRoom(null);
+      setIsClosing(false);
+    }, 300); // Matches the 0.3s duration of genie-out animation
+  }
+
   function handleFloorSwitch(floor: Floor) {
     hasInteracted.current = true;
     setActiveFloor(floor);
-    setSelectedRoom(null);
+    if (selectedRoom) {
+      handleCloseDetail();
+    }
   }
 
   function handleRoomClick(room: FloorPlanRoom) {
     hasInteracted.current = true;
+    // If opening a new room while another is open, just switch instantly
+    // (or optionally close and reopen - but instant switch keeps it snappy)
+    if (isClosing) setIsClosing(false);
     setSelectedRoom(room);
   }
 
@@ -786,19 +784,37 @@ export function InteractiveFloorPlan() {
           </div>
 
           {/* Room detail panel — appears only after hotspot click with genie animation */}
-          {selectedRoom && (
+          {(selectedRoom || isClosing) && selectedRoom && (
             <div
               ref={detailRef}
-              className="lg:flex lg:flex-col animate-[genie_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]"
+              className={`lg:flex lg:flex-col ${
+                isClosing
+                  ? "animate-[genie-out_0.3s_ease-in_forwards]"
+                  : "animate-[genie_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]"
+              }`}
               style={{
                 transformOrigin: "left center", // scale from left for desktop (from map to card)
               }}
             >
-              <RoomDetail room={selectedRoom} onClose={() => setSelectedRoom(null)} />
+              <RoomDetail
+                room={selectedRoom}
+                onClose={handleCloseDetail}
+                onImageClick={(i) => setLightboxIndex(i)}
+              />
             </div>
           )}
         </div>
       </div>
+
+      {/* Lightbox — outside of genie animated context to prevent stacking issues */}
+      {lightboxIndex !== null && selectedRoom && (
+        <Lightbox
+          images={selectedRoom.images}
+          initialIndex={lightboxIndex}
+          roomName={selectedRoom.name}
+          onClose={() => setLightboxIndex(null)}
+        />
+      )}
     </section>
   );
 }
