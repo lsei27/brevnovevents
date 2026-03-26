@@ -42,6 +42,7 @@ const en: Dictionary = {
       "Spaces for 20 to 1\u00a0100 guests. Catering, AV and parking \u2013 all under one roof.",
     cta: "Schedule a tour",
     ctaSecondary: "Technical rider",
+    ctaSecondaryHref: "/downloads/BK_Technicky_rider.pdf",
     imageAlt: "Aerial view of Brevnov Monastery, Prague",
   },
 

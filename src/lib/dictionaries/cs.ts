@@ -35,7 +35,8 @@ const cs: Dictionary = {
     title: "Uspořádejte váš event v\u00a0barokním klenotu Prahy",
     subtitle: "Prostory pro 20 až 1\u00a0100 hostů. Catering, technika i parkování – vše pod jednou střechou.",
     cta: "Domluvit prohlídku",
-    ctaSecondary: "Technický rider",
+    ctaSecondary: "Plánek prostoru",
+    ctaSecondaryHref: "/firemni-eventy#planek",
     imageAlt: "Břevnovský klášter z výšky",
   },
   usp: {

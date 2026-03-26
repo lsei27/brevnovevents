@@ -194,6 +194,7 @@ export interface Dictionary {
     subtitle: string;
     cta: string;
     ctaSecondary: string;
+    ctaSecondaryHref: string;
     imageAlt: string;
   };
 
