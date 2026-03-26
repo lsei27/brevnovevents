@@ -626,6 +626,7 @@ export function InteractiveFloorPlan() {
   const [selectedRoom, setSelectedRoom] = useState<FloorPlanRoom | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isClosing, setIsClosing] = useState(false);
+  const [isChangingFloor, setIsChangingFloor] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
   const hasInteracted = useRef(false);
@@ -653,18 +654,26 @@ export function InteractiveFloorPlan() {
   }
 
   function handleFloorSwitch(floor: Floor) {
-    if (activeFloor === floor) return;
+    if (activeFloor === floor || isChangingFloor) return;
     hasInteracted.current = true;
+
+    const performMapSwitch = () => {
+      setIsChangingFloor(true);
+      setTimeout(() => {
+        setActiveFloor(floor);
+        setIsChangingFloor(false);
+      }, 300);
+    };
 
     if (selectedRoom) {
       setIsClosing(true);
       setTimeout(() => {
         setSelectedRoom(null);
         setIsClosing(false);
-        setActiveFloor(floor); // Switch floor only after the room detail is closed
+        performMapSwitch();
       }, 300);
     } else {
-      setActiveFloor(floor);
+      performMapSwitch();
     }
   }
 
@@ -735,7 +744,14 @@ export function InteractiveFloorPlan() {
           }`}
         >
           {/* Floor plan with hotspots */}
-          <div className="relative mx-auto w-full max-w-3xl lg:max-w-none">
+          <div
+            className={`relative mx-auto w-full max-w-3xl lg:max-w-none ${
+              isChangingFloor
+                ? "animate-[genie-out_0.3s_ease-in_forwards]"
+                : "animate-[genie_0.3s_ease-out_forwards]"
+            }`}
+            style={{ transformOrigin: "center center" }}
+          >
             <Image
               src={floorImage}
               alt={
