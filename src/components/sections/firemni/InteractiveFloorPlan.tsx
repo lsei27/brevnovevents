@@ -752,13 +752,13 @@ export function InteractiveFloorPlan() {
                   transform: "translate(-50%, -50%)",
                 }}
               >
-                {/* Pulse ring */}
+                {/* Ring — animated ping only for selected, static glow for others */}
                 <span
                   className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
                     selectedRoom.id === room.id
-                      ? "animate-ping bg-brand-red/40"
-                      : "animate-[ping_3s_ease-in-out_infinite] bg-brand-red/20"
-                  } h-5 w-5 md:h-7 md:w-7`}
+                      ? "h-5 w-5 animate-ping bg-brand-red/40 md:h-7 md:w-7"
+                      : "h-6 w-6 bg-white/20 md:h-8 md:w-8"
+                  }`}
                 />
                 {/* Dot */}
                 <span
