@@ -122,8 +122,8 @@ const groundFloorRooms: FloorPlanRoom[] = [
   {
     id: "prostor-pred-sala-terrenou-gf",
     name: "Prostor před Sala Terrenou",
-    x: 85.5,
-    y: 52.8,
+    x: 85.2,
+    y: 52.2,
     mobileX: 88.5,
     mobileY: 49.8,
     area: "–",
@@ -254,8 +254,8 @@ const firstFloorRooms: FloorPlanRoom[] = [
   {
     id: "prostor-pred-sala-terrenou-1f",
     name: "Prostor před Sala Terrenou",
-    x: 84.8,
-    y: 51.5,
+    x: 85.2,
+    y: 52.2,
     mobileX: 88.8,
     mobileY: 51.5,
     area: "–",
@@ -631,7 +631,7 @@ export function InteractiveFloorPlan() {
   const hasInteracted = useRef(false);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
+    const mq = window.matchMedia("(max-width: 1023px)"); // Matches Tailwind lg breakpoint
     setIsMobile(mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mq.addEventListener("change", handler);
@@ -759,26 +759,26 @@ export function InteractiveFloorPlan() {
                 type="button"
                 onClick={() => handleRoomClick(room)}
                 aria-label={`Zobrazit detail: ${room.name}`}
-                className="group absolute -m-2 p-2 md:-m-1 md:p-1"
+                className="group absolute flex h-10 w-10 items-center justify-center"
                 style={{
                   left: `${hotX}%`,
                   top: `${hotY}%`,
                   transform: "translate(-50%, -50%)",
                 }}
               >
-                {/* Ring — animated ping only for selected, static glow for others */}
+                {/* Ring — centered via flex in button */}
                 <span
-                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
+                  className={`absolute rounded-full p-0 transition-opacity ${
                     selectedRoom?.id === room.id
                       ? "h-6 w-6 animate-ping bg-brand-red/40 md:h-8 md:w-8"
-                      : "h-7 w-7 bg-brand-red/15 md:h-9 md:w-9"
+                      : "h-7 w-7 bg-brand-red/15 opacity-100 group-hover:bg-brand-red/25 md:h-9 md:w-9"
                   }`}
                 />
                 {/* Dot */}
                 <span
                   className={`relative block h-3 w-3 rounded-full border-[1.5px] transition-transform md:h-4 md:w-4 md:border-2 ${
                     selectedRoom?.id === room.id
-                      ? "scale-125 border-white bg-brand-red"
+                      ? "scale-110 border-white bg-brand-red shadow-[0_0_8px_rgba(239,68,68,0.5)]"
                       : "border-brand-red/60 bg-brand-red/80 group-hover:scale-110 group-hover:border-white group-hover:bg-brand-red"
                   }`}
                 />
