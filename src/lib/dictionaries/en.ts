@@ -41,8 +41,8 @@ const en: Dictionary = {
     subtitle:
       "Spaces for 20 to 1\u00a0100 guests. Catering, AV and parking \u2013 all under one roof.",
     cta: "Schedule a tour",
-    ctaSecondary: "Technical rider",
-    ctaSecondaryHref: "/downloads/BK_Technicky_rider.pdf",
+    ctaSecondary: "Venue floor plan",
+    ctaSecondaryHref: "/en/corporate-events#planek",
     imageAlt: "Aerial view of Brevnov Monastery, Prague",
   },
 
@@ -72,8 +72,8 @@ const en: Dictionary = {
   spaces: {
     title: "Prague event venues for every format \u2013 from boardroom to congress",
     ctaPrimary: "All venues",
-    ctaSecondary: "Technical rider",
-    ctaSecondaryHref: "/downloads/BK_Technicky_rider.pdf",
+    ctaSecondary: "Venue floor plan",
+    ctaSecondaryHref: "/en/corporate-events#planek",
     items: [
       {
         image: "/images/prostory/tereziansky-sal-konference.webp",

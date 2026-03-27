@@ -6,9 +6,10 @@ import {
 import { FiremniHero } from "@/components/sections/firemni/FiremniHero";
 import { USPExpanded } from "@/components/sections/firemni/USPExpanded";
 import { Packages } from "@/components/sections/firemni/Packages";
+import { InteractiveFloorPlanEN } from "@/components/sections/firemni/InteractiveFloorPlanEN";
 import { CapacityTables } from "@/components/sections/firemni/CapacityTables";
-import { SpacesGallery } from "@/components/sections/firemni/SpacesGallery";
 import { SmallerEvents } from "@/components/sections/firemni/SmallerEvents";
+import { EventBanner } from "@/components/sections/firemni/EventBanner";
 import { PriceList } from "@/components/sections/firemni/PriceList";
 import { Upsell } from "@/components/sections/firemni/Upsell";
 import { ProcessExpanded } from "@/components/sections/firemni/ProcessExpanded";
@@ -53,9 +54,10 @@ export default function CorporateEventsPage() {
       <FiremniHero />
       <USPExpanded />
       <Packages />
+      <InteractiveFloorPlanEN />
       <CapacityTables />
-      <SpacesGallery />
       <SmallerEvents />
+      <EventBanner />
       <PriceList />
       <Upsell />
       <ProcessExpanded />

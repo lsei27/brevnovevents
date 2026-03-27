@@ -8,15 +8,20 @@ Brevnov Monastery offers versatile historic event venues in Prague for a wide ra
 
 ### Czech (CS)
 - [Domovská stránka](https://brevnovevents.cz/) – Hlavní stránka s přehledem prostor a služeb.
-- [Firemní eventy](https://brevnovevents.cz/firemni-eventy) – Prostory pro konference, gala večery, meetingy, vánoční večírky a firemní akce.
+- [Firemní eventy](https://brevnovevents.cz/firemni-eventy) – Prostory pro konference, gala večery, meetingy, vánoční večírky a firemní akce. Interaktivní plánek prostor.
 - [Svatba v klášteře](https://brevnovevents.cz/svatba-v-klastere) – Kompletní svatební servis na klíč, obřady i hostiny.
 - [Ochrana osobních údajů (GDPR)](https://brevnovevents.cz/gdpr)
 
 ### English (EN)
 - [Homepage](https://brevnovevents.cz/en) – Overview of event venues Prague and services.
-- [Corporate Events](https://brevnovevents.cz/en/corporate-events) – Conference halls, gala dinners, meetings, Christmas parties, and corporate events in Prague.
+- [Corporate Events](https://brevnovevents.cz/en/corporate-events) – Conference halls, gala dinners, meetings, Christmas parties, corporate events in Prague. Interactive venue floor plan with room details and capacities.
 - [Wedding Venue](https://brevnovevents.cz/en/wedding-venue) – Full-service wedding venue with ceremonies and receptions.
 - [Privacy Policy](https://brevnovevents.cz/en/privacy-policy)
+
+## Key Features
+- **Interactive Floor Plan**: Available in both CS and EN. Click hotspots to explore individual rooms with photos, dimensions and seating capacities.
+- **Venue packages**: Indicative pricing for conferences, gala dinners and corporate parties.
+- **Event banner**: Atmospheric section highlighting the venue's prestige and 993 AD heritage.
 
 ## Capacity & Services
 - **Capacity:** 20 to 1,100 guests depending on the venue and layout.
