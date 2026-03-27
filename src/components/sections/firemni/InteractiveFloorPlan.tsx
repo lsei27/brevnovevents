@@ -251,25 +251,6 @@ const firstFloorRooms: FloorPlanRoom[] = [
       "/images/planek/prostor-pred-klasterem-3.webp",
     ],
   },
-  {
-    id: "prostor-pred-sala-terrenou-1f",
-    name: "Prostor před Sala Terrenou",
-    x: 85.2,
-    y: 52.2,
-    mobileX: 88.8,
-    mobileY: 51.5,
-    area: "–",
-    dimensions: "–",
-    capacity: { reception: "–", theatre: "–", school: "–", banquet: "–" },
-    description:
-      "Venkovní prostor ideální pro welcome drink, cocktail reception a letní akce.",
-    images: [
-      "/images/planek/prostor-pred-sala-terrenou-1.webp",
-      "/images/planek/prostor-pred-sala-terrenou-2.webp",
-      "/images/planek/prostor-pred-sala-terrenou-3.webp",
-      "/images/planek/prostor-pred-sala-terrenou-4.webp",
-    ],
-  },
 ];
 
 /* ─── Lightbox ─── */
@@ -632,7 +613,7 @@ export function InteractiveFloorPlan() {
   const floorImage =
     activeFloor === "ground"
       ? "/images/planek/mapa_BK-new_2.webp"
-      : "/images/planek/mapa_BK-new_1.webp";
+      : "/images/planek/mapa_BK_rev.webp";
 
   function handleFloorSwitch(floor: Floor) {
     if (activeFloor === floor || isChangingFloor) return;
