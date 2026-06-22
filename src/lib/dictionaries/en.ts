@@ -223,6 +223,20 @@ const en: Dictionary = {
     references: [
       {
         title:
+          "183 most influential women in Czechia \u2013 Forbes Women's Gala 2026",
+        image: "/images/reference/forbes-womens-gala-brevnov.webp",
+        alt: "Forbes Women's Gala 2026 \u2013 open-air gala dinner in the courtyard of Brevnov Monastery, Prague for 183 guests",
+        description:
+          "Forbes Women's Gala 2026 for the 183 most influential women in Czechia. In a single evening we brought the entire monastery estate to life: the brewery for the opening toast, the crypt for a guided tour, the space in front of the prelature for networking, the Theresian Hall for workshops and the atrium for an open-air gala dinner. Catering, service and seamless transitions between spaces were all ours to run.",
+        stats: [
+          { number: "183", label: "guests" },
+          { number: "5", label: "venues in the estate" },
+          { number: "1", label: "evening" },
+          { number: "1", label: "catering & service" },
+        ],
+      },
+      {
+        title:
           "800 attendees, one venue, one team \u2013 Speedchain 2024",
         image: "/images/reference/speedchain-brevnov.webp",
         alt: "Speedchain 2024 \u2013 international conference for 800 attendees at Brevnov Monastery, Prague",

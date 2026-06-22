@@ -110,6 +110,18 @@ const cs: Dictionary = {
     goTo: "Reference",
     references: [
       {
+        title: "183 nejvlivnějších žen Česka – Forbes Women's Gala 2026",
+        image: "/images/reference/forbes-womens-gala-brevnov.webp",
+        alt: "Forbes Women's Gala 2026 – slavnostní večeře na nádvoří Břevnovského kláštera pro 183 hostek",
+        description: "Forbes Women's Gala 2026 pro 183 nejvlivnějších žen Česka. Během jediného večera jsme rozehráli celý areál kláštera: klášterní pivovar pro úvodní přípitek, kryptu pro komentovanou prohlídku, prostor před prelaturou pro networking, Tereziánský sál pro workshopy a atrium pro slavnostní večeři pod širým nebem. Catering, servis i plynulé přechody mezi prostory v naší režii.",
+        stats: [
+          { number: "183", label: "hostek" },
+          { number: "5", label: "prostor areálu" },
+          { number: "1", label: "večer" },
+          { number: "1", label: "catering a servis" },
+        ],
+      },
+      {
         title: "800 účastníků, jeden areál, jeden tým – Speedchain 2024",
         image: "/images/reference/speedchain-brevnov.webp",
         alt: "Speedchain 2024 – konference pro 800 účastníků v Břevnovském klášteře",
