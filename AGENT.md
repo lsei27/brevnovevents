@@ -1,10 +1,10 @@
 # Project Summary: Břevnov Events Web
 
 ## Overview
-A modern, multilingual (CS/EN) landing page for Břevnov Monastery event venues, built with Next.js 15, React, and Vanilla CSS. The site features interactive elements, localization, and SEO optimization.
+A modern, multilingual (CS/EN) landing page for Břevnov Monastery event venues, built with Next.js 16, React 19, and Vanilla CSS. The site features interactive elements, localization, and SEO optimization.
 
 ## Technology Stack
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: Next.js 16 (App Router, Turbopack)
 - **Styling**: Vanilla CSS with custom tokens
 - **Localization**: Custom dictionary-based system (`src/lib/dictionaries`)
 - **Interactive Elements**: Embla Carousel, Framer Motion (implied by animations), Custom SVG Floor Plan
@@ -16,6 +16,13 @@ A modern, multilingual (CS/EN) landing page for Břevnov Monastery event venues,
 - **Localization**: Seamless switching between Czech and English with full content parity.
 - **Dynamic Hero**: Configurable CTAs per language (both CS and EN link to interactive floor plan).
 - **SEO Ready**: Dynamic `sitemap.ts`, `robots.txt`, and documented `llms.txt`.
+
+## Dependency Updates (Jun 25, 2026)
+- Patch/minor bumps within semver ranges (only `package-lock.json` changed), build + lint verified unchanged:
+    - `next` 16.2.6 → 16.2.9, `react` / `react-dom` 19.2.6 → 19.2.7
+    - `tailwindcss` + `@tailwindcss/postcss` 4.3.0 → 4.3.1, `eslint-config-next` 16.2.6 → 16.2.9
+- **Held back (breaking majors):** `eslint` 9 → 10 (new `recommended` rules risk failing lint/build), `@types/node` 25 → 26 (types would outrun the Node 24 runtime).
+- **Known advisory:** 2 moderate `postcss` issues are transitive inside Next's own bundle; no stable fix yet. Do **not** run `npm audit fix --force` (it downgrades Next to 9.x and breaks the app).
 
 ## Current Status (as of Mar 27, 2026)
 - **Homepage**: Hero CTA updated — both CS ("Plánek prostoru") and EN ("Venue floor plan") link to interactive floor plan.
