@@ -217,11 +217,12 @@ const content: CaseStudyContent = {
     ],
   },
   cta: {
-    heading: "Planning an event in a demanding venue?",
-    text: "Write to us and we'll design a tailor-made concept together.",
+    heading: "Plan an event in the unique setting of Brevnov Monastery?",
+    textBefore: "Write to us at ",
+    email: "brevnov@incatering.cz",
+    textAfter: " and we'll design a tailor-made concept together.",
     button: "Request a quote",
     href: "/en/corporate-events#contact",
-    email: "brevnov@incatering.cz",
   },
 };
 

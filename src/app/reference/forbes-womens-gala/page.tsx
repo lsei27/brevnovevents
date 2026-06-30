@@ -217,11 +217,12 @@ const content: CaseStudyContent = {
     ],
   },
   cta: {
-    heading: "Plánujete event v náročném prostoru?",
-    text: "Napište nám a společně navrhneme koncept na míru.",
+    heading: "Naplánujte event v jedinečném prostoru Břevnovského kláštera?",
+    textBefore: "Napište nám na ",
+    email: "brevnov@incatering.cz",
+    textAfter: " a společně navrhneme koncept na míru.",
     button: "Nezávazná nabídka",
     href: "/firemni-eventy#kontakt",
-    email: "brevnov@incatering.cz",
   },
 };
 

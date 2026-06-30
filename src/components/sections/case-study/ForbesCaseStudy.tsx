@@ -33,7 +33,14 @@ export interface CaseStudyContent {
   result: { heading: string; bullets: string[] };
   forManagers: { heading: string; paragraphs: string[] };
   gallery: { heading: string; slides: CaseStudySlide[] };
-  cta: { heading: string; text: string; button: string; href: string; email: string };
+  cta: {
+    heading: string;
+    textBefore: string;
+    email: string;
+    textAfter: string;
+    button: string;
+    href: string;
+  };
 }
 
 export function ForbesCaseStudy({ content }: { content: CaseStudyContent }) {
@@ -185,18 +192,19 @@ export function ForbesCaseStudy({ content }: { content: CaseStudyContent }) {
             {content.cta.heading}
           </h2>
           <p className="mx-auto mt-4 max-w-xl leading-relaxed text-brand-white/70">
-            {content.cta.text}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Button href={content.cta.href} variant="primary">
-              {content.cta.button}
-            </Button>
+            {content.cta.textBefore}
             <a
               href={`mailto:${content.cta.email}`}
               className="font-bold text-brand-white underline transition-colors hover:text-brand-red"
             >
               {content.cta.email}
             </a>
+            {content.cta.textAfter}
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Button href={content.cta.href} variant="primary">
+              {content.cta.button}
+            </Button>
           </div>
         </div>
       </section>
