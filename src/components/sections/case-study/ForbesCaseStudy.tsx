@@ -40,30 +40,26 @@ export function ForbesCaseStudy({ content }: { content: CaseStudyContent }) {
   return (
     <article>
       {/* Hero */}
-      <section className="relative">
-        <div className="relative h-[68vh] min-h-[460px] w-full">
-          <Image
-            src={content.heroImage}
-            alt={content.heroAlt}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/30 to-brand-black" />
-        </div>
-        <div className="absolute inset-0 flex items-end">
-          <div className="mx-auto w-full max-w-5xl px-6 pb-12 md:pb-16">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-brand-red">
-              {content.eyebrow}
-            </p>
-            <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight md:text-6xl">
-              {content.title}
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg text-brand-white/80 md:text-xl">
-              {content.subtitle}
-            </p>
-          </div>
+      <section className="relative flex min-h-screen items-end pb-20 md:pb-28">
+        <Image
+          src={content.heroImage}
+          alt={content.heroAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-brand-black/30" />
+        <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-brand-white">
+            {content.eyebrow}
+          </p>
+          <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight md:text-6xl">
+            {content.title}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-brand-white/80 md:text-xl">
+            {content.subtitle}
+          </p>
         </div>
       </section>
 
