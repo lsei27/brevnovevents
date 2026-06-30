@@ -138,11 +138,11 @@ const content: CaseStudyContent = {
         description: "Forbes flags welcomed guests in front of the main monastery building.",
       },
       {
-        image: `${IMG}/uvitani-pred-prelaturou-brevnov.webp`,
-        alt: "Welcome moment in front of the prelature of Brevnov Monastery",
+        image: `${IMG}/welcome-bazilika-prelatura-brevnov.webp`,
+        alt: "Welcome by the prelature of Brevnov Monastery with the tower of the Basilica of St Margaret",
         title: "Welcome moment",
         capacity: "By the prelature",
-        description: "The atmosphere of the place welcomed guests before they stepped inside.",
+        description: "The atmosphere of the place welcomed guests beneath the basilica tower.",
       },
       {
         image: `${IMG}/priprava-nadvori-brevnov.webp`,

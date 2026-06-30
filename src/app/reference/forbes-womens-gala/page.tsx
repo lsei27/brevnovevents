@@ -138,11 +138,11 @@ const content: CaseStudyContent = {
         description: "Forbes vlajky vítaly hosty před hlavní budovou kláštera.",
       },
       {
-        image: `${IMG}/uvitani-pred-prelaturou-brevnov.webp`,
-        alt: "Welcome moment před prelaturou Břevnovského kláštera",
+        image: `${IMG}/welcome-bazilika-prelatura-brevnov.webp`,
+        alt: "Welcome u prelatury Břevnovského kláštera s věží baziliky svaté Markéty",
         title: "Welcome moment",
         capacity: "Před prelaturou",
-        description: "Atmosféra místa přivítala hosty dřív, než vešli dovnitř.",
+        description: "Hosty přivítala atmosféra místa pod věží baziliky.",
       },
       {
         image: `${IMG}/priprava-nadvori-brevnov.webp`,
