@@ -217,7 +217,7 @@ const content: CaseStudyContent = {
     ],
   },
   cta: {
-    heading: "Plan an event in the unique setting of Brevnov Monastery?",
+    heading: "Plan your next event in the unique setting of Brevnov Monastery.",
     textBefore: "Write to us at ",
     email: "brevnov@incatering.cz",
     textAfter: " and we'll design a tailor-made concept together.",
