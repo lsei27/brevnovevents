@@ -217,6 +217,7 @@ const en: Dictionary = {
 
   socialProof: {
     cta: "Plan a similar event",
+    caseStudyCta: "View case study",
     prev: "Previous reference",
     next: "Next reference",
     goTo: "Reference",
@@ -234,6 +235,7 @@ const en: Dictionary = {
           { number: "1", label: "evening" },
           { number: "1", label: "catering & service" },
         ],
+        caseStudyHref: "/en/case-study/forbes-womens-gala",
       },
       {
         title:

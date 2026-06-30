@@ -35,6 +35,7 @@ export interface Reference {
   alt: string;
   description: string;
   stats: ReferenceStat[];
+  caseStudyHref?: string;
 }
 
 export interface ProcessStep {
@@ -237,6 +238,7 @@ export interface Dictionary {
 
   socialProof: {
     cta: string;
+    caseStudyCta: string;
     prev: string;
     next: string;
     goTo: string;

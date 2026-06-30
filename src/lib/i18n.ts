@@ -8,6 +8,7 @@ export const routeMap: Record<string, Record<Locale, string>> = {
   home: { cs: "/", en: "/en" },
   corporate: { cs: "/firemni-eventy", en: "/en/corporate-events" },
   wedding: { cs: "/svatba-v-klastere", en: "/en/wedding-venue" },
+  caseStudyForbes: { cs: "/reference/forbes-womens-gala", en: "/en/case-study/forbes-womens-gala" },
   gdpr: { cs: "/gdpr", en: "/en/privacy-policy" },
 };
 

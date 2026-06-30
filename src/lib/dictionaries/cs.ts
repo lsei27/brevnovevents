@@ -105,6 +105,7 @@ const cs: Dictionary = {
   },
   socialProof: {
     cta: "Chci podobnou akci",
+    caseStudyCta: "Prohlédnout case study",
     prev: "Předchozí reference",
     next: "Další reference",
     goTo: "Reference",
@@ -120,6 +121,7 @@ const cs: Dictionary = {
           { number: "1", label: "večer" },
           { number: "1", label: "catering a servis" },
         ],
+        caseStudyHref: "/reference/forbes-womens-gala",
       },
       {
         title: "800 účastníků, jeden areál, jeden tým – Speedchain 2024",

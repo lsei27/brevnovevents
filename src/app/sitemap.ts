@@ -6,6 +6,7 @@ const routes = [
   { cs: "/", en: "/en", priority: 1.0, changeFrequency: "monthly" as const },
   { cs: "/firemni-eventy", en: "/en/corporate-events", priority: 0.9, changeFrequency: "monthly" as const },
   { cs: "/svatba-v-klastere", en: "/en/wedding-venue", priority: 0.8, changeFrequency: "monthly" as const },
+  { cs: "/reference/forbes-womens-gala", en: "/en/case-study/forbes-womens-gala", priority: 0.7, changeFrequency: "yearly" as const },
   { cs: "/gdpr", en: "/en/privacy-policy", priority: 0.3, changeFrequency: "yearly" as const },
 ];
 

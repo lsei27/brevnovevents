@@ -70,7 +70,12 @@ export function SocialProof() {
                           </div>
                         ))}
                       </div>
-                      <div className="mt-8">
+                      <div className="mt-8 flex flex-wrap gap-4">
+                        {ref.caseStudyHref && (
+                          <Button href={ref.caseStudyHref} variant="primary">
+                            {t.caseStudyCta}
+                          </Button>
+                        )}
                         <Button href={contactHref} variant="secondary">
                           {t.cta}
                         </Button>

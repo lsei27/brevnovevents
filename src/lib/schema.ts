@@ -208,6 +208,72 @@ export function getFiremniBreadcrumbSchema(locale: Locale = "cs") {
   };
 }
 
+export function getCaseStudyForbesSchema(locale: Locale = "cs") {
+  const isEn = locale === "en";
+  const url = isEn
+    ? `${BASE}/en/case-study/forbes-womens-gala`
+    : `${BASE}/reference/forbes-womens-gala`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: isEn
+      ? "Forbes Women's Gala at Brevnov Monastery — case study"
+      : "Forbes Women's Gala v Břevnovském klášteře — případová studie",
+    description: isEn
+      ? "How we ran the entire Brevnov Monastery estate for the Forbes Women's Gala 2026: 183 guests, five venues, one evening, one catering and service team."
+      : "Jak jsme pro Forbes Women's Gala 2026 rozehráli celý areál Břevnovského kláštera: 183 hostek, pět prostor, jeden večer, jeden tým pro catering i servis.",
+    image: `${BASE}/images/case-study/forbes-womens-gala/nadvori-vecere-shora-forbes-womens-gala-brevnov.webp`,
+    datePublished: "2026-06-17",
+    dateModified: "2026-06-17",
+    inLanguage: isEn ? "en" : "cs",
+    author: { "@type": "Organization", name: "IN CATERING s.r.o." },
+    publisher: {
+      "@type": "Organization",
+      name: "IN CATERING s.r.o.",
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE}/images/in-catering-logo.svg`,
+      },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    about: isEn ? "Forbes Women's Gala 2026" : "Forbes Women's Gala 2026",
+    locationCreated: {
+      "@type": "Place",
+      name: isEn ? "Brevnov Monastery, Prague" : "Břevnovský klášter, Praha",
+    },
+  };
+}
+
+export function getCaseStudyForbesBreadcrumbSchema(locale: Locale = "cs") {
+  const isEn = locale === "en";
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: isEn ? "Home" : "Domů",
+        item: isEn ? `${BASE}/en` : BASE,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: isEn ? "Corporate Events" : "Firemní eventy",
+        item: isEn ? `${BASE}/en/corporate-events` : `${BASE}/firemni-eventy`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Forbes Women's Gala 2026",
+        item: isEn
+          ? `${BASE}/en/case-study/forbes-womens-gala`
+          : `${BASE}/reference/forbes-womens-gala`,
+      },
+    ],
+  };
+}
+
 export function getSvatbaBreadcrumbSchema(locale: Locale = "cs") {
   const isEn = locale === "en";
   return {
