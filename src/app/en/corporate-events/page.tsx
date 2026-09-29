@@ -22,11 +22,11 @@ import { Contact } from "@/components/sections/Contact";
 export const metadata: Metadata = {
   title: "Corporate Event Venues Prague | Brevnov Monastery – Up to 1,100",
   description:
-    "Historic event venues in Prague for conferences, gala dinners and corporate events. Capacity 20–1,100 guests, free parking, in-house catering. Get a quote within 24 hours.",
+    "Historic event venues in Prague for conferences, gala dinners and corporate events. Capacity 20–1,100 guests, free parking, catering by IN CATERING. Get a quote within 24 hours.",
   openGraph: {
     title: "Corporate Events at Brevnov Monastery | Prague",
     description:
-      "Conferences, gala dinners and corporate events in baroque halls dating to 993 AD. Up to 1,100 guests, free parking, one team for venue and catering.",
+      "Conferences, gala dinners and corporate events in baroque halls dating to 993 AD. Up to 1,100 guests, free parking, one contact for venue and catering.",
     url: "https://brevnovevents.cz/en/corporate-events",
     siteName: "brevnovevents.cz",
     locale: "en_US",

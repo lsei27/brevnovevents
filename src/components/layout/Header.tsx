@@ -47,7 +47,7 @@ export function Header() {
             priority
           />
           <span className="hidden text-xs text-white lg:block">
-            {dict.header.operatedBy}
+            {dict.header.cateringPartner}
             <Image
               src="/images/in-catering-logo.svg"
               alt="IN CATERING"

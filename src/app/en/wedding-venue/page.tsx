@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Wedding Venue Prague – Brevnov Monastery",
     description:
-      "Ceremony in the garden, reception in a baroque hall, afterparty in the wine cellar. All under one roof with in-house catering by IN CATERING.",
+      "Ceremony in the garden, reception in a baroque hall, afterparty in the wine cellar. All within one estate, with catering by IN CATERING, the monastery's exclusive catering partner.",
     url: "https://brevnovevents.cz/en/wedding-venue",
     siteName: "brevnovevents.cz",
     locale: "en_US",

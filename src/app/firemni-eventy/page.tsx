@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Firemní eventy v Břevnovském klášteře | Praha 6",
     description:
-      "Konference, gala večery a firemní akce v barokních sálech z 10. století. Až 1 100 hostů, parkování zdarma, jeden tým pro prostor i catering.",
+      "Konference, gala večery a firemní akce v barokních sálech z 10. století. Až 1 100 hostů, parkování zdarma, jeden kontakt pro prostor i catering.",
     url: "https://brevnovevents.cz/firemni-eventy",
     siteName: "brevnovevents.cz",
     locale: "cs_CZ",

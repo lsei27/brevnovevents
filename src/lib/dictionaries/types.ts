@@ -173,14 +173,15 @@ export interface Dictionary {
     cta: string;
     ctaHref: string;
     logoAlt: string;
-    operatedBy: string;
+    cateringPartner: string;
     openMenu: string;
     closeMenu: string;
   };
 
   footer: {
     nav: NavLink[];
-    operatedBy: string;
+    cateringPartner: string;
+    rolesNote: string;
     navigation: string;
     contact: string;
     copyright: string;

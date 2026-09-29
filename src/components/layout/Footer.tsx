@@ -22,7 +22,7 @@ export async function Footer() {
               height={45}
             />
             <p className="flex items-center gap-2 text-sm text-white/70">
-              {dict.footer.operatedBy}
+              {dict.footer.cateringPartner}
               <a
                 href="https://incatering.cz"
                 target="_blank"
@@ -35,6 +35,9 @@ export async function Footer() {
                   height={28}
                 />
               </a>
+            </p>
+            <p className="max-w-xs text-xs leading-relaxed text-white/50">
+              {dict.footer.rolesNote}
             </p>
           </div>
 

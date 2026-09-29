@@ -13,7 +13,7 @@ import { Contact } from "@/components/sections/Contact";
 export const metadata: Metadata = {
   title: "Event Venues Prague | Brevnov Monastery | brevnovevents.cz",
   description:
-    "Premium event venues in Prague for 20–1,100 guests. Baroque halls, courtyards and gardens at Brevnov Monastery. Free parking, in-house catering. Request a tour today.",
+    "Premium event venues in Prague for 20–1,100 guests. Baroque halls, courtyards and gardens at Brevnov Monastery. Free parking, exclusive catering by IN CATERING. Request a tour.",
   openGraph: {
     title: "Event Venues Prague – Brevnov Monastery",
     description:

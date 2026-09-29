@@ -13,7 +13,7 @@ import { Contact } from "@/components/sections/Contact";
 export const metadata: Metadata = {
   title: "Břevnovský klášter – eventové prostory Praha | brevnovevents.cz",
   description:
-    "Pronájem historických prostor pro firemní akce a svatby v Praze. Od komorního meetingu pro 20 osob po kongres pro 1 100 hostů. Parkování zdarma. Provozuje IN CATERING.",
+    "Pronájem historických prostor pro firemní akce a svatby v Praze. Od komorního meetingu pro 20 osob po kongres pro 1 100 hostů. Parkování zdarma, exkluzivní catering od IN CATERING.",
   openGraph: {
     title: "Břevnovský klášter – eventové prostory v Praze",
     description:

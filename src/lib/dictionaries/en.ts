@@ -14,7 +14,7 @@ const en: Dictionary = {
     cta: "Schedule a tour",
     ctaHref: "/en/#contact",
     logoAlt: "Brevnov Monastery \u2013 logo",
-    operatedBy: "operated by",
+    cateringPartner: "catering partner",
     openMenu: "Open menu",
     closeMenu: "Close menu",
   },
@@ -26,7 +26,8 @@ const en: Dictionary = {
       { label: "Weddings", href: "/en/wedding-venue" },
       { label: "Contact", href: "/en/#contact" },
     ],
-    operatedBy: "Operated by",
+    cateringPartner: "Exclusive catering partner",
+    rolesNote: "The event spaces are part of Brevnov Monastery. Their hire and operation are primarily managed by the Brevnov Monastery Administration. IN CATERING is the exclusive catering partner for events in these spaces. It does not operate the monastery, its spaces or any other businesses on the grounds.",
     navigation: "Navigation",
     contact: "Contact",
     copyright: "IN CATERING s.r.o. All rights reserved.",
@@ -63,8 +64,8 @@ const en: Dictionary = {
         text: "60 free parking spaces right at the venue. Public transport to the door. Airport 15 minutes by car. You won\u2019t find this in central Prague.",
       },
       {
-        title: "One team for venue and catering",
-        text: "IN CATERING operates the monastery and provides all gastronomy. One contact, one schedule, one invoice. No multi-vendor coordination.",
+        title: "One contact for your entire event",
+        text: "IN CATERING is Brevnov Monastery\u2019s exclusive catering partner for its event spaces. Your enquiry, catering and arrangements with the Monastery Administration are all handled by us. One contact, one schedule, one invoice.",
       },
     ],
   },
@@ -476,8 +477,8 @@ const en: Dictionary = {
         alt: "Brevnov Monastery exterior with parking and access",
       },
       {
-        title: "One partner for venue hire and catering",
-        text: "IN CATERING operates the lower part of the monastery and handles gastronomy across the entire complex. No coordination between venue and external supplier. One contact, one schedule, one invoice.",
+        title: "One contact for venue and catering",
+        text: "The spaces are managed by Brevnov Monastery, and IN CATERING is its exclusive catering partner. We provide the catering and arrange the venue hire for you in cooperation with the Monastery Administration. One contact, one schedule, one invoice.",
         meaning:
           "No back-and-forth between caterer and building manager. The team that knows every corner of the space runs your entire event. You save coordination time and reduce miscommunication risk.",
         image: "/images/prostory/sala-terrena-raut.webp",
@@ -1017,7 +1018,7 @@ const en: Dictionary = {
       {
         question: "Can we bring our own caterer?",
         answer:
-          "Catering is provided exclusively by IN CATERING \u2013 the operator of the monastery spaces. This means one team that knows the venue inside out and guarantees seamless logistics. No need to coordinate multiple suppliers.",
+          "IN CATERING is the exclusive catering partner for events in the monastery\u2019s event spaces. This means one team that knows the venue inside out and guarantees seamless logistics. If you are considering another supplier, ask us about the terms.",
       },
       {
         question:
@@ -1260,8 +1261,8 @@ const en: Dictionary = {
         text: "No driving to a remote ch\u00e2teau. Guests arrive by tram or park right on site (60 spaces, free).",
       },
       {
-        title: "One team for everything.",
-        text: "Venue and catering handled by IN CATERING. One contact, not three suppliers.",
+        title: "One contact for everything.",
+        text: "IN CATERING, the monastery\u2019s exclusive catering partner, handles your catering and arranges the venue with the Monastery Administration. One contact, not three suppliers.",
       },
       {
         title: "Flexible spaces.",
@@ -1313,7 +1314,7 @@ const en: Dictionary = {
       {
         question: "Can we bring our own caterer?",
         answer:
-          "Catering is provided exclusively by IN CATERING. This gives us full control over quality and logistics \u2013 and you get a single point of contact instead of two.",
+          "IN CATERING is the exclusive catering partner for events in the monastery\u2019s event spaces. This gives us full control over quality and logistics \u2013 and you get a single point of contact instead of two. If you are considering another supplier, ask us about the terms.",
       },
       {
         question:

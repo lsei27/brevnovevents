@@ -54,7 +54,7 @@ export function getLocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "IN CATERING s.r.o.",
-    description: "Provozovatel eventových prostor v Břevnovském klášteře.",
+    description: "Exkluzivní cateringový partner pro eventové prostory Břevnovského kláštera.",
     url: BASE,
     telephone: "+420602346729",
     email: "brevnov@incatering.cz",
@@ -109,7 +109,7 @@ export function getFiremniEventyFAQSchema(locale: Locale = "cs") {
 
   const faqsCs = [
     { q: "Jaká je maximální kapacita Břevnovského kláštera pro akce?", a: "Až 1 100 osob při využití všech podlaží a nádvoří. Tereziánský sál pojme 180 osob v divadelním sezení, přízemí dalších 300, nádvoří dalších 300. Kombinací prostor zvládneme i akce nad 800 účastníků – viz Speedchain International 2024." },
-    { q: "Můžeme si přivést vlastního dodavatele cateringu?", a: "Catering zajišťuje výhradně IN CATERING – provozovatel klášterních prostor. Díky tomu máte jeden tým, který prostor zná a garantuje bezchybnou logistiku. Nemusíte koordinovat dva dodavatele." },
+    { q: "Můžeme si přivést vlastního dodavatele cateringu?", a: "Exkluzivním cateringovým partnerem pro akce v eventových prostorech kláštera je IN CATERING. Díky tomu máte jeden tým, který prostor zná a garantuje bezchybnou logistiku. Pokud zvažujete jiného dodavatele, zeptejte se nás na podmínky." },
     { q: "Kolik stojí pronájem prostor v Břevnovském klášteře?", a: "Přízemí od 15 000 Kč/den, Tereziánský sál 65 000 Kč/den, celé 1. patro 90 000 Kč/den. Kompletní ceník najdete výše. Nabídku na míru včetně cateringu připravíme do 24 hodin – nezávazně." },
     { q: "Je v Břevnovském klášteře parkování?", a: "Ano. 60 míst zdarma přímo v areálu kláštera. Pro větší akce zajistíme organizaci parkování a navigaci hostů." },
     { q: "Je prostor bezbariérový?", a: "Přízemí (Sala Terrena, salonky) je přístupné bez schodů. 1. patro (Tereziánský sál) vyžaduje schody – informujte nás předem o požadavcích na přístupnost a najdeme řešení." },
@@ -122,7 +122,7 @@ export function getFiremniEventyFAQSchema(locale: Locale = "cs") {
 
   const faqsEn = [
     { q: "What is the maximum capacity of Brevnov Monastery for events?", a: "Up to 1,100 guests using all floors and the courtyard. The Theresian Hall seats 180 theatre-style, the ground floor holds 300 more, and the courtyard another 300. We have hosted events for 800+ attendees — see Speedchain International 2024." },
-    { q: "Can we bring our own caterer?", a: "Catering is provided exclusively by IN CATERING, the venue operator. This means one team that knows the space inside out and guarantees seamless logistics. No need to coordinate multiple vendors." },
+    { q: "Can we bring our own caterer?", a: "IN CATERING is the exclusive catering partner for events in the monastery's event spaces. This means one team that knows the space inside out and guarantees seamless logistics. If you are considering another supplier, ask us about the terms." },
     { q: "How much does it cost to hire event venues at Brevnov Monastery?", a: "Ground floor from CZK 15,000/day, Theresian Hall CZK 65,000/day, entire first floor CZK 90,000/day. See the full price list above. We prepare a tailored quote including catering within 24 hours — no obligation." },
     { q: "Is there parking at Brevnov Monastery?", a: "Yes. 60 spaces free of charge right outside the monastery grounds. For larger events we arrange parking management and guest navigation." },
     { q: "Is the venue wheelchair accessible?", a: "The ground floor (Sala Terrena, lounges) is step-free. The first floor (Theresian Hall) requires stairs — let us know about accessibility requirements in advance and we will find a solution." },
@@ -154,7 +154,7 @@ export function getSvatbaFAQSchema(locale: Locale = "cs") {
 
   const faqsCs = [
     { q: "Konají se v Břevnovském klášteře svatební obřady?", a: "V prostoru Vojtěška v klášterní zahradě se konají civilní svatební obřady. Církevní obřady v bazilice sv. Markéty je třeba domluvit přímo s klášterem." },
-    { q: "Můžeme si přivést vlastního cateringu?", a: "Catering zajišťuje výhradně IN CATERING. Díky tomu máme plnou kontrolu nad kvalitou a logistikou – a vy jeden kontakt místo dvou." },
+    { q: "Můžeme si přivést vlastního cateringu?", a: "Exkluzivním cateringovým partnerem pro akce v eventových prostorech kláštera je IN CATERING. Díky tomu máme plnou kontrolu nad kvalitou a logistikou – a vy jeden kontakt místo dvou. Pokud zvažujete jiného dodavatele, zeptejte se nás na podmínky." },
     { q: "Kolik lidí se vejde na svatbu v klášteře?", a: "Banketní hostina v Tereziánském sále: 120 osob. V Sala Terreně: 70 osob. Kombinací prostor zvládneme svatby až pro 200 hostů." },
     { q: "Je parkování problém?", a: "Ne. 60 míst zdarma přímo v areálu." },
     { q: "Do kolika hodin může svatba trvat?", a: "Standardně do půlnoci. Prodloužení do 02:00 je možné za příplatek." },
@@ -163,7 +163,7 @@ export function getSvatbaFAQSchema(locale: Locale = "cs") {
 
   const faqsEn = [
     { q: "Are wedding ceremonies held at Brevnov Monastery?", a: "Civil ceremonies take place at the Vojtěška garden pavilion. Church ceremonies in the Basilica of St. Margaret must be arranged directly with the monastery." },
-    { q: "Can we bring our own caterer?", a: "Catering is provided exclusively by IN CATERING. This gives us full control over quality and logistics — and you a single point of contact." },
+    { q: "Can we bring our own caterer?", a: "IN CATERING is the exclusive catering partner for events in the monastery's event spaces. This gives us full control over quality and logistics — and you a single point of contact. If you are considering another supplier, ask us about the terms." },
     { q: "How many guests can a monastery wedding accommodate?", a: "Banquet reception in the Theresian Hall: 120 guests. In Sala Terrena: 70 guests. By combining spaces, we can host weddings for up to 200 guests." },
     { q: "Is parking an issue?", a: "Not at all. 60 free parking spaces right on the monastery grounds." },
     { q: "What time can the wedding run until?", a: "Standard operation until midnight. Extension to 2:00 AM is available for a surcharge." },
